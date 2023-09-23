@@ -14,6 +14,7 @@ public class Player
     public DateOnly? BirthDate { get; set; } // ? = nullable
     public double Level { get; set; }
     public PlayerPosition Position { get; set; }
+    public List<PadelCourt> PlayedOnCourts { get; set; } = new List<PadelCourt>(); // List of Played padel courts.
     
     // Override ToString() method
     public override string ToString()

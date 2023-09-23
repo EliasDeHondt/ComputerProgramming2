@@ -7,10 +7,10 @@
 // Enum PlayerPosition
 namespace CA;
 
-public enum PlayerPosition
+public enum PlayerPosition : byte
 {
-    Member,         // Een lid van de club
-    Guest,          // Een gastspeler op een PadelCourt
-    Instructor,     // Een instructeur op een PadelCourt
-    TournamentPlayer // Een toernooispeler op een PadelCourt
+    Member = 1,         // Een lid van de club
+    Guest = 2,          // Een gastspeler op een PadelCourt
+    Instructor = 3,     // Een instructeur op een PadelCourt
+    TournamentPlayer = 4 // Een toernooispeler op een PadelCourt
 }

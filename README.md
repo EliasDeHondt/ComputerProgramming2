@@ -6,5 +6,5 @@
 * Klasgroep: ISB204B
 * Onderwerp: Padel Club Management -> Club 1-* PadelCourt *-* Player
 
-#### Rider Projects [.NET Fundamentals] Second year exercises of training applied computer science at the KdG.
-#### Rider Projects [.NET Extended] Second year exercises of training applied computer science at the KdG.
+
+#### Rider Projects [.NET Fundamentals-Extended] Second year exercises of training applied computer science at the KdG.
