@@ -1,0 +1,14 @@
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\bin\Debug\net7.0\CA.exe
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\bin\Debug\net7.0\CA.deps.json
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\bin\Debug\net7.0\CA.runtimeconfig.json
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\bin\Debug\net7.0\CA.dll
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\bin\Debug\net7.0\CA.pdb
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\obj\Debug\net7.0\CA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\obj\Debug\net7.0\CA.AssemblyInfoInputs.cache
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\obj\Debug\net7.0\CA.AssemblyInfo.cs
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\obj\Debug\net7.0\CA.csproj.CoreCompileInputs.cache
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\obj\Debug\net7.0\CA.dll
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\obj\Debug\net7.0\refint\CA.dll
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\obj\Debug\net7.0\CA.pdb
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\obj\Debug\net7.0\CA.genruntimeconfig.cache
+C:\Users\elias\OneDrive\Data Core\Documents\School Documents\(5) KdG\Toegepaste Informatica\[2]  Toegepaste Informatica Tweede Jaar\[2] Programmeren\elias.dehondt\CA\obj\Debug\net7.0\ref\CA.dll
