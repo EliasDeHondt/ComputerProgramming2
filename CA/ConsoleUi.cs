@@ -4,139 +4,161 @@
  *   Visit https://eliasdh.com         *
  *                                     *
  ***************************************/
+
 // Entiteit ConsoleUi
 namespace CA;
 
 public class ConsoleUi
 {
-    public List<Player> Players = new List<Player>();
-    public List<PadelCourt> PadelCourts = new List<PadelCourt>();
-    
+    private List<Player> Players = new List<Player>();
+    private List<PadelCourt> PadelCourts = new List<PadelCourt>();
+
     public void StartConsoleUi()
     {
-        Seed(); // Seed the application with some data
+        SeedData();
         Console.WriteLine("Welcome to the Padel Club application!");
-        
-        Boolean ProgramLoop = true;
-        while (ProgramLoop)
-        {
-            Console.Write("What would you like to do?\n" + 
-						  "===============================\n" + 
-						  "0) Quit\n" + 
-						  "1) Show all Players\n" + 
-						  "2) Show players by position\n" + 
-						  "3) Show all Padel Courts\n" + 
-						  "4) Show Padel Courts with Price and/or (Indoor?)\n" + 
-						  "Choice (0-4): ");
-            string Input = Console.ReadLine();
-            
 
-            switch (Input)
+        bool programLoop = true;
+        while (programLoop)
+        {
+            PrintMenu();
+            string input = Console.ReadLine();
+
+            switch (input)
             {
                 case "0":
                     Console.WriteLine("Goodbye!");
-                    ProgramLoop = false;
+                    programLoop = false;
                     break;
                 case "1":
-                    foreach (Player player in Players)
-                    {
-                        Console.WriteLine(player.ToString());
-                    }
+                    ShowAllPlayers();
                     break;
                 case "2":
-                    Console.WriteLine("Which position would you like to see?");
-                    
-                    foreach (PlayerPosition position in Enum.GetValues(typeof(PlayerPosition))) // Show all possible positions
-                    {
-                        Console.WriteLine($"{(byte)position}) {position}");
-                    }
-
-                    string InputPosition = Console.ReadLine();
-                    PlayerPosition Position = (PlayerPosition) Enum.Parse(typeof(PlayerPosition), InputPosition); // Parse the input to a PlayerPosition enum
-                    
-                    foreach (Player player in Players)
-                    {
-                        if (player.Position == Position)
-                        {
-                            Console.WriteLine(player.ToString());
-                        }
-                    }
+                    ShowPlayersByPosition();
                     break;
                 case "3":
-                    foreach (PadelCourt padelCourt in PadelCourts)
-                    {
-                        Console.WriteLine(padelCourt.ToString());
-                    }
+                    ShowAllPadelCourts();
                     break;
                 case "4":
-                    Double Price = 0.0; // Set the price to 0.0 by default
-                    Boolean NewInputIndoor = false; // Set the indoor/outdoor to false by default
-                    Boolean InputFirstQuestion = true;
-                    Boolean IsParsedPrice;
-                    Boolean InputSecondQuestion = true;
-                    string InputPrice = "";
-                    string InputIndoor = "";
-                    
-                    while (InputFirstQuestion)
-                    {
-                        Console.Write("Enter te price of the Padel Court or leave blank: ");
-                        InputPrice = Console.ReadLine();
-                        
-                        IsParsedPrice = Double.TryParse(InputPrice, out Price); // Try to parse the input to a double
-                        // If the input is a double, set InputFirstQuestion to false (stop the while loop)
-                        // of
-                        // If the input is null, empty or whitespace, set InputFirstQuestion to false (stop the while loop)
-                        if (IsParsedPrice || string.IsNullOrWhiteSpace(InputPrice)) InputFirstQuestion = false;
-                    }
-
-                    while (InputSecondQuestion)
-                    {
-                        Console.Write("Enter (I)ndoor or (O)utdoor or leave blank: ");
-                        InputIndoor = Console.ReadLine();
-                        InputIndoor = InputIndoor.ToLower();
-                        if (InputIndoor == "i" || InputIndoor == "o") InputSecondQuestion = false; // If the input is "i" or "o", set InputSecondQuestion to false (stop the while loop)
-                        if (string.IsNullOrWhiteSpace(InputIndoor)) InputSecondQuestion = false; // If the input is null, empty or whitespace, set InputSecondQuestion to false (stop the while loop)
-                        if (InputIndoor == "i") NewInputIndoor = true; else NewInputIndoor = false; // If the input is "i", set NewInputIndoor to true, else set it to false
-                    }
-                    
-                    
-                    foreach (PadelCourt padelCourt in PadelCourts)
-                    {
-                        if (string.IsNullOrWhiteSpace(InputPrice) == false && string.IsNullOrWhiteSpace(InputIndoor) == false) // If both inputs are not null, empty or whitespace
-                        {
-                            if (padelCourt.Price == Price && padelCourt.IsIndoor == NewInputIndoor) // If the price and indoor/outdoor match
-                            {
-                                if (Price != 0.0) Console.WriteLine(padelCourt.ToString()); // If the price is not 0.0, show the Padel Court
-                            }
-                        }
-                        else if (string.IsNullOrWhiteSpace(InputPrice) == false) // If only the price input is not null, empty or whitespace
-                        {
-                            if (padelCourt.Price == Price) // If the price matches
-                            {
-                                if (Price != 0.0) Console.WriteLine(padelCourt.ToString()); // If the price is not 0.0, show the Padel Court
-                            }
-                        }
-                        else if (string.IsNullOrWhiteSpace(InputIndoor) == false) // If only the indoor/outdoor input is not null, empty or whitespace
-                        {
-                            if (padelCourt.IsIndoor == NewInputIndoor) // If the indoor/outdoor matches
-                            {
-                                Console.WriteLine(padelCourt.ToString());
-                            }
-                        }
-                        else // If both inputs are null, empty or whitespace
-                        {
-                            Console.WriteLine(padelCourt.ToString());
-                        }
-                    }
+                    ShowPadelCourtsByFilter();
+                    break;
+                default:
+                    Console.WriteLine("Invalid input. Please try again.");
                     break;
             }
         }
-
     }
 
-    public void Seed() // Seed the application with some data
-    { 
-        // Seed data for Club (1 Object)
+    private void PrintMenu()
+    {
+        Console.Write("What would you like to do?\n" +
+                      "===============================\n" +
+                      "0) Quit\n" +
+                      "1) Show all Players\n" +
+                      "2) Show players by position\n" +
+                      "3) Show all Padel Courts\n" +
+                      "4) Show Padel Courts with Price and/or (Indoor?)\n" +
+                      "Choice (0-4): ");
+    }
+
+    private void ShowAllPlayers()
+    {
+        foreach (Player player in Players)
+        {
+            Console.WriteLine(player.ToString());
+        }
+    }
+
+    private void ShowPlayersByPosition()
+    {
+        
+        Console.WriteLine("Which position would you like to see?");
+        foreach (PlayerPosition positionE in Enum.GetValues(typeof(PlayerPosition)))
+        {
+            Console.WriteLine($"{(byte)positionE}) {positionE}");
+        }
+
+        string inputPosition = Console.ReadLine();
+        if (Enum.TryParse(inputPosition, out PlayerPosition position))
+        {
+            foreach (Player player in Players)
+            {
+                if (player.Position == position)
+                {
+                    Console.WriteLine(player.ToString());
+                }
+            }
+        }
+    }
+
+    private void ShowAllPadelCourts()
+    {
+        foreach (PadelCourt padelCourt in PadelCourts)
+        {
+            Console.WriteLine(padelCourt.ToString());
+        }
+    }
+
+    private void ShowPadelCourtsByFilter()
+    {
+        double? price = GetPriceFilter();
+        bool? indoor = GetIndoorFilter();
+
+        foreach (PadelCourt padelCourt in PadelCourts)
+        {
+            // If price is null or the price of the padelCourt is equal to the price filter and indoor is null or the indoor of the padelCourt is equal to the indoor filter
+            if ((!price.HasValue || padelCourt.Price == price.Value) && (!indoor.HasValue || padelCourt.IsIndoor == indoor.Value))
+            {
+                Console.WriteLine(padelCourt.ToString());
+            }
+        }
+    }
+
+    private double? GetPriceFilter()
+    {
+        while (true)
+        {
+            Console.Write("Enter the price of the Padel Court or leave blank: ");
+            string inputPrice = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(inputPrice))
+            {
+                return null;
+            }
+            if (double.TryParse(inputPrice, out double price))
+            {
+                return price;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input for price. Please enter a valid number.");
+            }
+        }
+    }
+
+    private bool? GetIndoorFilter()
+    {
+        while (true)
+        {
+            Console.Write("Enter (I)ndoor or (O)utdoor or leave blank: ");
+            string inputIndoor = Console.ReadLine()?.ToLower();
+            if (string.IsNullOrWhiteSpace(inputIndoor))
+            {
+                return null;
+            }
+            if (inputIndoor == "i" || inputIndoor == "o")
+            {
+                return inputIndoor == "i";
+            }
+            else
+            {
+                Console.WriteLine("Invalid input for indoor/outdoor. Please enter 'I' for indoor or 'O' for outdoor.");
+            }
+        }
+    }
+    
+    private void SeedData() // Seed data for the application
+    {
+                // Seed data for Club (1 Object)
         Club Club = new Club(); // Create a new instance of Club
         Club.Name = "Padel Club"; // Set the name of the club
         Club.NumberOfCours = 5; // Set the number of courts
@@ -240,7 +262,5 @@ public class ConsoleUi
             Position = PlayerPosition.Guest,
             PlayedOnCourts = new List<PadelCourt> {PadelCourts[0], PadelCourts[1], PadelCourts[2]} // 3 courts (veel-op-veel relatie)
         });
-        
-
     }
 }
