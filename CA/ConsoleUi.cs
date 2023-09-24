@@ -20,10 +20,14 @@ public class ConsoleUi
         Boolean ProgramLoop = true;
         while (ProgramLoop)
         {
-            Console.WriteLine("What would you like to do?");
-            Console.WriteLine("===============================");
-            Console.WriteLine("0) Quit\n1) Show all Players\n2) Show players by position\n3) Show all Padel Courts\n4) Show Padel Courts with Price and/or (Indoor?)");
-            Console.Write("Choice (0-4): ");
+            Console.Write("What would you like to do?\n" + 
+						  "===============================\n" + 
+						  "0) Quit\n" + 
+						  "1) Show all Players\n" + 
+						  "2) Show players by position\n" + 
+						  "3) Show all Padel Courts\n" + 
+						  "4) Show Padel Courts with Price and/or (Indoor?)\n" + 
+						  "Choice (0-4): ");
             string Input = Console.ReadLine();
             
 
