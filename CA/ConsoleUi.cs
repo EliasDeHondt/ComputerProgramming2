@@ -149,16 +149,13 @@ public class ConsoleUi
             {
                 return inputIndoor == "i";
             }
-            else
-            {
-                Console.WriteLine("Invalid input for indoor/outdoor. Please enter 'I' for indoor or 'O' for outdoor.");
-            }
+            Console.WriteLine("Invalid input for indoor/outdoor. Please enter 'I' for indoor or 'O' for outdoor."); // if inputIndoor is not "i" or "o"
         }
     }
     
     private void SeedData() // Seed data for the application
     {
-                // Seed data for Club (1 Object)
+        // Seed data for Club (1 Object)
         Club Club = new Club(); // Create a new instance of Club
         Club.Name = "Padel Club"; // Set the name of the club
         Club.NumberOfCours = 5; // Set the number of courts
