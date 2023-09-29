@@ -5,7 +5,7 @@
  *                                     *
  ***************************************/
 // Enum PlayerPosition
-namespace CA;
+namespace UI;
 
 public enum PlayerPosition : byte
 {

@@ -5,7 +5,7 @@
  *                                     *
  ***************************************/
 // Entiteit Club
-namespace CA;
+namespace UI;
 
 public class Club
 {

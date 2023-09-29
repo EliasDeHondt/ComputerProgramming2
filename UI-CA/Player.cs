@@ -5,7 +5,7 @@
  *                                     *
  ***************************************/
 // Entiteit Player
-namespace CA;
+namespace UI;
 
 public class Player
 {
