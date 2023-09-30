@@ -5,11 +5,11 @@
  *                                     *
  ***************************************/
 // Entiteit Club
-namespace UI;
+namespace SC.BL.Domain;
 
 public class Club
 {
-    public string Name { get; set; }
+    public string Name { get; set; } // Id
     public int NumberOfCours { get; set; }
     public string StreetName { get; set; } // Part of address
     public int HouseNumber { get; set; } // Part of address

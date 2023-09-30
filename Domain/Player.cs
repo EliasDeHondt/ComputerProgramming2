@@ -5,10 +5,11 @@
  *                                     *
  ***************************************/
 // Entiteit Player
-namespace UI;
+namespace SC.BL.Domain;
 
 public class Player
 {
+    public int PlayerNumber { get; set; } // Id
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateOnly? BirthDate { get; set; } // ? = nullable
@@ -19,6 +20,6 @@ public class Player
     // Override ToString() method
     public override string ToString()
     {
-        return $"{FirstName} {LastName} born on ({BirthDate}) is a {Position} with a level of {Level}.";
+        return $"PlayerNumber {PlayerNumber}, {FirstName} {LastName} born on ({BirthDate}) is a {Position} with a level of {Level}.";
     }
 }

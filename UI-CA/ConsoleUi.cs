@@ -4,9 +4,9 @@
  *   Visit https://eliasdh.com         *
  *                                     *
  ***************************************/
-
 // Entiteit ConsoleUi
-namespace UI;
+using SC.BL.Domain;
+namespace SC.UI.CA;
 
 public class ConsoleUi
 {   
@@ -224,6 +224,7 @@ public class ConsoleUi
         // Seed data for Players (5 Objects)
         _players.Add(new Player
         {
+            PlayerNumber = 1,
             FirstName = "Elias", 
             LastName = "De Hondt", 
             BirthDate = new DateOnly(2001, 4, 10), 
@@ -233,6 +234,7 @@ public class ConsoleUi
         });
         _players.Add(new Player
         {
+            PlayerNumber = 2,
             FirstName = "Alice", 
             LastName = "Johnson", 
             BirthDate = new DateOnly(1990, 3, 20), 
@@ -242,6 +244,7 @@ public class ConsoleUi
         });
         _players.Add(new Player
         {
+            PlayerNumber = 3,
             FirstName = "Bob", 
             LastName = "Smith", 
             BirthDate = new DateOnly(1988, 12, 5), 
@@ -251,6 +254,7 @@ public class ConsoleUi
         });
         _players.Add(new Player
         {
+            PlayerNumber = 4,
             FirstName = "Carol", 
             LastName = "Davis", 
             BirthDate = new DateOnly(1995, 8, 15), 
@@ -260,6 +264,7 @@ public class ConsoleUi
         });
         _players.Add(new Player
         {
+            PlayerNumber = 5,
             FirstName = "David", 
             LastName = "Lee", 
             BirthDate = new DateOnly(1992, 6, 10), 

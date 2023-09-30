@@ -5,7 +5,7 @@
  *                                     *
  ***************************************/
 // Enum PlayerPosition
-namespace UI;
+namespace SC.BL.Domain;
 
 public enum PlayerPosition : byte
 {
