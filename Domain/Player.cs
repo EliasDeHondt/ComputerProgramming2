@@ -4,7 +4,7 @@
  *   Visit https://eliasdh.com         *
  *                                     *
  ***************************************/
-// Entiteit Player
+// Class Player
 namespace SC.BL.Domain;
 
 public class Player

@@ -4,7 +4,7 @@
  *   Visit https://eliasdh.com         *
  *                                     *
  ***************************************/
-// Entiteit PadelCourt
+// Class PadelCourt
 namespace SC.BL.Domain;
 
 public class PadelCourt

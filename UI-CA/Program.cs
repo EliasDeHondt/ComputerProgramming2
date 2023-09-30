@@ -6,6 +6,13 @@
  ***************************************/
 // Top level statements, i.e. entry point of the application (Start)
 
+using SC.BL;
+using SC.DAL;
 using SC.UI.CA;
 
-ConsoleUi consoleUi = new ConsoleUi(); // Create new instance of ConsoleUi & start the application
+InMemoryRepository repository = new InMemoryRepository(); // Create new instance of InMemoryRepository
+Manager manager = new Manager(repository); // Create new instance of Manager
+
+InMemoryRepository.Seed(); // Seed the repository with some data
+
+ConsoleUi consoleUi = new ConsoleUi(manager); // Create new instance of ConsoleUi & start the application

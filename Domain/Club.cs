@@ -4,7 +4,7 @@
  *   Visit https://eliasdh.com         *
  *                                     *
  ***************************************/
-// Entiteit Club
+// Class Club
 namespace SC.BL.Domain;
 
 public class Club
