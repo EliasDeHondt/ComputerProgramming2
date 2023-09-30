@@ -5,6 +5,7 @@
  *                                     *
  ***************************************/
 // Class ConsoleUi
+using System.ComponentModel.DataAnnotations;
 using SC.BL.Domain;
 using SC.BL;
 
@@ -52,6 +53,12 @@ public class ConsoleUi
                     Console.WriteLine("Padel Courts by filter:\n======================");
                     ShowPadelCourtsByFilter();
                     break;
+                case "5":
+                    AddPlayer();
+                    break;
+                case "6":
+                    AddPadelCourt();
+                    break;
                 default:
                     Console.WriteLine("Invalid input. Please try again.");
                     break;
@@ -69,7 +76,9 @@ public class ConsoleUi
                           2) Show players by position
                           3) Show all Padel Courts
                           4) Show Padel Courts with Price and/or (Indoor?)
-                          Choice (0-4): 
+                          5) Add a player
+                          6) Add a Padel Court
+                          Choice (0-6): 
                           """);
     }
 
@@ -83,7 +92,6 @@ public class ConsoleUi
     {
         Console.WriteLine("Which position would you like to see?");
         ShowPositions();
-        Console.Write("Choice (1-4): ");
         string inputPosition = Console.ReadLine();
         
         if (Enum.TryParse(inputPosition, out PlayerPosition position)) // If the inputPosition is a valid PlayerPosition
@@ -99,6 +107,7 @@ public class ConsoleUi
         {
             Console.WriteLine($"{(byte)positionE}) {positionE}");
         }
+        Console.Write("Choice position (1-4): ");
     }
 
     private void ShowAllPadelCourts() // Shows all the PadelCourts
@@ -143,6 +152,83 @@ public class ConsoleUi
             if (inputIndoor == "i" || inputIndoor == "o") return inputIndoor == "i";
             
             Console.WriteLine("Invalid input for indoor/outdoor. Please enter 'I' for indoor or 'O' for outdoor."); // If inputIndoor is not "i" or "o"
+        }
+    }
+    
+    private void AddPlayer() // Add a player
+    {
+        try
+        {
+            Console.Write("Enter the first name of the player: ");
+            string firstName = Console.ReadLine();
+        
+            Console.Write("Enter the last name of the player: ");
+            string lastName = Console.ReadLine();
+        
+            Console.Write("Enter the birth date of the player (DD/MM/YYYY): ");
+            string inputBirthDate = Console.ReadLine();
+            DateOnly? birthDate = null;
+            
+            if (DateTime.TryParseExact(inputBirthDate, "dd/mm/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate))
+            {
+                int year = parsedDate.Year;
+                int month = parsedDate.Month;
+                int day = parsedDate.Day;
+                birthDate = new DateOnly(year, month, day);
+            }
+            
+           
+        
+            Console.Write("Enter the level of the player: ");
+            string inputLevel = Console.ReadLine();
+            int level;
+            bool isParsedLevel = int.TryParse(inputLevel, out level); // is it Parse? Yes/No
+            if (!isParsedLevel) level = 11; // If it's not convertible to an int set it to 11 to trigger the validation exception.
+        
+            ShowPositions();
+            string inputPosition = Console.ReadLine();
+            PlayerPosition position;
+            bool isParsedPosition = Enum.TryParse(inputPosition, out position); // is it Parse? Yes/No
+            if (!isParsedPosition) position = PlayerPosition.Member; // If it's not convertible set it to Member default.
+        
+            _manager.AddPlayer(firstName, lastName, birthDate, level, position);
+        }
+        catch (ValidationException validationException)
+        {
+            Console.ForegroundColor = ConsoleColor.Red; // Set the console color to red
+            Console.WriteLine(validationException.Message);
+            Console.ResetColor(); // Reset the console color
+        }
+
+    }
+    
+    private void AddPadelCourt() // Add a PadelCourt
+    {
+        try
+        {
+            Console.Write("Is the Padel Court indoor? (Y/n): ");
+            string inputIndoor = Console.ReadLine().ToLower();
+            bool isIndoor;
+            if (inputIndoor == "y" || inputIndoor == "n") if (inputIndoor == "y") isIndoor = true; else isIndoor = false; // If inputIndoor is "y" or "n", set isIndoor to true or false
+            else isIndoor = true; // If inputIndoor is not "y" or "n", set isIndoor to true (default)
+        
+            Console.Write("Enter the capacity of the Padel Court: ");
+            string inputCapacity = Console.ReadLine();
+            int capacity = int.TryParse(inputCapacity, out int capacityInt) ? capacityInt : 5; // If it's not convertible to an int set it to 5 to trigger the validation exception.
+        
+            Console.Write("Enter the price of the Padel Court: ");
+            string inputPrice = Console.ReadLine();
+            double price;
+            bool isParsedPrice = double.TryParse(inputPrice, out price); // is it Parse? Yes/No
+            if (!isParsedPrice) price = 0.1; // If it's not convertible to a double set it to 0.1 to trigger the validation exception.
+            
+            _manager.AddPadelCourt(isIndoor, capacity, price);
+        }
+        catch (ValidationException validationException)
+        {
+            Console.ForegroundColor = ConsoleColor.Red; // Set the console color to red
+            Console.WriteLine(validationException.Message);
+            Console.ResetColor(); // Reset the console color
         }
     }
 }

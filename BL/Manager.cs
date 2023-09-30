@@ -5,6 +5,7 @@
  *                                     *
  ***************************************/
 // Class Manager
+using System.ComponentModel.DataAnnotations;
 using SC.BL.Domain;
 using SC.DAL;
 
@@ -37,6 +38,7 @@ public class Manager : IManager
     public void AddPlayer(string firstName, string lastName, DateOnly? birthDate, double level, PlayerPosition position)
     {
         Player player = new Player { FirstName = firstName, LastName = lastName, BirthDate = birthDate, Level = level, Position = position };
+        Validate(player);
         
         _repository.CreatePlayer(player);
     }
@@ -56,10 +58,41 @@ public class Manager : IManager
         return _repository.ReadPadelCourtsByFilter(price, indoor);
     }
     
-    public void AddPadelCourt(bool isIndoor, int capacity, double price, Club club)
+    public void AddPadelCourt(bool isIndoor, int capacity, double price) 
     {
-        PadelCourt padelCourt = new PadelCourt { IsIndoor = isIndoor, Capacity = capacity, Price = price, Club = club };
+        PadelCourt padelCourt = new PadelCourt { IsIndoor = isIndoor, Capacity = capacity, Price = price };
+        Validate(padelCourt);
         
         _repository.CreatePadelCourt(padelCourt);
+    }
+    
+    private void Validate(Player player) // Validate the Player object (overload)
+    {
+        List<ValidationResult> errors = new List<ValidationResult>();
+        bool valid = Validator.TryValidateObject(player, new ValidationContext(player), errors, true);
+        
+        if (!valid) // If the object is not valid
+        {
+            string errorString = "\nAn error occurred, please try again:\n * ";
+            
+            foreach (ValidationResult error in errors) errorString += error.ErrorMessage + "\n * "; // Add each error to the errorString
+            
+            throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
+        }
+    }
+    
+    private void Validate(PadelCourt padelCourt) // Validate the PadelCourt object (overload)
+    {
+        List<ValidationResult> errors = new List<ValidationResult>();
+        bool valid = Validator.TryValidateObject(padelCourt, new ValidationContext(padelCourt), errors, true);
+        
+        if (!valid) // If the object is not valid
+        {
+            string errorString = "\nAn error occurred, please try again:\n * ";
+            
+            foreach (ValidationResult error in errors) errorString += error.ErrorMessage + "\n * "; // Add each error to the errorString
+            
+            throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
+        }
     }
 }
