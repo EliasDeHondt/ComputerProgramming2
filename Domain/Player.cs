@@ -12,13 +12,13 @@ namespace SC.BL.Domain;
 public class Player
 {
     public int PlayerNumber { get; set; } // Id
-    [StringLength(25, ErrorMessage = "At least one character, maximum 25 characters")] [Required]
+    [StringLength(25, ErrorMessage = "(FirstName) At least one character, maximum 25 characters")] [Required]
     public string FirstName { get; set; }
-    [StringLength(25, ErrorMessage = "At least one character, maximum 25 characters")] [Required]
+    [StringLength(25, ErrorMessage = "(LastName) At least one character, maximum 25 characters")] [Required]
     public string LastName { get; set; }
-    [RegularExpression(@"\d{2}/\d{2}/\d{4}", ErrorMessage = "Input the date as follows: DD/MM/YYYY")]
+    [RegularExpression(@"\d{2}/\d{2}/\d{4}", ErrorMessage = "(BirthDate) Input the date as follows: dd/MM/yyyy")]
     public DateOnly? BirthDate { get; set; } // ? = nullable
-    [Range(0, 10, ErrorMessage = "Input a number from 0 to 10")] [Required]
+    [Range(0, 10, ErrorMessage = "(Level) Input a number from 0 to 10")] [Required]
     public double Level { get; set; }
     public PlayerPosition Position { get; set; }
     public List<PadelCourt> PlayedOnCourts { get; set; } = new List<PadelCourt>(); // List of Played padel courts.

@@ -13,7 +13,6 @@ public class PadelCourt : IValidatableObject
 {
     public int CourtNumber { get; set; } // Id
     public bool IsIndoor { get; set; }
-    [Range(2,4, ErrorMessage = "Input a number from 2 to 4")] [Required]
     public int Capacity { get; set; }
     public double Price { get; set; }
     public Club Club { get; set; } // Club where the PadelCourt is located.
@@ -22,13 +21,16 @@ public class PadelCourt : IValidatableObject
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         List<ValidationResult> errors = new List<ValidationResult>();
-
-        // Check that the price has exactly two decimal places
-        if (Math.Abs((Price * 100) % 1) > double.Epsilon)
+        
+        if (!(Capacity >= 2 && Capacity <= 4)) // Capacity must be between 2 and 4
         {
-            errors.Add(new ValidationResult("Price must have exactly two decimal places", new string[] { "Price" }));
+            errors.Add(new ValidationResult("(Capacity) Input a number from 2 to 4", new string[] { "Capacity" }));
         }
-
+        
+        if (!(Price >= 0.01 && Price < 100)) // Price must be between 0.01 and 100
+        {
+            errors.Add(new ValidationResult("(Price) Input a number between 0.01 and 100", new string[] { "Price" }));
+        }
         return errors;
     }
     

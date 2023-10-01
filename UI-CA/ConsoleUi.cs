@@ -60,7 +60,8 @@ public class ConsoleUi
                     AddPadelCourt();
                     break;
                 default:
-                    Console.WriteLine("Invalid input. Please try again.");
+                    ValidationException validationException = new ValidationException("An error occurred, please try again:\n * Invalid input. Please enter a number from 0 to 6.\n * end");
+                    CatchValidationException(validationException);
                     break;
             }
         }
@@ -136,7 +137,8 @@ public class ConsoleUi
             
             if (double.TryParse(inputPrice, out double price)) return price; // If the inputPrice is a valid double, return the price
             
-            Console.WriteLine("Invalid input for price. Please enter a valid number.");
+            ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for price. Please enter a valid number.\n * end\n");
+            CatchValidationException(validationException);
         }
     }
 
@@ -151,7 +153,8 @@ public class ConsoleUi
             
             if (inputIndoor == "i" || inputIndoor == "o") return inputIndoor == "i";
             
-            Console.WriteLine("Invalid input for indoor/outdoor. Please enter 'I' for indoor or 'O' for outdoor."); // If inputIndoor is not "i" or "o"
+            ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for indoor/outdoor. Please enter 'I' for indoor or 'O' for outdoor.\n * end\n");
+            CatchValidationException(validationException);
         }
     }
     
@@ -165,20 +168,20 @@ public class ConsoleUi
             Console.Write("Enter the last name of the player: ");
             string lastName = Console.ReadLine();
         
-            Console.Write("Enter the birth date of the player (DD/MM/YYYY): ");
+            Console.Write("Enter the birth date of the player (dd/MM/yyyy): ");
             string inputBirthDate = Console.ReadLine();
-            DateOnly? birthDate = null;
-            
-            if (DateTime.TryParseExact(inputBirthDate, "dd/mm/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate))
+            DateOnly birthDate;
+            if (!string.IsNullOrWhiteSpace(inputBirthDate)) // If inputBirthDate is not null or whitespace
             {
-                int year = parsedDate.Year;
-                int month = parsedDate.Month;
-                int day = parsedDate.Day;
-                birthDate = new DateOnly(year, month, day);
+                bool isParsedDate = DateTime.TryParseExact(inputBirthDate, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate);
+                if (isParsedDate) // is it Parse? Yes/No
+                {
+                    birthDate = new DateOnly(parsedDate.Year, parsedDate.Month, parsedDate.Day);
+                }
+                else birthDate = new DateOnly(01, 01, 0001); // If it's not convertible to a DateTime set it to 00/00/0000 to trigger the validation exception.
             }
+            else birthDate = new DateOnly(01, 01, 0001); // If it's null or whitespace set it to 00/00/0000 to trigger the validation exception.
             
-           
-        
             Console.Write("Enter the level of the player: ");
             string inputLevel = Console.ReadLine();
             int level;
@@ -195,9 +198,7 @@ public class ConsoleUi
         }
         catch (ValidationException validationException)
         {
-            Console.ForegroundColor = ConsoleColor.Red; // Set the console color to red
-            Console.WriteLine(validationException.Message);
-            Console.ResetColor(); // Reset the console color
+            CatchValidationException(validationException);
         }
 
     }
@@ -220,15 +221,21 @@ public class ConsoleUi
             string inputPrice = Console.ReadLine();
             double price;
             bool isParsedPrice = double.TryParse(inputPrice, out price); // is it Parse? Yes/No
-            if (!isParsedPrice) price = 0.1; // If it's not convertible to a double set it to 0.1 to trigger the validation exception.
+            if (!isParsedPrice) price = 101.00; // If it's not convertible to a double set it to 101.00 to trigger the validation exception.
             
-            _manager.AddPadelCourt(isIndoor, capacity, price);
+            Club club = new Club { Name = "Padel Club" }; // This is temporarily statically programmed!!!
+            _manager.AddPadelCourt(isIndoor, capacity, price, club);
         }
         catch (ValidationException validationException)
         {
-            Console.ForegroundColor = ConsoleColor.Red; // Set the console color to red
-            Console.WriteLine(validationException.Message);
-            Console.ResetColor(); // Reset the console color
+            CatchValidationException(validationException);
         }
+    }
+    
+    private void CatchValidationException(ValidationException validationException) // Catch the ValidationException
+    {
+        Console.ForegroundColor = ConsoleColor.Red; // Set the console color to red
+        Console.WriteLine(validationException.Message);
+        Console.ResetColor(); // Reset the console color
     }
 }
