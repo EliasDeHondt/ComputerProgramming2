@@ -24,13 +24,14 @@ public class ConsoleUi
     private void Start() // Start the application
     {
         bool programLoop = true;
+        String line = new String('=', 26); // Create a new string with 26 "="
         while (programLoop) // While programLoop is true, run the code below
         {
             Console.Write("\n");
             PrintMenu();
             string input = Console.ReadLine();
             Console.Write("\n");
-
+            
             switch (input)
             {
                 case "0":
@@ -38,25 +39,27 @@ public class ConsoleUi
                     programLoop = false;
                     break;
                 case "1":
-                    Console.WriteLine("All Players:\n=============");
+                    Console.WriteLine($"All Players:\n{line}");
                     ShowAllPlayers();
                     break;
                 case "2":
-                    Console.WriteLine("Players by position:\n====================");
+                    Console.WriteLine($"Players by position:\n{line}");
                     ShowPlayersByPosition();
                     break;
                 case "3":
-                    Console.WriteLine("All Padel Courts:\n=================");
+                    Console.WriteLine($"All Padel Courts:\n{line}");
                     ShowAllPadelCourts();
                     break;
                 case "4":
-                    Console.WriteLine("Padel Courts by filter:\n======================");
+                    Console.WriteLine($"Padel Courts by filter:\n{line}");
                     ShowPadelCourtsByFilter();
                     break;
                 case "5":
+                    Console.WriteLine($"Add Player:\n{line}");
                     AddPlayer();
                     break;
                 case "6":
+                    Console.WriteLine($"Add Padel Court:\n{line}");
                     AddPadelCourt();
                     break;
                 default:
@@ -71,7 +74,7 @@ public class ConsoleUi
     {
         Console.Write("""
                           What would you like to do?
-                          ===============================
+                          ==========================
                           0) Quit
                           1) Show all Players
                           2) Show players by position
@@ -122,8 +125,8 @@ public class ConsoleUi
         double? price = GetPriceFilter();
         bool? indoor = GetIndoorFilter();
         
-        List<PadelCourt> _padelCourts = _manager.GetPadelCourtsByFilter(price, indoor); // Get all the PadelCourts by filter from the manager
-        foreach (PadelCourt padelCourt in _padelCourts) Console.WriteLine(padelCourt.ToString()); // Print all the PadelCourts in a foreach loop (if price == padelCourt.Price && indoor == padelCourt.IsIndoor)
+        List<PadelCourt> padelCourts = _manager.GetPadelCourtsByFilter(price, indoor); // Get all the PadelCourts by filter from the manager
+        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.ToString()); // Print all the PadelCourts in a foreach loop (if price == padelCourt.Price && indoor == padelCourt.IsIndoor)
     }
 
     private double? GetPriceFilter() // Returns a double or null (double?)
@@ -133,9 +136,9 @@ public class ConsoleUi
             Console.Write("Enter the price of the Padel Court or leave blank: ");
             string inputPrice = Console.ReadLine();
             
-            if (string.IsNullOrWhiteSpace(inputPrice)) return null; // If the inputPrice is null or whitespace, return null
+            if (String.IsNullOrWhiteSpace(inputPrice)) return null; // If the inputPrice is null or whitespace, return null
             
-            if (double.TryParse(inputPrice, out double price)) return price; // If the inputPrice is a valid double, return the price
+            if (Double.TryParse(inputPrice, out double price)) return price; // If the inputPrice is a valid double, return the price
             
             ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for price. Please enter a valid number.\n * end\n");
             CatchValidationException(validationException);
@@ -149,7 +152,7 @@ public class ConsoleUi
             Console.Write("Enter (I)ndoor or (O)utdoor or leave blank: ");
             string inputIndoor = Console.ReadLine()?.ToLower();
             
-            if (string.IsNullOrWhiteSpace(inputIndoor)) return null;
+            if (String.IsNullOrWhiteSpace(inputIndoor)) return null;
             
             if (inputIndoor == "i" || inputIndoor == "o") return inputIndoor == "i";
             
@@ -171,7 +174,7 @@ public class ConsoleUi
             Console.Write("Enter the birth date of the player (dd/MM/yyyy): ");
             string inputBirthDate = Console.ReadLine();
             DateOnly birthDate;
-            if (!string.IsNullOrWhiteSpace(inputBirthDate)) // If inputBirthDate is not null or whitespace
+            if (!String.IsNullOrWhiteSpace(inputBirthDate)) // If inputBirthDate is not null or whitespace
             {
                 bool isParsedDate = DateTime.TryParseExact(inputBirthDate, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate);
                 if (isParsedDate) // is it Parse? Yes/No
@@ -185,7 +188,7 @@ public class ConsoleUi
             Console.Write("Enter the level of the player: ");
             string inputLevel = Console.ReadLine();
             int level;
-            bool isParsedLevel = int.TryParse(inputLevel, out level); // is it Parse? Yes/No
+            bool isParsedLevel = Int32.TryParse(inputLevel, out level); // is it Parse? Yes/No
             if (!isParsedLevel) level = 11; // If it's not convertible to an int set it to 11 to trigger the validation exception.
         
             ShowPositions();
@@ -208,19 +211,19 @@ public class ConsoleUi
         try
         {
             Console.Write("Is the Padel Court indoor? (Y/n): ");
-            string inputIndoor = Console.ReadLine().ToLower();
+            string inputIndoor = Console.ReadLine()?.ToLower(); // ToLower() to make it case insensitive ? to make it nullable (because of the null check)
             bool isIndoor;
             if (inputIndoor == "y" || inputIndoor == "n") if (inputIndoor == "y") isIndoor = true; else isIndoor = false; // If inputIndoor is "y" or "n", set isIndoor to true or false
             else isIndoor = true; // If inputIndoor is not "y" or "n", set isIndoor to true (default)
         
             Console.Write("Enter the capacity of the Padel Court: ");
             string inputCapacity = Console.ReadLine();
-            int capacity = int.TryParse(inputCapacity, out int capacityInt) ? capacityInt : 5; // If it's not convertible to an int set it to 5 to trigger the validation exception.
+            int capacity = Int32.TryParse(inputCapacity, out int capacityInt) ? capacityInt : 5; // If it's not convertible to an int set it to 5 to trigger the validation exception.
         
             Console.Write("Enter the price of the Padel Court: ");
             string inputPrice = Console.ReadLine();
             double price;
-            bool isParsedPrice = double.TryParse(inputPrice, out price); // is it Parse? Yes/No
+            bool isParsedPrice = Double.TryParse(inputPrice, out price); // is it Parse? Yes/No
             if (!isParsedPrice) price = 101.00; // If it's not convertible to a double set it to 101.00 to trigger the validation exception.
             
             Club club = new Club { Name = "Padel Club" }; // This is temporarily statically programmed!!!
