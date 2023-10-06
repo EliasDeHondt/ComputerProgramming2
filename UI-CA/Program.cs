@@ -10,6 +10,7 @@ using PadelClubManagement.BL;
 using PadelClubManagement.DAL;
 using PadelClubManagement.UI.CA;
 
+// Composition Root
 InMemoryRepository repository = new InMemoryRepository(); // Create new instance of InMemoryRepository
 Manager manager = new Manager(repository); // Create new instance of Manager
 
