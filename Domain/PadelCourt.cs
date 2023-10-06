@@ -33,13 +33,4 @@ public class PadelCourt : IValidatableObject
         }
         return errors;
     }
-    
-    // Override ToString() method
-    public override string ToString()
-    {
-        // {(IsIndoor ? "indoor" : "outdoor")} if IsIndoor is true, return "indoor", else return "outdoor"
-        return $"Padel Court {CourtNumber} is {(IsIndoor ? "indoor" : "outdoor")} and has a capacity of {Capacity} players. The price is {Price} euro per hour (Club: {Club.Name})."; // Notation: $"" = string interpolation
-        // string IsIndoorString = IsIndoor ? "indoor" : "outdoor";
-        // return String.Format("Padel Court {0} is {1} and has a capacity of {2} players. The price is {3} euro per hour (Club: {4}).", CourtNumber, IsIndoorString, Capacity, Price, Club.Name); // Notation: String.Format()
-    }
 }

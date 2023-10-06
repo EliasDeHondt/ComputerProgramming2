@@ -8,6 +8,7 @@
 using System.ComponentModel.DataAnnotations;
 using PadelClubManagement.BL.Domain;
 using PadelClubManagement.BL;
+using PadelClubManagement.UI.CA.Extensions;
 
 namespace PadelClubManagement.UI.CA;
 
@@ -89,7 +90,7 @@ public class ConsoleUi
     private void ShowAllPlayers() // Shows all the players
     {
         List<Player> players = _manager.GetAllPlayers(); // Get all the players from the manager
-        foreach (Player player in players) Console.WriteLine(player.ToString()); // Print all the players in a foreach loop
+        foreach (Player player in players) Console.WriteLine(player.GetInfo()); // Print all the players in a foreach loop
     }
 
     private void ShowPlayersByPosition() // Shows all the players by position
@@ -101,7 +102,7 @@ public class ConsoleUi
         if (Enum.TryParse(inputPosition, out PlayerPosition position)) // If the inputPosition is a valid PlayerPosition
         {
             List<Player> players = _manager.GetPlayersByPosition(position); // Get all the players by position from the manager
-            foreach (Player player in players) Console.WriteLine(player.ToString()); // Print all the players in a foreach loop (if position == player.Position)
+            foreach (Player player in players) Console.WriteLine(player.GetInfo()); // Print all the players in a foreach loop (if position == player.Position)
         }
     }
     
@@ -117,7 +118,7 @@ public class ConsoleUi
     private void ShowAllPadelCourts() // Shows all the PadelCourts
     {
         List<PadelCourt> padelCourts = _manager.GetAllPadelCourts(); // Get all the PadelCourts from the manager
-        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.ToString()); // Print all the PadelCourts in a foreach loop
+        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfo()); // Print all the PadelCourts in a foreach loop
     }
 
     private void ShowPadelCourtsByFilter() // Shows all the PadelCourts with a price and/or indoor filter
@@ -126,7 +127,7 @@ public class ConsoleUi
         bool? indoor = GetIndoorFilter();
         
         List<PadelCourt> padelCourts = _manager.GetPadelCourtsByFilter(price, indoor); // Get all the PadelCourts by filter from the manager
-        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.ToString()); // Print all the PadelCourts in a foreach loop (if price == padelCourt.Price && indoor == padelCourt.IsIndoor)
+        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfo()); // Print all the PadelCourts in a foreach loop (if price == padelCourt.Price && indoor == padelCourt.IsIndoor)
     }
 
     private double? GetPriceFilter() // Returns a double or null (double?)

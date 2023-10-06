@@ -14,11 +14,4 @@ public class Club
     public string StreetName { get; set; } // Part of address
     public int HouseNumber { get; set; } // Part of address
     public int ZipCode { get; set; } // Part of address
-    
-    // Override ToString() method
-    public override string ToString()
-    {
-        return $"{Name} has {NumberOfCours} courts and is located at {StreetName} {HouseNumber}, {ZipCode}."; // Notation: $"" = string interpolation
-        // return String.Format("{0} has {1} courts and is located at {2} {3}, {4}.", Name, NumberOfCours, StreetName, HouseNumber, ZipCode); // Notation: String.Format()
-    }
 }

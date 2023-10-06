@@ -22,11 +22,4 @@ public class Player
     public double Level { get; set; }
     public PlayerPosition Position { get; set; }
     public List<PadelCourt> PlayedOnCourts { get; set; } = new List<PadelCourt>(); // List of Played padel courts.
-    
-    // Override ToString() method
-    public override string ToString()
-    {
-        return $"PlayerNumber {PlayerNumber}, {FirstName} {LastName} born on ({BirthDate}) is a {Position} with a level of {Level}."; // Notation: $"" = string interpolation
-        // return String.Format("PlayerNumber {0}, {1} {2} born on ({3}) is a {4} with a level of {5}.", PlayerNumber, FirstName, LastName, BirthDate, Position, Level); // Notation: String.Format()
-    }
 }
