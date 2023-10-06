@@ -6,10 +6,10 @@
  ***************************************/
 // Class Manager
 using System.ComponentModel.DataAnnotations;
-using SC.BL.Domain;
-using SC.DAL;
+using PadelClubManagement.BL.Domain;
+using PadelClubManagement.DAL;
 
-namespace SC.BL;
+namespace PadelClubManagement.BL;
 
 public class Manager : IManager
 {

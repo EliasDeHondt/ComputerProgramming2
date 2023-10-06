@@ -6,10 +6,10 @@
  ***************************************/
 // Class ConsoleUi
 using System.ComponentModel.DataAnnotations;
-using SC.BL.Domain;
-using SC.BL;
+using PadelClubManagement.BL.Domain;
+using PadelClubManagement.BL;
 
-namespace SC.UI.CA;
+namespace PadelClubManagement.UI.CA;
 
 public class ConsoleUi
 {

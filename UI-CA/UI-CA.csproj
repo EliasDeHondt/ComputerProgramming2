@@ -5,8 +5,8 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
-        <AssemblyName>SC.UI.CA</AssemblyName>
-        <RootNamespace>SC.UI.CA</RootNamespace>
+        <AssemblyName>PadelClubManagement.UI.CA</AssemblyName>
+        <RootNamespace>PadelClubManagement.UI.CA</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

@@ -5,7 +5,7 @@
  *                                     *
  ***************************************/
 // Enum PlayerPosition
-namespace SC.BL.Domain;
+namespace PadelClubManagement.BL.Domain;
 
 public enum PlayerPosition : byte
 {

@@ -4,8 +4,8 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
-        <AssemblyName>SC.DAL</AssemblyName>
-        <RootNamespace>SC.DAL</RootNamespace>
+        <AssemblyName>PadelClubManagement.DAL</AssemblyName>
+        <RootNamespace>PadelClubManagement.DAL</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

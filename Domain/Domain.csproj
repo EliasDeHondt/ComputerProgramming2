@@ -4,8 +4,8 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
-        <AssemblyName>SC.BL.Domain</AssemblyName>
-        <RootNamespace>SC.BL.Domain</RootNamespace>
+        <AssemblyName>PadelClubManagement.BL.Domain</AssemblyName>
+        <RootNamespace>PadelClubManagement.BL.Domain</RootNamespace>
     </PropertyGroup>
 
 </Project>

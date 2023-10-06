@@ -5,9 +5,9 @@
  *                                     *
  ***************************************/
 // Interface IRepository
-using SC.BL.Domain;
+using PadelClubManagement.BL.Domain;
 
-namespace SC.DAL;
+namespace PadelClubManagement.DAL;
 
 public interface IRepository
 {

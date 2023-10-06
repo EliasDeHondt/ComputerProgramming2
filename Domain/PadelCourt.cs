@@ -7,7 +7,7 @@
 // Class PadelCourt
 using System.ComponentModel.DataAnnotations;
 
-namespace SC.BL.Domain;
+namespace PadelClubManagement.BL.Domain;
 
 public class PadelCourt : IValidatableObject
 {

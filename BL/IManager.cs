@@ -5,9 +5,9 @@
  *                                     *
  ***************************************/
 // Interface IManager
-using SC.BL.Domain;
+using PadelClubManagement.BL.Domain;
 
-namespace SC.BL;
+namespace PadelClubManagement.BL;
 
 public interface IManager
 {

@@ -4,8 +4,8 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
-        <AssemblyName>SC.BL</AssemblyName>
-        <RootNamespace>SC.BL</RootNamespace>
+        <AssemblyName>PadelClubManagement.BL</AssemblyName>
+        <RootNamespace>PadelClubManagement.BL</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

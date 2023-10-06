@@ -5,7 +5,7 @@
  *                                     *
  ***************************************/
 // Class Club
-namespace SC.BL.Domain;
+namespace PadelClubManagement.BL.Domain;
 
 public class Club
 {

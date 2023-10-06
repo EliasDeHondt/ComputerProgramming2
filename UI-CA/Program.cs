@@ -6,9 +6,9 @@
  ***************************************/
 // Top level statements, i.e. entry point of the application (Start)
 
-using SC.BL;
-using SC.DAL;
-using SC.UI.CA;
+using PadelClubManagement.BL;
+using PadelClubManagement.DAL;
+using PadelClubManagement.UI.CA;
 
 InMemoryRepository repository = new InMemoryRepository(); // Create new instance of InMemoryRepository
 Manager manager = new Manager(repository); // Create new instance of Manager
