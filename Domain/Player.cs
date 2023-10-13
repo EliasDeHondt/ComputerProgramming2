@@ -12,9 +12,9 @@ namespace PadelClubManagement.BL.Domain;
 public class Player
 {
     public int PlayerNumber { get; set; } // Id
-    [StringLength(25, ErrorMessage = "(FirstName) At least one character, maximum 25 characters")] [Required]
+    [StringLength(50, MinimumLength = 2, ErrorMessage = "(FirstName) At least 2 character, maximum 50 characters")] [Required]
     public string FirstName { get; set; }
-    [StringLength(25, ErrorMessage = "(LastName) At least one character, maximum 25 characters")] [Required]
+    [StringLength(50, MinimumLength = 2, ErrorMessage = "(LastName) At least 2 character, maximum 50 characters")] [Required]
     public string LastName { get; set; }
     [RegularExpression(@"\d{2}/\d{2}/\d{4}", ErrorMessage = "(BirthDate) Input the date as follows: dd/MM/yyyy")]
     public DateOnly? BirthDate { get; set; } // ? = nullable

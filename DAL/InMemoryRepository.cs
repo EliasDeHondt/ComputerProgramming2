@@ -19,6 +19,7 @@ public class InMemoryRepository : IRepository
       {
           // Seed data for Club (1 Object) (1 op veel relatie)
           Club club = new Club(); // Create a new instance of Club
+          club.ClubNumber = 1; // Set the club number
           club.Name = "Padel Club"; // Set the name of the club
           club.NumberOfCours = 5; // Set the number of courts
           club.StreetName = "Kattenbroek"; // Set the street name
