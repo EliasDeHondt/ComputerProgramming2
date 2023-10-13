@@ -5,9 +5,15 @@
  *                                     *
  ***************************************/
 // Class PadelClubManagementDbContext
+using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+
 namespace PadelClubManagement.DAL.EF;
 
-public class PadelClubManagementDbContext
+public class PadelClubManagementDbContext : DbContext
 {
-    
+    public PadelClubManagementDbContext()
+    {
+        
+    }
 }

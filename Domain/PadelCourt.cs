@@ -24,12 +24,12 @@ public class PadelCourt : IValidatableObject
         
         if (!(Capacity >= 2 && Capacity <= 4)) // Capacity must be between 2 and 4
         {
-            errors.Add(new ValidationResult("(Capacity) Input a number from 2 to 4", new string[] { "Capacity" }));
+            errors.Add(new ValidationResult("(Capacity) Input a number from 2 to 4", new string[] { nameof(Capacity) }));
         }
         
         if (!(Price >= 0.01 && Price < 100)) // Price must be between 0.01 and 100
         {
-            errors.Add(new ValidationResult("(Price) Input a number between 0.01 and 100", new string[] { "Price" }));
+            errors.Add(new ValidationResult("(Price) Input a number between 0.01 and 100", new string[] { nameof(Price) }));
         }
         return errors;
     }
