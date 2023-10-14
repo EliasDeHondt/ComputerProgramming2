@@ -6,14 +6,20 @@
  ***************************************/
 // Top level statements, i.e. entry point of the application (Start)
 
+using Microsoft.EntityFrameworkCore;
 using PadelClubManagement.BL;
-using PadelClubManagement.DAL;
+using PadelClubManagement.DAL.EF;
 using PadelClubManagement.UI.CA;
 
 // Composition Root
-InMemoryRepository repository = new InMemoryRepository(); // Create new instance of InMemoryRepository
-Manager manager = new Manager(repository); // Create new instance of Manager
+DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
+PadelClubManagementDbContext padelClubManagementDbContext = new PadelClubManagementDbContext(optionsBuilder.Options);
+DbContextRepository dbContextRepository = new DbContextRepository(padelClubManagementDbContext);
 
-InMemoryRepository.Seed(); // Seed the repository with some data
+bool databaseCreated = padelClubManagementDbContext.CreateDatabase(true); // Create the database
+if (databaseCreated) DataSeeder.Seed(padelClubManagementDbContext); // Seed the database with some data
+
+Manager manager = new Manager(dbContextRepository); // Create new instance of Manager
 
 ConsoleUi consoleUi = new ConsoleUi(manager); // Create new instance of ConsoleUi & start the application
+consoleUi.Start(); // Start the application

@@ -17,44 +17,38 @@ public class InMemoryRepository : IRepository
 
       public static void Seed() // Seed data for the application
       {
-          // Seed data for Club (1 Object) (1 op veel relatie)
-          Club club = new Club(); // Create a new instance of Club
-          club.ClubNumber = 1; // Set the club number
-          club.Name = "Padel Club"; // Set the name of the club
-          club.NumberOfCours = 5; // Set the number of courts
-          club.StreetName = "Kattenbroek"; // Set the street name
-          club.HouseNumber = 3; // Set the house number
-          club.ZipCode = 2650; // Set the zip code
+        // Seed data for Club (1 Object) (1 op veel relatie)
+        Club club1 = new Club { ClubNumber = 1, Name = "Padel Club", NumberOfCours = 5, StreetName = "Kattenbroek", HouseNumber = 3, ZipCode = 2650 };
         
-          // Seed data for PadelCourts (6 Objects)
-          PadelCourt padelCourt1 = new PadelCourt { CourtNumber = 1, IsIndoor = true, Capacity = 4, Price = 20.50, Club = club };
-          PadelCourt padelCourt2 = new PadelCourt { CourtNumber = 2,  IsIndoor = true, Capacity = 4, Price = 20.50, Club = club };
-          PadelCourt padelCourt3 = new PadelCourt { CourtNumber = 3,  IsIndoor = true, Capacity = 4, Price = 20.50, Club = club };
-          PadelCourt padelCourt4 = new PadelCourt { CourtNumber = 4,  IsIndoor = false, Capacity = 2, Price = 15.75, Club = club };
-          PadelCourt padelCourt5 = new PadelCourt { CourtNumber = 5,  IsIndoor = false, Capacity = 2, Price = 15.75, Club = club };
-          PadelCourt padelCourt6 = new PadelCourt { CourtNumber = 6,  IsIndoor = false, Capacity = 2, Price = 20.50, Club = club };
+        // Seed data for PadelCourts (6 Objects)
+        PadelCourt padelCourt1 = new PadelCourt { CourtNumber = 1, IsIndoor = true, Capacity = 4, Price = 20.50, Club = club1 };
+        PadelCourt padelCourt2 = new PadelCourt { CourtNumber = 2,  IsIndoor = true, Capacity = 4, Price = 20.50, Club = club1 };
+        PadelCourt padelCourt3 = new PadelCourt { CourtNumber = 3,  IsIndoor = true, Capacity = 4, Price = 20.50, Club = club1 };
+        PadelCourt padelCourt4 = new PadelCourt { CourtNumber = 4,  IsIndoor = false, Capacity = 2, Price = 15.75, Club = club1 };
+        PadelCourt padelCourt5 = new PadelCourt { CourtNumber = 5,  IsIndoor = false, Capacity = 2, Price = 15.75, Club = club1 };
+        PadelCourt padelCourt6 = new PadelCourt { CourtNumber = 6,  IsIndoor = false, Capacity = 2, Price = 20.50, Club = club1 };
         
-          // Seed data for Players (5 Objects)
-          Player player1 = new Player { PlayerNumber = 1, FirstName = "Elias", LastName = "De Hondt", BirthDate = new DateOnly(2001, 4, 10), Level = 5.5, Position = PlayerPosition.Member };
-          Player player2 = new Player { PlayerNumber = 2,  FirstName = "Alice", LastName = "Johnson", BirthDate = new DateOnly(1990, 3, 20), Level = 6.2, Position = PlayerPosition.Instructor };
-          Player player3 = new Player { PlayerNumber = 3,  FirstName = "Bob", LastName = "Smith", BirthDate = new DateOnly(1988, 12, 5), Level = 5.0, Position = PlayerPosition.TournamentPlayer };
-          Player player4 = new Player { PlayerNumber = 4,  FirstName = "Carol", LastName = "Davis", BirthDate = new DateOnly(1995, 8, 15), Level = 4.5, Position = PlayerPosition.Member };
-          Player player5 = new Player { PlayerNumber = 5,  FirstName = "David", LastName = "Lee", BirthDate = new DateOnly(1992, 6, 10), Level = 4.2, Position = PlayerPosition.Guest };
+        // Seed data for Players (5 Objects)
+        Player player1 = new Player { PlayerNumber = 1, FirstName = "Elias", LastName = "De Hondt", BirthDate = new DateOnly(2001, 4, 10), Level = 5.5, Position = PlayerPosition.Member };
+        Player player2 = new Player { PlayerNumber = 2,  FirstName = "Alice", LastName = "Johnson", BirthDate = new DateOnly(1990, 3, 20), Level = 6.2, Position = PlayerPosition.Instructor };
+        Player player3 = new Player { PlayerNumber = 3,  FirstName = "Bob", LastName = "Smith", BirthDate = new DateOnly(1988, 12, 5), Level = 5.0, Position = PlayerPosition.TournamentPlayer };
+        Player player4 = new Player { PlayerNumber = 4,  FirstName = "Carol", LastName = "Davis", BirthDate = new DateOnly(1995, 8, 15), Level = 4.5, Position = PlayerPosition.Member };
+        Player player5 = new Player { PlayerNumber = 5,  FirstName = "David", LastName = "Lee", BirthDate = new DateOnly(1992, 6, 10), Level = 4.2, Position = PlayerPosition.Guest };
           
-          // Add padelCourts to the list of padelCourts
-          _padelCourts.Add(padelCourt1);
-          _padelCourts.Add(padelCourt2);
-          _padelCourts.Add(padelCourt3);
-          _padelCourts.Add(padelCourt4);
-          _padelCourts.Add(padelCourt5);
-          _padelCourts.Add(padelCourt6);
+        // Add padelCourts to the list of padelCourts
+        _padelCourts.Add(padelCourt1);
+        _padelCourts.Add(padelCourt2);
+        _padelCourts.Add(padelCourt3);
+        _padelCourts.Add(padelCourt4);
+        _padelCourts.Add(padelCourt5);
+        _padelCourts.Add(padelCourt6);
           
-          // Add players to the list of players
-          _players.Add(player1);
-          _players.Add(player2);
-          _players.Add(player3);
-          _players.Add(player4);
-          _players.Add(player5);
+        // Add players to the list of players
+        _players.Add(player1);
+        _players.Add(player2);
+        _players.Add(player3);
+        _players.Add(player4);
+        _players.Add(player5);
       }
 
       public Player ReadPlayer(int playerNumber)
@@ -107,10 +101,10 @@ public class InMemoryRepository : IRepository
           foreach (PadelCourt padelCourt in _padelCourts)
           {
               // If price is null or the price of the padelCourt is equal to the price filter and indoor is null or the indoor of the padelCourt is equal to the indoor filter
-              if ((!price.HasValue || padelCourt.Price.Equals(price.Value)) && (!indoor.HasValue || padelCourt.IsIndoor == indoor.Value))
-              {
-                    padelCourts.Add(padelCourt);
-              }
+              bool meetsPriceCriteria = !price.HasValue || padelCourt.Price.Equals(price.Value);
+              bool meetsIndoorCriteria = !indoor.HasValue || padelCourt.IsIndoor == indoor.Value;
+              
+              if (meetsPriceCriteria && meetsIndoorCriteria) padelCourts.Add(padelCourt);
           }
           return padelCourts;
       }

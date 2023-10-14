@@ -1,3 +1,10 @@
+/***************************************
+ *                                     *
+ *   Created by Elias De Hondt         *
+ *   Visit https://eliasdh.com         *
+ *                                     *
+ ***************************************/
+// Class ClubExtensions
 using PadelClubManagement.BL.Domain;
 
 namespace PadelClubManagement.UI.CA.Extensions;

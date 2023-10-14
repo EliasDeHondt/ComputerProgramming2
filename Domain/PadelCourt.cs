@@ -11,6 +11,7 @@ namespace PadelClubManagement.BL.Domain;
 
 public class PadelCourt : IValidatableObject
 {
+    [Key] // Primary key
     public int CourtNumber { get; set; } // Id
     public bool IsIndoor { get; set; }
     public int Capacity { get; set; }

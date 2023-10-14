@@ -5,13 +5,13 @@
  *                                     *
  ***************************************/
 // Class Club
-
 using System.ComponentModel.DataAnnotations;
 
 namespace PadelClubManagement.BL.Domain;
 
 public class Club
 {
+    [Key] // Primary key
     public int ClubNumber { get; set; } // Id
     [StringLength(50, MinimumLength = 2, ErrorMessage = "(Name) At least 2 character, maximum 50 characters")] [Required]
     public string Name { get; set; }

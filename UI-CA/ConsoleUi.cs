@@ -18,12 +18,11 @@ public class ConsoleUi
     public ConsoleUi(IManager manager) // Constructor
     {
         _manager = manager;
-        Console.WriteLine("Welcome to the Padel Club application!");
-        Start();
     }
 
-    private void Start() // Start the application
+    public void Start() // Start the application
     {
+        Console.WriteLine("Welcome to the Padel Club application!");
         bool programLoop = true;
         String line = new String('=', 26); // Create a new string with 26 "="
         while (programLoop) // While programLoop is true, run the code below

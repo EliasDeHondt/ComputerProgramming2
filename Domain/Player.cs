@@ -11,6 +11,7 @@ namespace PadelClubManagement.BL.Domain;
 
 public class Player
 {
+    [Key] // Primary key
     public int PlayerNumber { get; set; } // Id
     [StringLength(50, MinimumLength = 2, ErrorMessage = "(FirstName) At least 2 character, maximum 50 characters")] [Required]
     public string FirstName { get; set; }
