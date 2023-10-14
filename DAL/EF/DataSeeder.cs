@@ -32,22 +32,22 @@ public static class DataSeeder
         Player player5 = new Player { PlayerNumber = 5,  FirstName = "David", LastName = "Lee", BirthDate = new DateOnly(1992, 6, 10), Level = 4.2, Position = PlayerPosition.Guest };
           
         // Add players to the DbContext (Database)
-        dbContext.DbPlayers.Add(player1);
-        dbContext.DbPlayers.Add(player2);
-        dbContext.DbPlayers.Add(player3);
-        dbContext.DbPlayers.Add(player4);
-        dbContext.DbPlayers.Add(player5);
+        dbContext.Players.Add(player1);
+        dbContext.Players.Add(player2);
+        dbContext.Players.Add(player3);
+        dbContext.Players.Add(player4);
+        dbContext.Players.Add(player5);
           
         // Add padelCourts to the DbContext (Database)
-        dbContext.DbPadelCourts.Add(padelCourt1);
-        dbContext.DbPadelCourts.Add(padelCourt2);
-        dbContext.DbPadelCourts.Add(padelCourt3);
-        dbContext.DbPadelCourts.Add(padelCourt4);
-        dbContext.DbPadelCourts.Add(padelCourt5);
-        dbContext.DbPadelCourts.Add(padelCourt6);
+        dbContext.PadelCourts.Add(padelCourt1);
+        dbContext.PadelCourts.Add(padelCourt2);
+        dbContext.PadelCourts.Add(padelCourt3);
+        dbContext.PadelCourts.Add(padelCourt4);
+        dbContext.PadelCourts.Add(padelCourt5);
+        dbContext.PadelCourts.Add(padelCourt6);
           
         // Add club to the DbContext (Database)
-        dbContext.DbClubs.Add(club1);
+        dbContext.Clubs.Add(club1);
 
         dbContext.SaveChanges(); // Save changes to the database
         

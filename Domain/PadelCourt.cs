@@ -13,14 +13,13 @@ namespace PadelClubManagement.BL.Domain;
 public class PadelCourt : IValidatableObject
 {
     [Key] // Primary key
-    public int CourtNumber { get; set; } // Id
+    public int CourtNumber { get; set; }
     public bool IsIndoor { get; set; }
     public int Capacity { get; set; }
     public double Price { get; set; }
     public Club Club { get; set; } // Club where the PadelCourt is located.
     
-    // Implement IValidatableObject
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) // Implement IValidatableObject
     {
         List<ValidationResult> errors = new List<ValidationResult>();
         

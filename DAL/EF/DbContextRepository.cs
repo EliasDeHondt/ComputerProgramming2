@@ -20,7 +20,7 @@ public class DbContextRepository : IRepository
 
     public Player ReadPlayer(int playerNumber)
     {
-        foreach (Player player in DbContext.DbPlayers)
+        foreach (Player player in DbContext.Players)
         {
             if (player.PlayerNumber == playerNumber) return player;
         }
@@ -29,13 +29,13 @@ public class DbContextRepository : IRepository
     
     public List<Player> ReadAllPlayers()
     {
-        return DbContext.DbPlayers.ToList();
+        return DbContext.Players.ToList();
     }
 
     public List<Player> ReadPlayersByPosition(PlayerPosition position)
     {
         List<Player> players = new List<Player>();
-        foreach (Player player in DbContext.DbPlayers)
+        foreach (Player player in DbContext.Players)
         {
             if (player.Position == position) players.Add(player);
         }
@@ -44,14 +44,14 @@ public class DbContextRepository : IRepository
 
     public void CreatePlayer(Player player)
     {
-        player.PlayerNumber = DbContext.DbPlayers.Count() + 1;
-        DbContext.DbPlayers.Add(player);
+        player.PlayerNumber = DbContext.Players.Count() + 1;
+        DbContext.Players.Add(player);
         DbContext.SaveChanges(); // Save changes to the database
     }
 
     public PadelCourt ReadPadelCourt(int courtNumber)
     {
-        foreach (PadelCourt padelCourt in DbContext.DbPadelCourts)
+        foreach (PadelCourt padelCourt in DbContext.PadelCourts)
         {
             if (padelCourt.CourtNumber == courtNumber) return padelCourt;
         }
@@ -60,13 +60,13 @@ public class DbContextRepository : IRepository
 
     public List<PadelCourt> ReadAllPadelCourts()
     {
-        return DbContext.DbPadelCourts.ToList();
+        return DbContext.PadelCourts.ToList();
     }
 
     public List<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor)
     {
         List<PadelCourt> padelCourts = new List<PadelCourt>();
-        IQueryable<PadelCourt> query = DbContext.DbPadelCourts; // Get all padelCourts from the database in 1 query
+        IQueryable<PadelCourt> query = DbContext.PadelCourts; // Get all padelCourts from the database in 1 query
         
         foreach (PadelCourt padelCourt in query)
         {
@@ -81,8 +81,8 @@ public class DbContextRepository : IRepository
 
     public void CreatePadelCourt(PadelCourt padelCourt)
     {
-        padelCourt.CourtNumber = DbContext.DbPadelCourts.Count() + 1;
-        DbContext.DbPadelCourts.Add(padelCourt);
+        padelCourt.CourtNumber = DbContext.PadelCourts.Count() + 1;
+        DbContext.PadelCourts.Add(padelCourt);
         DbContext.SaveChanges(); // Save changes to the database
     }
 }

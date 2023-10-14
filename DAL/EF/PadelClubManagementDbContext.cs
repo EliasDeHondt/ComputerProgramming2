@@ -15,9 +15,9 @@ namespace PadelClubManagement.DAL.EF;
 public class PadelClubManagementDbContext : DbContext
 {
     
-    public DbSet<Player> DbPlayers { get; set; } // Table Players
-    public DbSet<PadelCourt> DbPadelCourts { get; set; } // Table PadelCourts
-    public DbSet<Club> DbClubs { get; set; } // Table Clubs
+    public DbSet<Player> Players { get; set; } // Table Players
+    public DbSet<PadelCourt> PadelCourts { get; set; } // Table PadelCourts
+    public DbSet<Club> Clubs { get; set; } // Table Clubs
     public PadelClubManagementDbContext(DbContextOptions options) : base(options)
     {
         
@@ -35,7 +35,7 @@ public class PadelClubManagementDbContext : DbContext
     public bool CreateDatabase(bool delete)
     {
         if (delete) Database.EnsureDeleted(); // Delete the database
-        bool databaseCreated = !Database.EnsureCreated(); // Create the database 
+        bool databaseCreated = Database.EnsureCreated(); // Create the database 
         return databaseCreated; // Return true if the database was created
     }
 }
