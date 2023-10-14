@@ -14,7 +14,7 @@ public static class DataSeeder
     public static void Seed(PadelClubManagementDbContext dbContext)
     {
         // Seed data for Club (1 Object) (1 op veel relatie)
-        Club club1 = new Club { ClubNumber = 1, Name = "Padel Club2", NumberOfCours = 5, StreetName = "Kattenbroek", HouseNumber = 3, ZipCode = 2650 };
+        Club club1 = new Club { ClubNumber = 1, Name = "Padel Club1", NumberOfCours = 5, StreetName = "Kattenbroek", HouseNumber = 3, ZipCode = 2650 };
         
         // Seed data for PadelCourts (6 Objects)
         PadelCourt padelCourt1 = new PadelCourt { CourtNumber = 1, IsIndoor = true, Capacity = 4, Price = 20.50, Club = club1 };
