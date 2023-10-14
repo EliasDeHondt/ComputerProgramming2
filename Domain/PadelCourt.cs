@@ -17,7 +17,7 @@ public class PadelCourt : IValidatableObject
     public bool IsIndoor { get; set; }
     public int Capacity { get; set; }
     public double Price { get; set; }
-    public Club Club { get; set; } // Club where the PadelCourt is located.
+    public Club Club { get; set; } // Club where the PadelCourt is located. (Navigation property)
     
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) // Implement IValidatableObject
     {

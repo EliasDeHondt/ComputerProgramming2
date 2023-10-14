@@ -12,15 +12,15 @@ namespace PadelClubManagement.BL.Domain;
 public class Player
 {
     [Key] // Primary key
-    public int PlayerNumber { get; set; } // Id
+    public int PlayerNumber { get; set; }
     [StringLength(50, MinimumLength = 2, ErrorMessage = "(FirstName) At least 2 character, maximum 50 characters")] [Required]
     public string FirstName { get; set; }
     [StringLength(50, MinimumLength = 2, ErrorMessage = "(LastName) At least 2 character, maximum 50 characters")] [Required]
     public string LastName { get; set; }
     [RegularExpression(@"\d{2}/\d{2}/\d{4}", ErrorMessage = "(BirthDate) Input the date as follows: dd/MM/yyyy")]
-    public DateOnly? BirthDate { get; set; } // ? = nullable
+    public DateOnly? BirthDate { get; set; }
     [Range(0, 10, ErrorMessage = "(Level) Input a number from 0 to 10")] [Required]
     public double Level { get; set; }
-    public PlayerPosition Position { get; set; }
-    public List<PadelCourt> PlayedOnCourts { get; set; } = new List<PadelCourt>(); // List of Played padel courts.
+    public PlayerPosition Position { get; set; } // Position of the player. (Navigation property)
+    public List<PadelCourt> PlayedOnCourts { get; set; } = new List<PadelCourt>(); // List of Played padel courts. (Navigation property)
 }
