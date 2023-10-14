@@ -17,7 +17,8 @@ PadelClubManagementDbContext padelClubManagementDbContext = new PadelClubManagem
 DbContextRepository dbContextRepository = new DbContextRepository(padelClubManagementDbContext);
 
 bool databaseCreated = padelClubManagementDbContext.CreateDatabase(true); // Create the database
-if (databaseCreated) DataSeeder.Seed(padelClubManagementDbContext); // Seed the database with some data
+//if (databaseCreated) DataSeeder.Seed(padelClubManagementDbContext); // Seed the database with some data
+DataSeeder.Seed(padelClubManagementDbContext);
 
 Manager manager = new Manager(dbContextRepository); // Create new instance of Manager
 

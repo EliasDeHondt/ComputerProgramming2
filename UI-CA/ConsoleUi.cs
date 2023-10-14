@@ -226,8 +226,8 @@ public class ConsoleUi
             bool isParsedPrice = Double.TryParse(inputPrice, out price); // is it Parse? Yes/No
             if (!isParsedPrice) price = 101.00; // If it's not convertible to a double set it to 101.00 to trigger the validation exception.
             
-            Club club = new Club { Name = "Padel Club" }; // This is temporarily statically programmed!!!
-            _manager.AddPadelCourt(isIndoor, capacity, price, club);
+            Club club2 = new Club { ClubNumber = 2, Name = "Padel Club2", NumberOfCours = 5, StreetName = "Kattenbroek", HouseNumber = 3, ZipCode = 2650 }; // This is temporarily statically programmed!!!
+            _manager.AddPadelCourt(isIndoor, capacity, price, club2);
         }
         catch (ValidationException validationException)
         {
