@@ -11,7 +11,8 @@ namespace PadelClubManagement.BL.Domain;
 
 public class PadelCourt : IValidatableObject
 {
-    public int CourtNumber { get; set; } [Key] // Primary key
+    [Key]
+    public int CourtNumber { get; set; } // Primary key
     public ICollection<Booking> Bookings { get; set; } // Foreign key   (Navigation property)
     public Club Club { get; set; } // Foreign key                       (Navigation property)
     

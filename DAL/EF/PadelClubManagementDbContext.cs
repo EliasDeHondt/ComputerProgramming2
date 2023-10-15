@@ -40,50 +40,50 @@ public class PadelClubManagementDbContext : DbContext
         // Club has many PadelCourts
         modelBuilder.Entity<Club>()
             .HasMany(club => club.PadelCourts)
-            .WithOne(padelcourts => padelcourts.Club)
-            .HasForeignKey("FK_CourtNumber")
+            .WithOne(padelcourt => padelcourt.Club)
+            .HasForeignKey("FK_PadelCourt_Club")
             .IsRequired();
         
         // PadelCourt has one Club
         modelBuilder.Entity<PadelCourt>()
             .HasOne(padelcourt => padelcourt.Club)
             .WithMany(club => club.PadelCourts)
-            .HasForeignKey("FK_ClubNumber")
+            .HasForeignKey("FK_PadelCourt_Club")
             .IsRequired();
         
         // PadelCourt has many Bookings
         modelBuilder.Entity<PadelCourt>()
             .HasMany(padelcourt => padelcourt.Bookings)
             .WithOne(booking => booking.PadelCourt)
-            .HasForeignKey("FK_BookingNumber")
+            .HasForeignKey("FK_Booking_PadelCourt")
             .IsRequired();
         
         // Booking has one PadelCourt
         modelBuilder.Entity<Booking>()
             .HasOne(booking => booking.PadelCourt)
             .WithMany(padelcourt => padelcourt.Bookings)
-            .HasForeignKey("FK_CourtNumber")
+            .HasForeignKey("FK_Booking_PadelCourt")
             .IsRequired();
         
         // Booking has one Player
         modelBuilder.Entity<Booking>()
             .HasOne(booking => booking.Player)
             .WithMany(player => player.Bookings)
-            .HasForeignKey("FK_PlayerNumber")
+            .HasForeignKey("FK_Booking_Player")
             .IsRequired();
         
         // Player has many Bookings
         modelBuilder.Entity<Player>()
             .HasMany(player => player.Bookings)
             .WithOne(booking => booking.Player)
-            .HasForeignKey("FK_BookingNumber")
+            .HasForeignKey("FK_Booking_Player")
             .IsRequired();
         
         // Primary key of Club, PadleCourt, Booking and Player
-        //modelBuilder.Entity<Club>().HasKey("PK_ClubNumber");
-        //modelBuilder.Entity<PadelCourt>().HasKey("PK_CourtNumber");
-        //modelBuilder.Entity<Booking>().HasKey("PK_BookingNumber");
-        //modelBuilder.Entity<Player>().HasKey("PK_PlayerNumber");
+        modelBuilder.Entity<Club>().HasKey(club => club.ClubNumber);
+        modelBuilder.Entity<PadelCourt>().HasKey(padelcourt => padelcourt.CourtNumber);
+        modelBuilder.Entity<Booking>().HasKey(booking => booking.BookingNumber);
+        modelBuilder.Entity<Player>().HasKey(player => player.PlayerNumber);
     }
     
     public bool CreateDatabase(bool delete)

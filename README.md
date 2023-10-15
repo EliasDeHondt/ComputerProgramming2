@@ -9,6 +9,8 @@
 
 #### Rider Projects [.NET Fundamentals-Extended] Second year exercises of training applied computer science at the KdG.
 
+
+
 ## Sprint 3
 
 ### Beide zoekcriteria ingevuld

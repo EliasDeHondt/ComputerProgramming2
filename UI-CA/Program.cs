@@ -11,6 +11,12 @@ using PadelClubManagement.BL;
 using PadelClubManagement.DAL.EF;
 using PadelClubManagement.UI.CA;
 
+/*
+InMemoryRepository repository = new InMemoryRepository();
+InMemoryRepository.Seed();
+Manager manager = new Manager(repository);
+*/
+
 // Composition Root
 DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
 PadelClubManagementDbContext padelClubManagementDbContext = new PadelClubManagementDbContext(optionsBuilder.Options);
@@ -18,7 +24,6 @@ DbContextRepository dbContextRepository = new DbContextRepository(padelClubManag
 
 bool databaseCreated = padelClubManagementDbContext.CreateDatabase(true); // Create the database
 if (databaseCreated) DataSeeder.Seed(padelClubManagementDbContext); // Seed the database with some data
-
 
 Manager manager = new Manager(dbContextRepository); // Create new instance of Manager
 

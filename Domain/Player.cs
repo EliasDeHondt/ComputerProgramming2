@@ -11,7 +11,8 @@ namespace PadelClubManagement.BL.Domain;
 
 public class Player
 {
-    public int PlayerNumber { get; set; } [Key]  // Primary key
+    [Key]
+    public int PlayerNumber { get; set; } // Primary key
     public ICollection<Booking> Bookings { get; set; } // Foreign key   (Navigation property)
     
     [StringLength(50, MinimumLength = 2, ErrorMessage = "(FirstName) At least 2 character, maximum 50 characters")] [Required]

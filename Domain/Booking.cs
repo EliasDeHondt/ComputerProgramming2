@@ -11,7 +11,8 @@ namespace PadelClubManagement.BL.Domain;
 
 public class Booking
 {
-    public int BookingNumber { get; set; } [Key] // Primary key
+    [Key]
+    public int BookingNumber { get; set; } // Primary key
     public Player Player { get; set; } // Foreign key           (Navigation property)
     public PadelCourt PadelCourt { get; set; } // Foreign key   (Navigation property)
     
