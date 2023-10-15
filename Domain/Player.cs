@@ -11,8 +11,9 @@ namespace PadelClubManagement.BL.Domain;
 
 public class Player
 {
-    [Key] // Primary key
-    public int PlayerNumber { get; set; }
+    public int PlayerNumber { get; set; } [Key]  // Primary key
+    public ICollection<Booking> Bookings { get; set; } // Foreign key   (Navigation property)
+    
     [StringLength(50, MinimumLength = 2, ErrorMessage = "(FirstName) At least 2 character, maximum 50 characters")] [Required]
     public string FirstName { get; set; }
     [StringLength(50, MinimumLength = 2, ErrorMessage = "(LastName) At least 2 character, maximum 50 characters")] [Required]
@@ -21,6 +22,5 @@ public class Player
     public DateOnly? BirthDate { get; set; }
     [Range(0, 10, ErrorMessage = "(Level) Input a number from 0 to 10")] [Required]
     public double Level { get; set; }
-    public PlayerPosition Position { get; set; } // Position of the player. (Navigation property)
-    public List<PadelCourt> PlayedOnCourts { get; set; } = new List<PadelCourt>(); // List of Played padel courts. (Navigation property)
+    public PlayerPosition Position { get; set; } // (Navigation property)
 }

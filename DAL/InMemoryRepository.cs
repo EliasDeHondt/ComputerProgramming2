@@ -21,12 +21,12 @@ public class InMemoryRepository : IRepository
         Club club1 = new Club { ClubNumber = 1, Name = "Padel Club", NumberOfCours = 5, StreetName = "Kattenbroek", HouseNumber = 3, ZipCode = 2650 };
         
         // Seed data for PadelCourts (6 Objects)
-        PadelCourt padelCourt1 = new PadelCourt { CourtNumber = 1, IsIndoor = true, Capacity = 4, Price = 20.50, Club = club1 };
-        PadelCourt padelCourt2 = new PadelCourt { CourtNumber = 2,  IsIndoor = true, Capacity = 4, Price = 20.50, Club = club1 };
-        PadelCourt padelCourt3 = new PadelCourt { CourtNumber = 3,  IsIndoor = true, Capacity = 4, Price = 20.50, Club = club1 };
-        PadelCourt padelCourt4 = new PadelCourt { CourtNumber = 4,  IsIndoor = false, Capacity = 2, Price = 15.75, Club = club1 };
-        PadelCourt padelCourt5 = new PadelCourt { CourtNumber = 5,  IsIndoor = false, Capacity = 2, Price = 15.75, Club = club1 };
-        PadelCourt padelCourt6 = new PadelCourt { CourtNumber = 6,  IsIndoor = false, Capacity = 2, Price = 20.50, Club = club1 };
+        PadelCourt padelCourt1 = new PadelCourt { CourtNumber = 1, IsIndoor = true, Capacity = 4, Price = 20.50};
+        PadelCourt padelCourt2 = new PadelCourt { CourtNumber = 2,  IsIndoor = true, Capacity = 4, Price = 20.50};
+        PadelCourt padelCourt3 = new PadelCourt { CourtNumber = 3,  IsIndoor = true, Capacity = 4, Price = 20.50};
+        PadelCourt padelCourt4 = new PadelCourt { CourtNumber = 4,  IsIndoor = false, Capacity = 2, Price = 15.75};
+        PadelCourt padelCourt5 = new PadelCourt { CourtNumber = 5,  IsIndoor = false, Capacity = 2, Price = 15.75};
+        PadelCourt padelCourt6 = new PadelCourt { CourtNumber = 6,  IsIndoor = false, Capacity = 2, Price = 20.50};
         
         // Seed data for Players (5 Objects)
         Player player1 = new Player { PlayerNumber = 1, FirstName = "Elias", LastName = "De Hondt", BirthDate = new DateOnly(2001, 4, 10), Level = 5.5, Position = PlayerPosition.Member };

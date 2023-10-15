@@ -6,18 +6,18 @@
  ***************************************/
 // Class PadelCourt
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PadelClubManagement.BL.Domain;
 
 public class PadelCourt : IValidatableObject
 {
-    [Key] // Primary key
-    public int CourtNumber { get; set; }
+    public int CourtNumber { get; set; } [Key] // Primary key
+    public ICollection<Booking> Bookings { get; set; } // Foreign key   (Navigation property)
+    public Club Club { get; set; } // Foreign key                       (Navigation property)
+    
     public bool IsIndoor { get; set; }
     public int Capacity { get; set; }
     public double Price { get; set; }
-    public Club Club { get; set; } // Club where the PadelCourt is located. (Navigation property)
     
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) // Implement IValidatableObject
     {

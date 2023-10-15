@@ -11,8 +11,9 @@ namespace PadelClubManagement.BL.Domain;
 
 public class Club
 {
-    [Key] // Primary key
-    public int ClubNumber { get; set; }
+    public int ClubNumber { get; set; } [Key] // Primary key
+    public ICollection<PadelCourt> PadelCourts { get; set; } // Foreign key   (Navigation property)
+    
     [StringLength(50, MinimumLength = 2, ErrorMessage = "(Name) At least 2 character, maximum 50 characters")] [Required]
     public string Name { get; set; }
     public int NumberOfCours { get; set; }

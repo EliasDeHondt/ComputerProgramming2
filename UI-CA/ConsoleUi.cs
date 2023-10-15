@@ -131,7 +131,7 @@ public class ConsoleUi
 
     private double? GetPriceFilter() // Returns a double or null (double?)
     {
-        while (true)
+        do
         {
             Console.Write("Enter the price of the Padel Court or leave blank: ");
             string inputPrice = Console.ReadLine();
@@ -142,12 +142,12 @@ public class ConsoleUi
             
             ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for price. Please enter a valid number.\n * end\n");
             CatchValidationException(validationException);
-        }
+        } while (true);
     }
 
     private bool? GetIndoorFilter() // Returns a bool or null (bool?)
     {
-        while (true) // While true, run the code below (until a return statement is reached)
+        do
         {
             Console.Write("Enter (I)ndoor or (O)utdoor or leave blank: ");
             string inputIndoor = Console.ReadLine()?.ToLower();
@@ -158,7 +158,7 @@ public class ConsoleUi
             
             ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for indoor/outdoor. Please enter 'I' for indoor or 'O' for outdoor.\n * end\n");
             CatchValidationException(validationException);
-        }
+        } while (true);
     }
     
     private void AddPlayer() // Add a player
@@ -177,10 +177,9 @@ public class ConsoleUi
             if (!String.IsNullOrWhiteSpace(inputBirthDate)) // If inputBirthDate is not null or whitespace
             {
                 bool isParsedDate = DateTime.TryParseExact(inputBirthDate, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate);
-                if (isParsedDate) // is it Parse? Yes/No
-                {
-                    birthDate = new DateOnly(parsedDate.Year, parsedDate.Month, parsedDate.Day);
-                }
+                
+                if (isParsedDate) birthDate = new DateOnly(parsedDate.Year, parsedDate.Month, parsedDate.Day); // is it Parse? Yes/No
+ 
                 else birthDate = new DateOnly(01, 01, 0001); // If it's not convertible to a DateTime set it to 00/00/0000 to trigger the validation exception.
             }
             else birthDate = new DateOnly(01, 01, 0001); // If it's null or whitespace set it to 00/00/0000 to trigger the validation exception.
@@ -203,7 +202,18 @@ public class ConsoleUi
         {
             CatchValidationException(validationException);
         }
+    }
 
+    private bool ConvertInputIndoor(string inputIndoor) // Convert the inputIndoor string to a bool
+    {
+        inputIndoor = inputIndoor?.ToLower(); // ToLower() to make it case insensitive ? to make it nullable (because of the null check)
+        bool isIndoor;
+
+        if (inputIndoor == "y") isIndoor = true;
+        else if (inputIndoor == "n") isIndoor = false;
+        else isIndoor = true;
+        
+        return isIndoor;
     }
     
     private void AddPadelCourt() // Add a PadelCourt
@@ -211,11 +221,9 @@ public class ConsoleUi
         try
         {
             Console.Write("Is the Padel Court indoor? (Y/n): ");
-            string inputIndoor = Console.ReadLine()?.ToLower(); // ToLower() to make it case insensitive ? to make it nullable (because of the null check)
-            bool isIndoor;
-            if (inputIndoor == "y" || inputIndoor == "n") if (inputIndoor == "y") isIndoor = true; else isIndoor = false; // If inputIndoor is "y" or "n", set isIndoor to true or false
-            else isIndoor = true; // If inputIndoor is not "y" or "n", set isIndoor to true (default)
-        
+            string inputIndoor = Console.ReadLine();
+            bool isIndoor = ConvertInputIndoor(inputIndoor);
+            
             Console.Write("Enter the capacity of the Padel Court: ");
             string inputCapacity = Console.ReadLine();
             int capacity = Int32.TryParse(inputCapacity, out int capacityInt) ? capacityInt : 5; // If it's not convertible to an int set it to 5 to trigger the validation exception.
@@ -226,8 +234,7 @@ public class ConsoleUi
             bool isParsedPrice = Double.TryParse(inputPrice, out price); // is it Parse? Yes/No
             if (!isParsedPrice) price = 101.00; // If it's not convertible to a double set it to 101.00 to trigger the validation exception.
             
-            Club club2 = new Club { ClubNumber = 2, Name = "Padel Club2", NumberOfCours = 5, StreetName = "Kattenbroek", HouseNumber = 3, ZipCode = 2650 }; // This is temporarily statically programmed!!!
-            _manager.AddPadelCourt(isIndoor, capacity, price, club2);
+            _manager.AddPadelCourt(isIndoor, capacity, price);
         }
         catch (ValidationException validationException)
         {
