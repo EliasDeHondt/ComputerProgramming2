@@ -15,9 +15,11 @@ namespace PadelClubManagement.DAL.EF;
 public class PadelClubManagementDbContext : DbContext
 {
     
-    public DbSet<Player> Players { get; set; } // Table Players
-    public DbSet<PadelCourt> PadelCourts { get; set; } // Table PadelCourts
     public DbSet<Club> Clubs { get; set; } // Table Clubs
+    public DbSet<PadelCourt> PadelCourts { get; set; } // Table PadelCourts
+    public DbSet<Booking> Bookings { get; set; } // Table Bookings
+    public DbSet<Player> Players { get; set; } // Table Players
+    
     public PadelClubManagementDbContext(DbContextOptions options) : base(options)
     {
         
@@ -28,8 +30,60 @@ public class PadelClubManagementDbContext : DbContext
         if (!optionsBuilder.IsConfigured) // If not configured, configure it
         {
             optionsBuilder.UseSqlite("Data Source=PadelClubManagement.db"); // Use SQLite
+            optionsBuilder.UseLazyLoadingProxies(false); // Disable lazy loading
             optionsBuilder.LogTo(message => Debug.WriteLine(message), LogLevel.Information); // Log to Debug
         }
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Club has many PadelCourts
+        modelBuilder.Entity<Club>()
+            .HasMany(club => club.PadelCourts)
+            .WithOne(padelcourts => padelcourts.Club)
+            .HasForeignKey("FK_CourtNumber")
+            .IsRequired();
+        
+        // PadelCourt has one Club
+        modelBuilder.Entity<PadelCourt>()
+            .HasOne(padelcourt => padelcourt.Club)
+            .WithMany(club => club.PadelCourts)
+            .HasForeignKey("FK_ClubNumber")
+            .IsRequired();
+        
+        // PadelCourt has many Bookings
+        modelBuilder.Entity<PadelCourt>()
+            .HasMany(padelcourt => padelcourt.Bookings)
+            .WithOne(booking => booking.PadelCourt)
+            .HasForeignKey("FK_BookingNumber")
+            .IsRequired();
+        
+        // Booking has one PadelCourt
+        modelBuilder.Entity<Booking>()
+            .HasOne(booking => booking.PadelCourt)
+            .WithMany(padelcourt => padelcourt.Bookings)
+            .HasForeignKey("FK_CourtNumber")
+            .IsRequired();
+        
+        // Booking has one Player
+        modelBuilder.Entity<Booking>()
+            .HasOne(booking => booking.Player)
+            .WithMany(player => player.Bookings)
+            .HasForeignKey("FK_PlayerNumber")
+            .IsRequired();
+        
+        // Player has many Bookings
+        modelBuilder.Entity<Player>()
+            .HasMany(player => player.Bookings)
+            .WithOne(booking => booking.Player)
+            .HasForeignKey("FK_BookingNumber")
+            .IsRequired();
+        
+        // Primary key of Club, PadleCourt, Booking and Player
+        //modelBuilder.Entity<Club>().HasKey("PK_ClubNumber");
+        //modelBuilder.Entity<PadelCourt>().HasKey("PK_CourtNumber");
+        //modelBuilder.Entity<Booking>().HasKey("PK_BookingNumber");
+        //modelBuilder.Entity<Player>().HasKey("PK_PlayerNumber");
     }
     
     public bool CreateDatabase(bool delete)
