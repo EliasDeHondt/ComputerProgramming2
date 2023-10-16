@@ -62,6 +62,12 @@ public class ConsoleUi
                     Console.WriteLine($"Add Padel Court:\n{line}");
                     AddPadelCourt();
                     break;
+                case "7":
+                    Console.WriteLine($"Add x to y:\n{line}");
+                    break;
+                case "8":
+                    Console.WriteLine($"Remove x from y:\n{line}");
+                    break;
                 default:
                     ValidationException validationException = new ValidationException("An error occurred, please try again:\n * Invalid input. Please enter a number from 0 to 6.\n * end");
                     CatchValidationException(validationException);
@@ -82,7 +88,9 @@ public class ConsoleUi
                           4) Show Padel Courts with Price and/or (Indoor?)
                           5) Add a player
                           6) Add a Padel Court
-                          Choice (0-6): 
+                          7) Add x to y
+                          8) Remove x from y
+                          Choice (0-8): 
                           """);
     }
 
