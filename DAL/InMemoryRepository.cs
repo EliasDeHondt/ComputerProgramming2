@@ -182,4 +182,14 @@ public class InMemoryRepository : IRepository
           padelCourt.CourtNumber = _padelCourts.Count + 1;
           _padelCourts.Add(padelCourt);
       }
+      
+      public List<Player> ReadAllPlayersWithBookingsAndPadelCourts()
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
+
+      public List<PadelCourt> ReadAllPadelCourtsWithClub()
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
 }

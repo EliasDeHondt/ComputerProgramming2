@@ -86,23 +86,16 @@ public class ConsoleUi
                           """);
     }
 
+    private void ShowAllPlayersBrief() // Shows all the players (brief)
+    {
+        List<Player> players = _manager.GetAllPlayers();
+        foreach (Player player in players) Console.WriteLine(player.GetInfoBrief());
+    }
+    
     private void ShowAllPlayers() // Shows all the players
     {
-        List<Player> players = _manager.GetAllPlayers(); // Get all the players from the manager
-        foreach (Player player in players) Console.WriteLine(player.GetInfo()); // Print all the players in a foreach loop
-    }
-
-    private void ShowPlayersByPosition() // Shows all the players by position
-    {
-        Console.WriteLine("Which position would you like to see?");
-        ShowPositions();
-        string inputPosition = Console.ReadLine();
-        
-        if (Enum.TryParse(inputPosition, out PlayerPosition position)) // If the inputPosition is a valid PlayerPosition
-        {
-            List<Player> players = _manager.GetPlayersByPosition(position); // Get all the players by position from the manager
-            foreach (Player player in players) Console.WriteLine(player.GetInfo()); // Print all the players in a foreach loop (if position == player.Position)
-        }
+        List<Player> players = _manager.GetAllPlayersWithBookingsAndPadelCourts();
+        foreach (Player player in players) Console.WriteLine(player.GetInfo());
     }
     
     private void ShowPositions() // Shows all the positions
@@ -114,10 +107,29 @@ public class ConsoleUi
         Console.Write("Choice position (1-4): ");
     }
 
+    private void ShowPlayersByPosition() // Shows all the players by position
+    {
+        Console.WriteLine("Which position would you like to see?");
+        ShowPositions();
+        string inputPosition = Console.ReadLine();
+        
+        if (Enum.TryParse(inputPosition, out PlayerPosition position)) // If the inputPosition is a valid PlayerPosition
+        {
+            List<Player> players = _manager.GetPlayersByPosition(position); // Get all the players by position from the manager
+            foreach (Player player in players) Console.WriteLine(player.GetInfoBrief()); // Print all the players in a foreach loop (if position == player.Position)
+        }
+    }
+
+    private void ShowAllPadelCourtsBrief() // Shows all the PadelCourts (brief)
+    {
+        List<PadelCourt> padelCourts = _manager.GetAllPadelCourts();
+        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfoBrief());
+    }
+    
     private void ShowAllPadelCourts() // Shows all the PadelCourts
     {
-        List<PadelCourt> padelCourts = _manager.GetAllPadelCourts(); // Get all the PadelCourts from the manager
-        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfo()); // Print all the PadelCourts in a foreach loop
+        List<PadelCourt> padelCourts = _manager.GetAllPadelCourtsWithClub();
+        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfo());
     }
 
     private void ShowPadelCourtsByFilter() // Shows all the PadelCourts with a price and/or indoor filter
@@ -126,7 +138,7 @@ public class ConsoleUi
         bool? indoor = GetIndoorFilter();
         
         List<PadelCourt> padelCourts = _manager.GetPadelCourtsByFilter(price, indoor); // Get all the PadelCourts by filter from the manager
-        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfo()); // Print all the PadelCourts in a foreach loop (if price == padelCourt.Price && indoor == padelCourt.IsIndoor)
+        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfoBrief()); // Print all the PadelCourts in a foreach loop (if price == padelCourt.Price && indoor == padelCourt.IsIndoor)
     }
 
     private double? GetPriceFilter() // Returns a double or null (double?)

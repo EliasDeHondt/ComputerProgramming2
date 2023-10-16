@@ -19,4 +19,6 @@ public interface IManager
     public List<PadelCourt> GetAllPadelCourts();
     public List<PadelCourt> GetPadelCourtsByFilter(double? price, bool? indoor);
     public void AddPadelCourt(bool isIndoor, int capacity, double price);
+    public List<Player> GetAllPlayersWithBookingsAndPadelCourts();
+    public List<PadelCourt> GetAllPadelCourtsWithClub();
 }

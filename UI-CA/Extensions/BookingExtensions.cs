@@ -4,15 +4,16 @@
  *   Visit https://eliasdh.com         *
  *                                     *
  ***************************************/
-// Class ClubExtensions
+// Class BookingExtensions
+
 using PadelClubManagement.BL.Domain;
 
 namespace PadelClubManagement.UI.CA.Extensions;
 
-public static class ClubExtensions
+public static class BookingExtensions
 {
-    public static string GetInfoBrief(this Club club) // Override ToString() method
+    public static string GetInfoBrief(this Booking booking)
     {
-        return $"{club.Name} ({club.ClubNumber}) has {club.NumberOfCours} courts and is located at {club.StreetName} {club.HouseNumber}, {club.ZipCode}.";
+        return $"Booking ID: {booking.BookingNumber} Date: {booking.BookingDate}, Time Start: {booking.StartTime}, Time End: {booking.EndTime}";
     }
 }

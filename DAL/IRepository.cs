@@ -19,4 +19,6 @@ public interface IRepository
     public List<PadelCourt> ReadAllPadelCourts();
     public List<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor);
     public void CreatePadelCourt(PadelCourt padelCourt);
+    public List<Player> ReadAllPlayersWithBookingsAndPadelCourts();
+    public List<PadelCourt> ReadAllPadelCourtsWithClub();
 }

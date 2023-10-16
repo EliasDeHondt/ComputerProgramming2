@@ -36,6 +36,7 @@ public static class DataSeeder
         Booking booking3 = new Booking { BookingNumber = 3, BookingDate = new DateOnly(2023, 4, 16), StartTime = new TimeSpan(14, 30, 0), EndTime = new TimeSpan(15, 30, 0) };
         Booking booking4 = new Booking { BookingNumber = 4, BookingDate = new DateOnly(2023, 4, 16), StartTime = new TimeSpan(10, 0, 0), EndTime = new TimeSpan(11, 0, 0) };
         Booking booking5 = new Booking { BookingNumber = 5, BookingDate = new DateOnly(2023, 4, 17), StartTime = new TimeSpan(13, 0, 0), EndTime = new TimeSpan(14, 0, 0) };
+        Booking booking6 = new Booking { BookingNumber = 6, BookingDate = new DateOnly(2023, 4, 17), StartTime = new TimeSpan(14, 0, 0), EndTime = new TimeSpan(15, 0, 0) };
         
         // Seed data for Players
         Player player1 = new Player { PlayerNumber = 1, FirstName = "Elias", LastName = "De Hondt", BirthDate = new DateOnly(2001, 4, 10), Level = 5.5, Position = PlayerPosition.Member };
@@ -63,16 +64,17 @@ public static class DataSeeder
         
         // Relate PadelCourts to Bookings
         padelCourt1.Bookings = new List<Booking> { booking1, booking2 };
-        padelCourt2.Bookings = new List<Booking> { booking3 };
-        padelCourt3.Bookings = new List<Booking> { booking4 };
-        padelCourt4.Bookings = new List<Booking> { booking5 };
+        padelCourt2.Bookings = new List<Booking> { booking3, booking4 };
+        padelCourt3.Bookings = new List<Booking> { booking5 };
+        padelCourt4.Bookings = new List<Booking> { booking6 };
         
         // Relate Bookings to PadelCourts
         booking1.PadelCourt = padelCourt1;
         booking2.PadelCourt = padelCourt1;
         booking3.PadelCourt = padelCourt2;
-        booking4.PadelCourt = padelCourt3;
-        booking5.PadelCourt = padelCourt4;
+        booking4.PadelCourt = padelCourt2;
+        booking5.PadelCourt = padelCourt3;
+        booking6.PadelCourt = padelCourt4;
         
         // Relate Bookings to Players
         booking1.Player = player1;
@@ -80,13 +82,14 @@ public static class DataSeeder
         booking3.Player = player3;
         booking4.Player = player4;
         booking5.Player = player5;
+        booking6.Player = player5;
         
         // Relate Players to Bookings
         player1.Bookings = new List<Booking> { booking1 };
         player2.Bookings = new List<Booking> { booking2 };
         player3.Bookings = new List<Booking> { booking3 };
         player4.Bookings = new List<Booking> { booking4 };
-        player5.Bookings = new List<Booking> { booking5 };
+        player5.Bookings = new List<Booking> { booking5, booking6 };
         
         // Add club to the DbContext (Database)
         dbContext.Clubs.Add(club1);

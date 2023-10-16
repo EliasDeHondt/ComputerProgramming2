@@ -5,6 +5,8 @@
  *                                     *
  ***************************************/
 // Class DbContextRepository
+
+using Microsoft.EntityFrameworkCore;
 using PadelClubManagement.BL.Domain;
 
 namespace PadelClubManagement.DAL.EF;
@@ -84,5 +86,21 @@ public class DbContextRepository : IRepository
         padelCourt.CourtNumber = DbContext.PadelCourts.Count() + 1;
         DbContext.PadelCourts.Add(padelCourt);
         DbContext.SaveChanges(); // Save changes to the database
+    }
+
+    public List<Player> ReadAllPlayersWithBookingsAndPadelCourts()
+    {
+        return DbContext.Players
+            .Include(player => player.Bookings)
+            .ThenInclude(booking => booking.PadelCourt)
+            .ThenInclude(padelCourt => padelCourt.Club)
+            .ToList();
+    }
+
+    public List<PadelCourt> ReadAllPadelCourtsWithClub()
+    {
+        return DbContext.PadelCourts
+            .Include(padelCourt => padelCourt.Club)
+            .ToList();
     }
 }

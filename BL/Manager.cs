@@ -95,4 +95,13 @@ public class Manager : IManager
             throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
         }
     }
+    public List<Player> GetAllPlayersWithBookingsAndPadelCourts()
+    {
+        return _repository.ReadAllPlayersWithBookingsAndPadelCourts();
+    }
+
+    public List<PadelCourt> GetAllPadelCourtsWithClub()
+    {
+        return _repository.ReadAllPadelCourtsWithClub();
+    }
 }
