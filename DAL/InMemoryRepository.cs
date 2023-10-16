@@ -192,4 +192,9 @@ public class InMemoryRepository : IRepository
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }
+      
+      public List<Club> ReadAllClubs()
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
 }

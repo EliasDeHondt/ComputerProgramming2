@@ -13,6 +13,6 @@ public static class ClubExtensions
 {
     public static string GetInfoBrief(this Club club) // Override ToString() method
     {
-        return $"{club.Name} ({club.ClubNumber}) has {club.NumberOfCours} courts and is located at {club.StreetName} {club.HouseNumber}, {club.ZipCode}.";
+        return $"({club.ClubNumber}) {club.Name} has {club.NumberOfCours} courts and is located at {club.StreetName} {club.HouseNumber}, {club.ZipCode}.";
     }
 }

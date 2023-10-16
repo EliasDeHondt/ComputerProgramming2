@@ -93,7 +93,13 @@ public class ConsoleUi
                           Choice (0-8): 
                           """);
     }
-
+    
+    private void ShowAllClubsBrief() // Shows all the clubs (brief)
+    {
+        List<Club> clubs = _manager.GetAllClubs();
+        foreach (Club club in clubs) Console.WriteLine(club.GetInfoBrief());
+    }
+    
     private void ShowAllPlayersBrief() // Shows all the players (brief)
     {
         List<Player> players = _manager.GetAllPlayers();
@@ -236,6 +242,38 @@ public class ConsoleUi
         return isIndoor;
     }
     
+    public Club SelectClubForPadelCourt()
+    {
+        Club selectedClub = null;
+
+        do
+        {
+            ShowAllClubsBrief();
+            Console.Write("Enter the club number where the Padel Court is located: ");
+            string inputClubNumber = Console.ReadLine();
+
+            if (int.TryParse(inputClubNumber, out int clubNumber))
+            {
+                selectedClub = _manager.GetAllClubs().FirstOrDefault(c => c.ClubNumber == clubNumber);
+
+                if (selectedClub == null)
+                {
+                    ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * The entered club number does not exist. Please try again.\n * end\n");
+                    CatchValidationException(validationException);
+                }
+            }
+            else
+            {
+                ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input. Please enter a valid club number.\n * end\n");
+                CatchValidationException(validationException);
+            }
+
+        } while (selectedClub == null);
+
+        return selectedClub;
+    }
+
+    
     private void AddPadelCourt() // Add a PadelCourt
     {
         try
@@ -254,7 +292,11 @@ public class ConsoleUi
             bool isParsedPrice = Double.TryParse(inputPrice, out price); // is it Parse? Yes/No
             if (!isParsedPrice) price = 101.00; // If it's not convertible to a double set it to 101.00 to trigger the validation exception.
             
-            _manager.AddPadelCourt(isIndoor, capacity, price);
+            
+            Club club = SelectClubForPadelCourt();
+            
+            _manager.AddPadelCourt(isIndoor, capacity, price, club);
+
         }
         catch (ValidationException validationException)
         {

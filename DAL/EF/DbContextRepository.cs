@@ -103,4 +103,9 @@ public class DbContextRepository : IRepository
             .Include(padelCourt => padelCourt.Club)
             .ToList();
     }
+    
+    public List<Club> ReadAllClubs()
+    {
+        return DbContext.Clubs.ToList();
+    }
 }

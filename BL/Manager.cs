@@ -58,9 +58,9 @@ public class Manager : IManager
         return _repository.ReadPadelCourtsByFilter(price, indoor);
     }
     
-    public void AddPadelCourt(bool isIndoor, int capacity, double price)
+    public void AddPadelCourt(bool isIndoor, int capacity, double price, Club club)
     {
-        PadelCourt padelCourt = new PadelCourt { IsIndoor = isIndoor, Capacity = capacity, Price = price};
+        PadelCourt padelCourt = new PadelCourt { IsIndoor = isIndoor, Capacity = capacity, Price = price, Club = club};
         Validate(padelCourt);
         
         _repository.CreatePadelCourt(padelCourt);
@@ -103,5 +103,10 @@ public class Manager : IManager
     public List<PadelCourt> GetAllPadelCourtsWithClub()
     {
         return _repository.ReadAllPadelCourtsWithClub();
+    }
+    
+    public List<Club> GetAllClubs()
+    {
+        return _repository.ReadAllClubs();
     }
 }

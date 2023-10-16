@@ -21,4 +21,5 @@ public interface IRepository
     public void CreatePadelCourt(PadelCourt padelCourt);
     public List<Player> ReadAllPlayersWithBookingsAndPadelCourts();
     public List<PadelCourt> ReadAllPadelCourtsWithClub();
+    public List<Club> ReadAllClubs();
 }
