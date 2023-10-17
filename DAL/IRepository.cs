@@ -26,4 +26,5 @@ public interface IRepository
     public IEnumerable<Booking> ReadAllBookings();
     public void CreatePlayerToBooking(Player player, Booking booking);
     public void DeletePlayerFromBooking(Player player, Booking booking);
+    public IEnumerable<Booking> ReadBookingsOfPlayer(Player player);
 }

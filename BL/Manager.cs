@@ -152,4 +152,13 @@ public class Manager : IManager
         
         _repository.DeletePlayerFromBooking(player, booking);
     }
+
+    public IEnumerable<Booking> GetBookingsOfPlayer(int playerNumber)
+    {
+        Player player = _repository.ReadPlayer(playerNumber);
+        
+        Validate(player);
+        
+        return _repository.ReadBookingsOfPlayer(player);
+    }
 }

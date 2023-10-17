@@ -359,8 +359,10 @@ public class ConsoleUi
         }
         
         Console.WriteLine("Which booking would you like to remove the player from?");
-        IEnumerable<Booking> bookings = _manager.GetPlayer(playerNumber).Bookings;
+        
+        IEnumerable<Booking> bookings = _manager.GetBookingsOfPlayer(playerNumber);
         foreach (Booking booking in bookings) Console.WriteLine(booking.GetInfoBrief());
+        
         Console.Write("Enter the booking number: ");
         string inputBookingNumber = Console.ReadLine();
         int bookingNumber;

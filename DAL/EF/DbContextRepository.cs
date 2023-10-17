@@ -138,4 +138,11 @@ public class DbContextRepository : IRepository
         
         DbContext.SaveChanges(); // Save changes to the database
     }
+    
+    public IEnumerable<Booking> ReadBookingsOfPlayer(Player player)
+    {
+        return DbContext.Bookings
+            .Where(booking => booking.Player == player)
+            .ToList();
+    }
 }
