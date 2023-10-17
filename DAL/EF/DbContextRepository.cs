@@ -29,12 +29,12 @@ public class DbContextRepository : IRepository
         return null;
     }
     
-    public List<Player> ReadAllPlayers()
+    public IEnumerable<Player> ReadAllPlayers()
     {
         return DbContext.Players.ToList();
     }
 
-    public List<Player> ReadPlayersByPosition(PlayerPosition position)
+    public IEnumerable<Player> ReadPlayersByPosition(PlayerPosition position)
     {
         List<Player> players = new List<Player>();
         foreach (Player player in DbContext.Players)
@@ -60,12 +60,12 @@ public class DbContextRepository : IRepository
         return null;
     }
 
-    public List<PadelCourt> ReadAllPadelCourts()
+    public IEnumerable<PadelCourt> ReadAllPadelCourts()
     {
         return DbContext.PadelCourts.ToList();
     }
 
-    public List<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor)
+    public IEnumerable<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor)
     {
         List<PadelCourt> padelCourts = new List<PadelCourt>();
         IQueryable<PadelCourt> query = DbContext.PadelCourts; // Get all padelCourts from the database in 1 query
@@ -88,7 +88,7 @@ public class DbContextRepository : IRepository
         DbContext.SaveChanges(); // Save changes to the database
     }
 
-    public List<Player> ReadAllPlayersWithBookingsAndPadelCourts()
+    public IEnumerable<Player> ReadAllPlayersWithBookingsAndPadelCourts()
     {
         return DbContext.Players
             .Include(player => player.Bookings)
@@ -97,14 +97,14 @@ public class DbContextRepository : IRepository
             .ToList();
     }
 
-    public List<PadelCourt> ReadAllPadelCourtsWithClub()
+    public IEnumerable<PadelCourt> ReadAllPadelCourtsWithClub()
     {
         return DbContext.PadelCourts
             .Include(padelCourt => padelCourt.Club)
             .ToList();
     }
     
-    public List<Club> ReadAllClubs()
+    public IEnumerable<Club> ReadAllClubs()
     {
         return DbContext.Clubs.ToList();
     }

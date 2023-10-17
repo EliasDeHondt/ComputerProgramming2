@@ -25,12 +25,12 @@ public class Manager : IManager
         return _repository.ReadPlayer(playerNumber);
     }
     
-    public List<Player> GetAllPlayers()
+    public IEnumerable<Player> GetAllPlayers()
     {
         return _repository.ReadAllPlayers();
     }
     
-    public List<Player> GetPlayersByPosition(PlayerPosition position)
+    public IEnumerable<Player> GetPlayersByPosition(PlayerPosition position)
     {
         return _repository.ReadPlayersByPosition(position);
     }
@@ -48,12 +48,12 @@ public class Manager : IManager
         return _repository.ReadPadelCourt(courtNumber);
     }
     
-    public List<PadelCourt> GetAllPadelCourts()
+    public IEnumerable<PadelCourt> GetAllPadelCourts()
     {
         return _repository.ReadAllPadelCourts();
     }
     
-    public List<PadelCourt> GetPadelCourtsByFilter(double? price, bool? indoor)
+    public IEnumerable<PadelCourt> GetPadelCourtsByFilter(double? price, bool? indoor)
     {
         return _repository.ReadPadelCourtsByFilter(price, indoor);
     }
@@ -111,17 +111,17 @@ public class Manager : IManager
         }
     }
     
-    public List<Player> GetAllPlayersWithBookingsAndPadelCourts()
+    public IEnumerable<Player> GetAllPlayersWithBookingsAndPadelCourts()
     {
         return _repository.ReadAllPlayersWithBookingsAndPadelCourts();
     }
 
-    public List<PadelCourt> GetAllPadelCourtsWithClub()
+    public IEnumerable<PadelCourt> GetAllPadelCourtsWithClub()
     {
         return _repository.ReadAllPadelCourtsWithClub();
     }
     
-    public List<Club> GetAllClubs()
+    public IEnumerable<Club> GetAllClubs()
     {
         return _repository.ReadAllClubs();
     }

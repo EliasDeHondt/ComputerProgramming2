@@ -98,13 +98,13 @@ public class ConsoleUi
     
     private void ShowAllClubsBrief() // Shows all the clubs (brief)
     {
-        List<Club> clubs = _manager.GetAllClubs();
+        IEnumerable<Club> clubs = _manager.GetAllClubs();
         foreach (Club club in clubs) Console.WriteLine(club.GetInfoBrief());
     }
     
     private void ShowAllPlayersBrief() // Shows all the players (brief)
     {
-        List<Player> players = _manager.GetAllPlayers();
+        IEnumerable<Player> players = _manager.GetAllPlayers();
         foreach (Player player in players) Console.WriteLine(player.GetInfoBrief());
     }
     
@@ -115,7 +115,7 @@ public class ConsoleUi
     
     private void ShowAllPlayers() // Shows all the players
     {
-        List<Player> players = _manager.GetAllPlayersWithBookingsAndPadelCourts();
+        IEnumerable<Player> players = _manager.GetAllPlayersWithBookingsAndPadelCourts();
         foreach (Player player in players) Console.WriteLine(player.GetInfo());
     }
     
@@ -136,20 +136,20 @@ public class ConsoleUi
         
         if (Enum.TryParse(inputPosition, out PlayerPosition position)) // If the inputPosition is a valid PlayerPosition
         {
-            List<Player> players = _manager.GetPlayersByPosition(position); // Get all the players by position from the manager
+            IEnumerable<Player> players = _manager.GetPlayersByPosition(position); // Get all the players by position from the manager
             foreach (Player player in players) Console.WriteLine(player.GetInfoBrief()); // Print all the players in a foreach loop (if position == player.Position)
         }
     }
 
     private void ShowAllPadelCourtsBrief() // Shows all the PadelCourts (brief)
     {
-        List<PadelCourt> padelCourts = _manager.GetAllPadelCourts();
+        IEnumerable<PadelCourt> padelCourts = _manager.GetAllPadelCourts();
         foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfoBrief());
     }
     
     private void ShowAllPadelCourts() // Shows all the PadelCourts
     {
-        List<PadelCourt> padelCourts = _manager.GetAllPadelCourtsWithClub();
+        IEnumerable<PadelCourt> padelCourts = _manager.GetAllPadelCourtsWithClub();
         foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfo());
     }
 
@@ -158,7 +158,7 @@ public class ConsoleUi
         double? price = GetPriceFilter();
         bool? indoor = GetIndoorFilter();
         
-        List<PadelCourt> padelCourts = _manager.GetPadelCourtsByFilter(price, indoor); // Get all the PadelCourts by filter from the manager
+        IEnumerable<PadelCourt> padelCourts = _manager.GetPadelCourtsByFilter(price, indoor); // Get all the PadelCourts by filter from the manager
         foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfoBrief()); // Print all the PadelCourts in a foreach loop (if price == padelCourt.Price && indoor == padelCourt.IsIndoor)
     }
 

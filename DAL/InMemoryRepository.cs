@@ -128,12 +128,12 @@ public class InMemoryRepository : IRepository
           return null;
       }
 
-      public List<Player> ReadAllPlayers()
+      public IEnumerable<Player> ReadAllPlayers()
       {
           return _players;
       }
 
-      public List<Player> ReadPlayersByPosition(PlayerPosition position)
+      public IEnumerable<Player> ReadPlayersByPosition(PlayerPosition position)
       {
           List<Player> players = new List<Player>();
           foreach (Player player in _players)
@@ -158,12 +158,12 @@ public class InMemoryRepository : IRepository
           return null;
       }
 
-      public List<PadelCourt> ReadAllPadelCourts()
+      public IEnumerable<PadelCourt> ReadAllPadelCourts()
       {
           return _padelCourts;
       }
 
-      public List<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor)
+      public IEnumerable<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor)
       {
           List<PadelCourt> padelCourts = new List<PadelCourt>();
           foreach (PadelCourt padelCourt in _padelCourts)
@@ -183,17 +183,17 @@ public class InMemoryRepository : IRepository
           _padelCourts.Add(padelCourt);
       }
       
-      public List<Player> ReadAllPlayersWithBookingsAndPadelCourts()
+      public IEnumerable<Player> ReadAllPlayersWithBookingsAndPadelCourts()
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }
 
-      public List<PadelCourt> ReadAllPadelCourtsWithClub()
+      public IEnumerable<PadelCourt> ReadAllPadelCourtsWithClub()
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }
       
-      public List<Club> ReadAllClubs()
+      public IEnumerable<Club> ReadAllClubs()
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }
