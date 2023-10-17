@@ -22,4 +22,7 @@ public interface IRepository
     public List<Player> ReadAllPlayersWithBookingsAndPadelCourts();
     public List<PadelCourt> ReadAllPadelCourtsWithClub();
     public List<Club> ReadAllClubs();
+    public Booking ReadBooking(int bookingNumber);
+    public void CreatePlayerToBooking(Player player, Booking booking);
+    public void DeletePlayerFromBooking(Player player, Booking booking);
 }

@@ -22,4 +22,6 @@ public interface IManager
     public List<Player> GetAllPlayersWithBookingsAndPadelCourts();
     public List<PadelCourt> GetAllPadelCourtsWithClub();
     public List<Club> GetAllClubs();
+    public void AddPlayerToBooking(int playerNumber, int bookingNumber);
+    public void RemovePlayerFromBooking(int playerNumber, int bookingNumber);
 }

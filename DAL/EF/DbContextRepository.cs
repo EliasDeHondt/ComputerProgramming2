@@ -108,4 +108,24 @@ public class DbContextRepository : IRepository
     {
         return DbContext.Clubs.ToList();
     }
+    
+    public Booking ReadBooking(int bookingNumber)
+    {
+        foreach (Booking booking in DbContext.Bookings)
+        {
+            if (booking.BookingNumber == bookingNumber) return booking;
+        }
+        return null;
+    }
+    
+    public void CreatePlayerToBooking(Player player, Booking booking)
+    {
+        booking.Player = player;
+        player.Bookings.Add(booking);
+    }
+
+    public void DeletePlayerFromBooking(Player player, Booking booking)
+    {
+        
+    }
 }

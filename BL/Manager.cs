@@ -95,6 +95,22 @@ public class Manager : IManager
             throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
         }
     }
+
+    private void Validate(Booking booking) // Validate the Booking object (overload)
+    {
+        List<ValidationResult> errors = new List<ValidationResult>();
+        bool valid = Validator.TryValidateObject(booking, new ValidationContext(booking), errors, true);
+        
+        if (!valid) // If the object is not valid
+        {
+            string errorString = "\nAn error occurred, please try again:\n * ";
+            
+            foreach (ValidationResult error in errors) errorString += error.ErrorMessage + "\n * "; // Add each error to the errorString
+            
+            throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
+        }
+    }
+    
     public List<Player> GetAllPlayersWithBookingsAndPadelCourts()
     {
         return _repository.ReadAllPlayersWithBookingsAndPadelCourts();
@@ -108,5 +124,21 @@ public class Manager : IManager
     public List<Club> GetAllClubs()
     {
         return _repository.ReadAllClubs();
+    }
+    
+    public void AddPlayerToBooking(int playerNumber, int bookingNumber)
+    {
+        Player player = _repository.ReadPlayer(playerNumber);
+        Booking booking = _repository.ReadBooking(bookingNumber);
+        
+        Validate(player);
+        Validate(booking);
+        
+        _repository.CreatePlayerToBooking(player, booking);
+    }
+
+    public void RemovePlayerFromBooking(int playerNumber, int bookingNumber)
+    {
+        
     }
 }

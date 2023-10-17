@@ -63,10 +63,12 @@ public class ConsoleUi
                     AddPadelCourt();
                     break;
                 case "7":
-                    Console.WriteLine($"Add x to y:\n{line}");
+                    Console.WriteLine($"Add Player to Booking:\n{line}");
+                    AddPlayerToBooking();
                     break;
                 case "8":
-                    Console.WriteLine($"Remove x from y:\n{line}");
+                    Console.WriteLine($"Remove Player from Booking:\n{line}");
+                    RemovePlayerFromBooking();
                     break;
                 default:
                     ValidationException validationException = new ValidationException("An error occurred, please try again:\n * Invalid input. Please enter a number from 0 to 6.\n * end");
@@ -88,8 +90,8 @@ public class ConsoleUi
                           4) Show Padel Courts with Price and/or (Indoor?)
                           5) Add a player
                           6) Add a Padel Court
-                          7) Add x to y
-                          8) Remove x from y
+                          7) Add Player to Booking
+                          8) Remove Player from Booking
                           Choice (0-8): 
                           """);
     }
@@ -104,6 +106,11 @@ public class ConsoleUi
     {
         List<Player> players = _manager.GetAllPlayers();
         foreach (Player player in players) Console.WriteLine(player.GetInfoBrief());
+    }
+    
+    private void ShowAllBookingsBrief() // Shows all the bookings (brief)
+    {
+
     }
     
     private void ShowAllPlayers() // Shows all the players
@@ -302,6 +309,42 @@ public class ConsoleUi
         {
             CatchValidationException(validationException);
         }
+    }
+    
+    private void AddPlayerToBooking() // Add a player to a booking
+    {
+        Console.WriteLine("Which player would you like to add to a booking?");
+        ShowAllPlayersBrief();
+        Console.Write("Enter the player number: ");
+        string inputPlayerNumber = Console.ReadLine();
+        int playerNumber;
+        
+        bool isParsedPlayerNumber = Int32.TryParse(inputPlayerNumber, out playerNumber); // is it Parse? Yes/No
+        if (!isParsedPlayerNumber)
+        {
+            ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for player number. Please enter a valid number.\n * end\n");
+            CatchValidationException(validationException);
+        }
+        
+        Console.WriteLine("Which booking would you like to add the player to?");
+        ShowAllBookingsBrief();
+        Console.Write("Enter the booking number: ");
+        string inputBookingNumber = Console.ReadLine();
+        int bookingNumber;
+        
+        bool isParsedBookingNumber = Int32.TryParse(inputBookingNumber, out bookingNumber); // is it Parse? Yes/No
+        if (!isParsedBookingNumber)
+        {
+            ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for booking number. Please enter a valid number.\n * end\n");
+            CatchValidationException(validationException);
+        }
+        
+        _manager.AddPlayerToBooking(playerNumber, bookingNumber);
+    }
+    
+    private void RemovePlayerFromBooking() // Remove a player from a booking
+    {
+        
     }
     
     private void CatchValidationException(ValidationException validationException) // Catch the ValidationException

@@ -197,4 +197,19 @@ public class InMemoryRepository : IRepository
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }
+
+      public Booking ReadBooking(int bookingNumber)
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
+
+      public void CreatePlayerToBooking(Player player, Booking booking)
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
+
+      public void DeletePlayerFromBooking(Player player, Booking booking)
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
 }
