@@ -125,6 +125,11 @@ public class Manager : IManager
     {
         return _repository.ReadAllClubs();
     }
+
+    public IEnumerable<Booking> GetAllBookings()
+    {
+        return _repository.ReadAllBookings();
+    }
     
     public void AddPlayerToBooking(int playerNumber, int bookingNumber)
     {

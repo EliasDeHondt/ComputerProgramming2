@@ -117,6 +117,11 @@ public class DbContextRepository : IRepository
         }
         return null;
     }
+
+    public IEnumerable<Booking> ReadAllBookings()
+    {
+        return DbContext.Bookings.ToList();
+    }
     
     public void CreatePlayerToBooking(Player player, Booking booking)
     {

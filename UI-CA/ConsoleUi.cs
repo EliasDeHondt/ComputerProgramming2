@@ -110,7 +110,8 @@ public class ConsoleUi
     
     private void ShowAllBookingsBrief() // Shows all the bookings (brief)
     {
-
+        IEnumerable<Booking> bookings = _manager.GetAllBookings();
+        foreach (Booking booking in bookings) Console.WriteLine(booking.GetInfoBrief());
     }
     
     private void ShowAllPlayers() // Shows all the players

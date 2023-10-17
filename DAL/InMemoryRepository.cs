@@ -197,6 +197,11 @@ public class InMemoryRepository : IRepository
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }
+      
+      public IEnumerable<Booking> ReadAllBookings()
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
 
       public Booking ReadBooking(int bookingNumber)
       {

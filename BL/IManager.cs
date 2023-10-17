@@ -22,6 +22,7 @@ public interface IManager
     public IEnumerable<Player> GetAllPlayersWithBookingsAndPadelCourts();
     public IEnumerable<PadelCourt> GetAllPadelCourtsWithClub();
     public IEnumerable<Club> GetAllClubs();
+    public IEnumerable<Booking> GetAllBookings();
     public void AddPlayerToBooking(int playerNumber, int bookingNumber);
     public void RemovePlayerFromBooking(int playerNumber, int bookingNumber);
 }
