@@ -127,10 +127,15 @@ public class DbContextRepository : IRepository
     {
         booking.Player = player;
         player.Bookings.Add(booking);
+        
+        DbContext.SaveChanges(); // Save changes to the database
     }
 
     public void DeletePlayerFromBooking(Player player, Booking booking)
     {
+        booking.Player = null;
+        player.Bookings.Remove(booking);
         
+        DbContext.SaveChanges(); // Save changes to the database
     }
 }

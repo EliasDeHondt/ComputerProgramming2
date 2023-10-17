@@ -144,6 +144,12 @@ public class Manager : IManager
 
     public void RemovePlayerFromBooking(int playerNumber, int bookingNumber)
     {
+        Player player = _repository.ReadPlayer(playerNumber);
+        Booking booking = _repository.ReadBooking(bookingNumber);
         
+        Validate(player);
+        Validate(booking);
+        
+        _repository.DeletePlayerFromBooking(player, booking);
     }
 }

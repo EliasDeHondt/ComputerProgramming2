@@ -345,7 +345,34 @@ public class ConsoleUi
     
     private void RemovePlayerFromBooking() // Remove a player from a booking
     {
+        Console.WriteLine("Which player would you like to remove from a booking?");
+        ShowAllPlayersBrief();
+        Console.Write("Enter the player number: ");
+        string inputPlayerNumber = Console.ReadLine();
+        int playerNumber;
         
+        bool isParsedPlayerNumber = Int32.TryParse(inputPlayerNumber, out playerNumber); // is it Parse? Yes/No
+        if (!isParsedPlayerNumber)
+        {
+            ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for player number. Please enter a valid number.\n * end\n");
+            CatchValidationException(validationException);
+        }
+        
+        Console.WriteLine("Which booking would you like to remove the player from?");
+        IEnumerable<Booking> bookings = _manager.GetPlayer(playerNumber).Bookings;
+        foreach (Booking booking in bookings) Console.WriteLine(booking.GetInfoBrief());
+        Console.Write("Enter the booking number: ");
+        string inputBookingNumber = Console.ReadLine();
+        int bookingNumber;
+        
+        bool isParsedBookingNumber = Int32.TryParse(inputBookingNumber, out bookingNumber); // is it Parse? Yes/No
+        if (!isParsedBookingNumber)
+        {
+            ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for booking number. Please enter a valid number.\n * end\n");
+            CatchValidationException(validationException);
+        }
+        
+        _manager.RemovePlayerFromBooking(playerNumber, bookingNumber);
     }
     
     private void CatchValidationException(ValidationException validationException) // Catch the ValidationException
