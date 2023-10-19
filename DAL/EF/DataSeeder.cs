@@ -40,8 +40,8 @@ public static class DataSeeder
         
         // Seed data for Players
         Player player1 = new Player { PlayerNumber = 1, FirstName = "Elias", LastName = "De Hondt", BirthDate = new DateOnly(2001, 4, 10), Level = 5.5, Position = PlayerPosition.Member };
-        Player player2 = new Player { PlayerNumber = 2, FirstName = "Alice", LastName = "Johnson", BirthDate = new DateOnly(1990, 3, 20), Level = 6.2, Position = PlayerPosition.Instructor };
-        Player player3 = new Player { PlayerNumber = 3, FirstName = "Bob", LastName = "Smith", BirthDate = new DateOnly(1988, 12, 5), Level = 5.0, Position = PlayerPosition.TournamentPlayer };
+        Player player2 = new Player { PlayerNumber = 2, FirstName = "Alice", LastName = "Johnson", BirthDate = new DateOnly(1990, 3, 12), Level = 6.2, Position = PlayerPosition.Instructor };
+        Player player3 = new Player { PlayerNumber = 3, FirstName = "Bob", LastName = "Smith", BirthDate = new DateOnly(1988, 12, 15), Level = 5.0, Position = PlayerPosition.TournamentPlayer };
         Player player4 = new Player { PlayerNumber = 4, FirstName = "Carol", LastName = "Davis", BirthDate = new DateOnly(1995, 8, 15), Level = 4.5, Position = PlayerPosition.Member };
         Player player5 = new Player { PlayerNumber = 5, FirstName = "David", LastName = "Lee", BirthDate = new DateOnly(1992, 6, 10), Level = 4.2, Position = PlayerPosition.Guest };
         
