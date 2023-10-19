@@ -311,10 +311,9 @@ public class ConsoleUi
             CatchValidationException(validationException);
         }
     }
-    
-    private void AddPlayerToBooking() // Add a player to a booking
+
+    private int ChoosePlayer() // Choose a player
     {
-        Console.WriteLine("Which player would you like to add to a booking?");
         ShowAllPlayersBrief();
         Console.Write("Enter the player number: ");
         string inputPlayerNumber = Console.ReadLine();
@@ -326,9 +325,12 @@ public class ConsoleUi
             ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for player number. Please enter a valid number.\n * end\n");
             CatchValidationException(validationException);
         }
-        
-        Console.WriteLine("Which booking would you like to add the player to?");
-        ShowAllBookingsBrief();
+        return playerNumber;
+    }
+    
+    private int ChooseBooking(bool showInfoBookingsBrief) // Choose a booking
+    {
+        if (showInfoBookingsBrief) ShowAllBookingsBrief();
         Console.Write("Enter the booking number: ");
         string inputBookingNumber = Console.ReadLine();
         int bookingNumber;
@@ -339,6 +341,17 @@ public class ConsoleUi
             ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for booking number. Please enter a valid number.\n * end\n");
             CatchValidationException(validationException);
         }
+        
+        return bookingNumber;
+    }
+    
+    private void AddPlayerToBooking() // Add a player to a booking
+    {
+        Console.WriteLine("Which player would you like to add to a booking?");
+        int playerNumber = ChoosePlayer();
+        
+        Console.WriteLine("Which booking would you like to add the player to?");
+        int bookingNumber = ChooseBooking(true);
         
         _manager.AddPlayerToBooking(playerNumber, bookingNumber);
     }
@@ -346,33 +359,14 @@ public class ConsoleUi
     private void RemovePlayerFromBooking() // Remove a player from a booking
     {
         Console.WriteLine("Which player would you like to remove from a booking?");
-        ShowAllPlayersBrief();
-        Console.Write("Enter the player number: ");
-        string inputPlayerNumber = Console.ReadLine();
-        int playerNumber;
-        
-        bool isParsedPlayerNumber = Int32.TryParse(inputPlayerNumber, out playerNumber); // is it Parse? Yes/No
-        if (!isParsedPlayerNumber)
-        {
-            ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for player number. Please enter a valid number.\n * end\n");
-            CatchValidationException(validationException);
-        }
+        int playerNumber = ChoosePlayer();
         
         Console.WriteLine("Which booking would you like to remove the player from?");
         
         IEnumerable<Booking> bookings = _manager.GetBookingsOfPlayer(playerNumber);
         foreach (Booking booking in bookings) Console.WriteLine(booking.GetInfoBrief());
         
-        Console.Write("Enter the booking number: ");
-        string inputBookingNumber = Console.ReadLine();
-        int bookingNumber;
-        
-        bool isParsedBookingNumber = Int32.TryParse(inputBookingNumber, out bookingNumber); // is it Parse? Yes/No
-        if (!isParsedBookingNumber)
-        {
-            ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for booking number. Please enter a valid number.\n * end\n");
-            CatchValidationException(validationException);
-        }
+        int bookingNumber = ChooseBooking(false);
         
         _manager.RemovePlayerFromBooking(playerNumber, bookingNumber);
     }

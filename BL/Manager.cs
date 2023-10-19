@@ -66,51 +66,6 @@ public class Manager : IManager
         _repository.CreatePadelCourt(padelCourt);
     }
     
-    private void Validate(Player player) // Validate the Player object (overload)
-    {
-        List<ValidationResult> errors = new List<ValidationResult>();
-        bool valid = Validator.TryValidateObject(player, new ValidationContext(player), errors, true);
-        
-        if (!valid) // If the object is not valid
-        {
-            string errorString = "\nAn error occurred, please try again:\n * ";
-            
-            foreach (ValidationResult error in errors) errorString += error.ErrorMessage + "\n * "; // Add each error to the errorString
-            
-            throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
-        }
-    }
-    
-    private void Validate(PadelCourt padelCourt) // Validate the PadelCourt object (overload)
-    {
-        List<ValidationResult> errors = new List<ValidationResult>();
-        bool valid = Validator.TryValidateObject(padelCourt, new ValidationContext(padelCourt), errors, true);
-        
-        if (!valid) // If the object is not valid
-        {
-            string errorString = "\nAn error occurred, please try again:\n * ";
-            
-            foreach (ValidationResult error in errors) errorString += error.ErrorMessage + "\n * "; // Add each error to the errorString
-            
-            throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
-        }
-    }
-
-    private void Validate(Booking booking) // Validate the Booking object (overload)
-    {
-        List<ValidationResult> errors = new List<ValidationResult>();
-        bool valid = Validator.TryValidateObject(booking, new ValidationContext(booking), errors, true);
-        
-        if (!valid) // If the object is not valid
-        {
-            string errorString = "\nAn error occurred, please try again:\n * ";
-            
-            foreach (ValidationResult error in errors) errorString += error.ErrorMessage + "\n * "; // Add each error to the errorString
-            
-            throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
-        }
-    }
-    
     public IEnumerable<Player> GetAllPlayersWithBookingsAndPadelCourts()
     {
         return _repository.ReadAllPlayersWithBookingsAndPadelCourts();
@@ -160,5 +115,50 @@ public class Manager : IManager
         Validate(player);
         
         return _repository.ReadBookingsOfPlayer(player);
+    }
+    
+    private void Validate(Player player) // Validate the Player object (overload)
+    {
+        List<ValidationResult> errors = new List<ValidationResult>();
+        bool valid = Validator.TryValidateObject(player, new ValidationContext(player), errors, true);
+        
+        if (!valid) // If the object is not valid
+        {
+            string errorString = "\nAn error occurred, please try again:\n * ";
+            
+            foreach (ValidationResult error in errors) errorString += error.ErrorMessage + "\n * "; // Add each error to the errorString
+            
+            throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
+        }
+    }
+    
+    private void Validate(PadelCourt padelCourt) // Validate the PadelCourt object (overload)
+    {
+        List<ValidationResult> errors = new List<ValidationResult>();
+        bool valid = Validator.TryValidateObject(padelCourt, new ValidationContext(padelCourt), errors, true);
+        
+        if (!valid) // If the object is not valid
+        {
+            string errorString = "\nAn error occurred, please try again:\n * ";
+            
+            foreach (ValidationResult error in errors) errorString += error.ErrorMessage + "\n * "; // Add each error to the errorString
+            
+            throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
+        }
+    }
+
+    private void Validate(Booking booking) // Validate the Booking object (overload)
+    {
+        List<ValidationResult> errors = new List<ValidationResult>();
+        bool valid = Validator.TryValidateObject(booking, new ValidationContext(booking), errors, true);
+        
+        if (!valid) // If the object is not valid
+        {
+            string errorString = "\nAn error occurred, please try again:\n * ";
+            
+            foreach (ValidationResult error in errors) errorString += error.ErrorMessage + "\n * "; // Add each error to the errorString
+            
+            throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
+        }
     }
 }
