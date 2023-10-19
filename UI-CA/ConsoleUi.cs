@@ -102,16 +102,28 @@ public class ConsoleUi
         foreach (Club club in clubs) Console.WriteLine(club.GetInfoBrief());
     }
     
-    private void ShowAllPlayersBrief() // Shows all the players (brief)
+    private void ShowAllPadelCourtsBrief() // Shows all the PadelCourts (brief)
     {
-        IEnumerable<Player> players = _manager.GetAllPlayers();
-        foreach (Player player in players) Console.WriteLine(player.GetInfoBrief());
+        IEnumerable<PadelCourt> padelCourts = _manager.GetAllPadelCourts();
+        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfoBrief());
     }
     
     private void ShowAllBookingsBrief() // Shows all the bookings (brief)
     {
         IEnumerable<Booking> bookings = _manager.GetAllBookings();
         foreach (Booking booking in bookings) Console.WriteLine(booking.GetInfoBrief());
+    }
+    
+    private void ShowAllPlayersBrief() // Shows all the players (brief)
+    {
+        IEnumerable<Player> players = _manager.GetAllPlayers();
+        foreach (Player player in players) Console.WriteLine(player.GetInfoBrief());
+    }
+    
+    private void ShowAllPadelCourts() // Shows all the PadelCourts
+    {
+        IEnumerable<PadelCourt> padelCourts = _manager.GetAllPadelCourtsWithClub();
+        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfo());
     }
     
     private void ShowAllPlayers() // Shows all the players
@@ -140,18 +152,6 @@ public class ConsoleUi
             IEnumerable<Player> players = _manager.GetPlayersByPosition(position); // Get all the players by position from the manager
             foreach (Player player in players) Console.WriteLine(player.GetInfoBrief()); // Print all the players in a foreach loop (if position == player.Position)
         }
-    }
-
-    private void ShowAllPadelCourtsBrief() // Shows all the PadelCourts (brief)
-    {
-        IEnumerable<PadelCourt> padelCourts = _manager.GetAllPadelCourts();
-        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfoBrief());
-    }
-    
-    private void ShowAllPadelCourts() // Shows all the PadelCourts
-    {
-        IEnumerable<PadelCourt> padelCourts = _manager.GetAllPadelCourtsWithClub();
-        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfo());
     }
 
     private void ShowPadelCourtsByFilter() // Shows all the PadelCourts with a price and/or indoor filter
@@ -250,7 +250,7 @@ public class ConsoleUi
         return isIndoor;
     }
     
-    public Club SelectClubForPadelCourt()
+    public Club SelectClubForPadelCourt() // Select a club for a PadelCourt
     {
         Club selectedClub = null;
 
@@ -280,7 +280,6 @@ public class ConsoleUi
 
         return selectedClub;
     }
-
     
     private void AddPadelCourt() // Add a PadelCourt
     {
@@ -353,7 +352,14 @@ public class ConsoleUi
         Console.WriteLine("Which booking would you like to add the player to?");
         int bookingNumber = ChooseBooking(true);
         
-        _manager.AddPlayerToBooking(playerNumber, bookingNumber);
+        try
+        {
+            _manager.AddPlayerToBooking(playerNumber, bookingNumber);
+        }
+        catch (ValidationException validationException)
+        {
+            CatchValidationException(validationException);
+        }
     }
     
     private void RemovePlayerFromBooking() // Remove a player from a booking
@@ -363,12 +369,20 @@ public class ConsoleUi
         
         Console.WriteLine("Which booking would you like to remove the player from?");
         
-        IEnumerable<Booking> bookings = _manager.GetBookingsOfPlayer(playerNumber);
-        foreach (Booking booking in bookings) Console.WriteLine(booking.GetInfoBrief());
+        try
+        {
+            IEnumerable<Booking> bookings = _manager.GetBookingsOfPlayer(playerNumber);
+            foreach (Booking booking in bookings) Console.WriteLine(booking.GetInfoBrief());
         
-        int bookingNumber = ChooseBooking(false);
+            int bookingNumber = ChooseBooking(false);
+            
+            _manager.RemovePlayerFromBooking(playerNumber, bookingNumber);
+        }
+        catch (ValidationException validationException)
+        {
+            CatchValidationException(validationException);
+        }
         
-        _manager.RemovePlayerFromBooking(playerNumber, bookingNumber);
     }
     
     private void CatchValidationException(ValidationException validationException) // Catch the ValidationException

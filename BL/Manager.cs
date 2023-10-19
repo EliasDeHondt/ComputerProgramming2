@@ -119,6 +119,8 @@ public class Manager : IManager
     
     private void Validate(Player player) // Validate the Player object (overload)
     {
+        if (player == null) throw new ValidationException("\nAn error occurred, please try again:\n * Player does not exist\nend");
+        
         List<ValidationResult> errors = new List<ValidationResult>();
         bool valid = Validator.TryValidateObject(player, new ValidationContext(player), errors, true);
         
@@ -134,6 +136,8 @@ public class Manager : IManager
     
     private void Validate(PadelCourt padelCourt) // Validate the PadelCourt object (overload)
     {
+        if (padelCourt == null) throw new ValidationException("\nAn error occurred, please try again:\n * PadelCourt does not exist\nend");
+        
         List<ValidationResult> errors = new List<ValidationResult>();
         bool valid = Validator.TryValidateObject(padelCourt, new ValidationContext(padelCourt), errors, true);
         
@@ -149,6 +153,8 @@ public class Manager : IManager
 
     private void Validate(Booking booking) // Validate the Booking object (overload)
     {
+        if (booking == null) throw new ValidationException("\nAn error occurred, please try again:\n * Booking does not exist\nend");
+        
         List<ValidationResult> errors = new List<ValidationResult>();
         bool valid = Validator.TryValidateObject(booking, new ValidationContext(booking), errors, true);
         
