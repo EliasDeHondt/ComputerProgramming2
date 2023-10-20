@@ -37,42 +37,21 @@ public class PadelClubManagementDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Club has many PadelCourts
+        // Club has many PadelCourts (PadelCourt has one Club)
         modelBuilder.Entity<Club>()
             .HasMany(club => club.PadelCourts)
             .WithOne(padelcourt => padelcourt.Club)
             .HasForeignKey("FK_PadelCourt_Club")
             .IsRequired();
         
-        // PadelCourt has one Club
-        modelBuilder.Entity<PadelCourt>()
-            .HasOne(padelcourt => padelcourt.Club)
-            .WithMany(club => club.PadelCourts)
-            .HasForeignKey("FK_PadelCourt_Club")
-            .IsRequired();
-        
-        // PadelCourt has many Bookings
+        // PadelCourt has many Bookings (Booking has one PadelCourt)
         modelBuilder.Entity<PadelCourt>()
             .HasMany(padelcourt => padelcourt.Bookings)
             .WithOne(booking => booking.PadelCourt)
             .HasForeignKey("FK_Booking_PadelCourt")
             .IsRequired();
         
-        // Booking has one PadelCourt
-        modelBuilder.Entity<Booking>()
-            .HasOne(booking => booking.PadelCourt)
-            .WithMany(padelcourt => padelcourt.Bookings)
-            .HasForeignKey("FK_Booking_PadelCourt")
-            .IsRequired();
-        
-        // Booking has one Player
-        modelBuilder.Entity<Booking>()
-            .HasOne(booking => booking.Player)
-            .WithMany(player => player.Bookings)
-            .HasForeignKey("FK_Booking_Player")
-            .IsRequired();
-        
-        // Player has many Bookings
+        // Player has many Bookings (Booking has one Player)
         modelBuilder.Entity<Player>()
             .HasMany(player => player.Bookings)
             .WithOne(booking => booking.Player)
