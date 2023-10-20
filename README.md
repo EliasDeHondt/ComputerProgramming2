@@ -55,7 +55,7 @@ classDiagram
 
     Club "1" -- "*" PadelCourt
     PadelCourt "1" -- "*" Booking
-    Booking "1" -- "1" Player
+    Booking "*" -- "1" Player
 ```
 
 ## Sprint 3

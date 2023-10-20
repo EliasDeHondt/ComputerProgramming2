@@ -22,26 +22,20 @@ public class DbContextRepository : IRepository
 
     public Player ReadPlayer(int playerNumber)
     {
-        foreach (Player player in DbContext.Players)
-        {
-            if (player.PlayerNumber == playerNumber) return player;
-        }
-        return null;
+        IEnumerable<Player> matchingPlayers = DbContext.Players.Where(player => player.PlayerNumber == playerNumber);
+        Player player = matchingPlayers.FirstOrDefault();
+        return player; // player or null
     }
     
     public IEnumerable<Player> ReadAllPlayers()
     {
         return DbContext.Players;
     }
-
+    
     public IEnumerable<Player> ReadPlayersByPosition(PlayerPosition position)
     {
-        List<Player> players = new List<Player>();
-        foreach (Player player in DbContext.Players)
-        {
-            if (player.Position == position) players.Add(player);
-        }
-        return players;
+        IEnumerable<Player> matchingPlayers = DbContext.Players.Where(player => player.Position == position);
+        return matchingPlayers; // IEnumerable<Player> or empty IEnumerable<Player>
     }
 
     public void CreatePlayer(Player player)
@@ -53,33 +47,33 @@ public class DbContextRepository : IRepository
 
     public PadelCourt ReadPadelCourt(int courtNumber)
     {
-        foreach (PadelCourt padelCourt in DbContext.PadelCourts)
-        {
-            if (padelCourt.CourtNumber == courtNumber) return padelCourt;
-        }
-        return null;
+        IEnumerable<PadelCourt> padelCourts = DbContext.PadelCourts.Where(padelCourt => padelCourt.CourtNumber == courtNumber);
+        PadelCourt padelCourt = padelCourts.FirstOrDefault();
+        return padelCourt;
     }
 
     public IEnumerable<PadelCourt> ReadAllPadelCourts()
     {
         return DbContext.PadelCourts;
     }
-
+    
     public IEnumerable<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor)
     {
-        List<PadelCourt> padelCourts = new List<PadelCourt>();
-        IQueryable<PadelCourt> query = DbContext.PadelCourts; // Get all padelCourts from the database in 1 query
-        
-        foreach (PadelCourt padelCourt in query)
+        IQueryable<PadelCourt> filteredPadelCourts = DbContext.PadelCourts.AsQueryable(); // Get all PadelCourts as a queryable source
+
+        if (price.HasValue)
         {
-            // If price is null or the price of the padelCourt is equal to the price filter and indoor is null or the indoor of the padelCourt is equal to the indoor filter
-            bool meetsPriceCriteria = !price.HasValue || padelCourt.Price.Equals(price.Value);
-            bool meetsIndoorCriteria = !indoor.HasValue || padelCourt.IsIndoor == indoor.Value;
-            
-            if (meetsPriceCriteria && meetsIndoorCriteria) padelCourts.Add(padelCourt);
+            filteredPadelCourts = filteredPadelCourts.Where(padelCourt => padelCourt.Price.Equals(price.Value));
         }
-        return padelCourts;
+
+        if (indoor.HasValue)
+        {
+            filteredPadelCourts = filteredPadelCourts.Where(padelCourt => padelCourt.IsIndoor == indoor.Value);
+        }
+
+        return filteredPadelCourts;
     }
+
 
     public void CreatePadelCourt(PadelCourt padelCourt)
     {
@@ -109,11 +103,9 @@ public class DbContextRepository : IRepository
     
     public Booking ReadBooking(int bookingNumber)
     {
-        foreach (Booking booking in DbContext.Bookings)
-        {
-            if (booking.BookingNumber == bookingNumber) return booking;
-        }
-        return null;
+        IEnumerable<Booking> bookings = DbContext.Bookings.Where(booking => booking.BookingNumber == bookingNumber);
+        Booking booking = bookings.FirstOrDefault();
+        return booking;
     }
 
     public IEnumerable<Booking> ReadAllBookings()

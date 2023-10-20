@@ -48,15 +48,13 @@ public class PadelClubManagementDbContext : DbContext
         modelBuilder.Entity<PadelCourt>()
             .HasMany(padelcourt => padelcourt.Bookings)
             .WithOne(booking => booking.PadelCourt)
-            .HasForeignKey("FK_Booking_PadelCourt")
-            .IsRequired();
+            .HasForeignKey("FK_Booking_PadelCourt");
         
         // Player has many Bookings (Booking has one Player)
         modelBuilder.Entity<Player>()
             .HasMany(player => player.Bookings)
             .WithOne(booking => booking.Player)
-            .HasForeignKey("FK_Booking_Player")
-            .IsRequired();
+            .HasForeignKey("FK_Booking_Player");
         
         // Primary key of Club, PadleCourt, Booking and Player
         modelBuilder.Entity<Club>().HasKey(club => club.ClubNumber);
