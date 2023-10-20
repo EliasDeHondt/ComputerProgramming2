@@ -31,7 +31,7 @@ public class DbContextRepository : IRepository
     
     public IEnumerable<Player> ReadAllPlayers()
     {
-        return DbContext.Players.ToList();
+        return DbContext.Players;
     }
 
     public IEnumerable<Player> ReadPlayersByPosition(PlayerPosition position)
@@ -62,7 +62,7 @@ public class DbContextRepository : IRepository
 
     public IEnumerable<PadelCourt> ReadAllPadelCourts()
     {
-        return DbContext.PadelCourts.ToList();
+        return DbContext.PadelCourts;
     }
 
     public IEnumerable<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor)
@@ -93,20 +93,18 @@ public class DbContextRepository : IRepository
         return DbContext.Players
             .Include(player => player.Bookings)
             .ThenInclude(booking => booking.PadelCourt)
-            .ThenInclude(padelCourt => padelCourt.Club)
-            .ToList();
+            .ThenInclude(padelCourt => padelCourt.Club);
     }
 
     public IEnumerable<PadelCourt> ReadAllPadelCourtsWithClub()
     {
         return DbContext.PadelCourts
-            .Include(padelCourt => padelCourt.Club)
-            .ToList();
+            .Include(padelCourt => padelCourt.Club);
     }
     
     public IEnumerable<Club> ReadAllClubs()
     {
-        return DbContext.Clubs.ToList();
+        return DbContext.Clubs;
     }
     
     public Booking ReadBooking(int bookingNumber)
@@ -120,7 +118,7 @@ public class DbContextRepository : IRepository
 
     public IEnumerable<Booking> ReadAllBookings()
     {
-        return DbContext.Bookings.ToList();
+        return DbContext.Bookings;
     }
     
     public void CreatePlayerToBooking(Player player, Booking booking)
@@ -142,7 +140,6 @@ public class DbContextRepository : IRepository
     public IEnumerable<Booking> ReadBookingsOfPlayer(Player player)
     {
         return DbContext.Bookings
-            .Where(booking => booking.Player == player)
-            .ToList();
+            .Where(booking => booking.Player == player);
     }
 }

@@ -5,7 +5,6 @@
  *                                     *
  ***************************************/
 // Top level statements, i.e. entry point of the application (Start)
-
 using Microsoft.EntityFrameworkCore;
 using PadelClubManagement.BL;
 using PadelClubManagement.DAL.EF;
@@ -22,7 +21,7 @@ DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
 PadelClubManagementDbContext padelClubManagementDbContext = new PadelClubManagementDbContext(optionsBuilder.Options);
 DbContextRepository dbContextRepository = new DbContextRepository(padelClubManagementDbContext);
 
-bool databaseCreated = padelClubManagementDbContext.CreateDatabase(true); // Create the database
+bool databaseCreated = padelClubManagementDbContext.CreateDatabase(true); // Create the database (Code first flow)
 if (databaseCreated) DataSeeder.Seed(padelClubManagementDbContext); // Seed the database with some data
 
 Manager manager = new Manager(dbContextRepository); // Create new instance of Manager

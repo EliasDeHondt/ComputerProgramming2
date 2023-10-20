@@ -340,7 +340,6 @@ public class ConsoleUi
             ValidationException validationException = new ValidationException("\nAn error occurred, please try again:\n * Invalid input for booking number. Please enter a valid number.\n * end\n");
             CatchValidationException(validationException);
         }
-        
         return bookingNumber;
     }
     
@@ -382,7 +381,6 @@ public class ConsoleUi
         {
             CatchValidationException(validationException);
         }
-        
     }
     
     private void CatchValidationException(ValidationException validationException) // Catch the ValidationException
