@@ -27,6 +27,8 @@ public class PadelClubManagementDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        base.OnConfiguring(optionsBuilder); // Call base method to configure the optionsBuilder
+        
         if (!optionsBuilder.IsConfigured) // If not configured, configure it
         {
             optionsBuilder.UseSqlite("Data Source=PadelClubManagement.db"); // Use SQLite
