@@ -90,8 +90,7 @@ public class DbContextRepository : IRepository
 
     public IEnumerable<PadelCourt> ReadAllPadelCourtsWithClub()
     {
-        return DbContext.PadelCourts
-            .Include(padelCourt => padelCourt.Club);
+        return DbContext.PadelCourts.Include(padelCourt => padelCourt.Club);
     }
     
     public IEnumerable<Club> ReadAllClubs()
@@ -101,8 +100,7 @@ public class DbContextRepository : IRepository
     
     public Booking ReadBooking(int bookingNumber)
     {
-        IEnumerable<Booking> bookings = DbContext.Bookings.Where(booking => booking.BookingNumber == bookingNumber);
-        Booking booking = bookings.FirstOrDefault();
+        Booking booking = DbContext.Bookings.Find(bookingNumber);
         return booking;
     }
 
@@ -115,7 +113,6 @@ public class DbContextRepository : IRepository
     {
         booking.Player = player;
         player.Bookings.Add(booking);
-        
         DbContext.SaveChanges(); // Save changes to the database
     }
 
@@ -123,13 +120,12 @@ public class DbContextRepository : IRepository
     {
         booking.Player = null;
         player.Bookings.Remove(booking);
-        
         DbContext.SaveChanges(); // Save changes to the database
     }
     
     public IEnumerable<Booking> ReadBookingsOfPlayer(Player player)
     {
-        return DbContext.Bookings
-            .Where(booking => booking.Player == player);
+        IEnumerable<Booking> bookings = DbContext.Bookings.Where(booking => booking.Player == player);
+        return bookings;
     }
 }
