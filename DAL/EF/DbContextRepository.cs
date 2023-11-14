@@ -22,8 +22,7 @@ public class DbContextRepository : IRepository
 
     public Player ReadPlayer(int playerNumber)
     {
-        IEnumerable<Player> matchingPlayers = DbContext.Players.Where(player => player.PlayerNumber == playerNumber);
-        Player player = matchingPlayers.FirstOrDefault();
+        Player player = DbContext.Players.Find(playerNumber);
         return player; // player or null
     }
     
@@ -47,8 +46,7 @@ public class DbContextRepository : IRepository
 
     public PadelCourt ReadPadelCourt(int courtNumber)
     {
-        IEnumerable<PadelCourt> padelCourts = DbContext.PadelCourts.Where(padelCourt => padelCourt.CourtNumber == courtNumber);
-        PadelCourt padelCourt = padelCourts.FirstOrDefault();
+        PadelCourt padelCourt = DbContext.PadelCourts.Find(courtNumber);
         return padelCourt;
     }
 
