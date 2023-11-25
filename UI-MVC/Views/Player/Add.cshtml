@@ -22,11 +22,11 @@
     <span asp-validation-for="BirthDate" class="text-danger"></span>
 
     <label asp-for="Level">Level (0-10):</label>
-    <input asp-for="Level" />
+    <input asp-for="Level"/>
     <span asp-validation-for="Level" class="text-danger"></span>
     
     <label asp-for="Position">Position:</label>
     <select asp-for="Position" asp-items="Html.GetEnumSelectList<PlayerPosition>()"></select>
     
-    <input type="submit" value="Add Player" />
+    <input type="submit" value="Add Player"/>
 </form>

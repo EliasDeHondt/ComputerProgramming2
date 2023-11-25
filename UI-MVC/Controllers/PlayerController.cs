@@ -37,12 +37,9 @@ public class PlayerController : Controller
     [HttpPost] // This method is only accessible via POST
     public IActionResult Add(Player player)
     {
-        if (ModelState.IsValid)
-        {
-            _manager.AddPlayerAsObject(player);
-            return RedirectToAction("Detail", new { playerNumber = player.PlayerNumber });
-        }
-        return View(player);
+        if (!ModelState.IsValid) return View(player);
+        _manager.AddPlayerAsObject(player);
+        return RedirectToAction("Detail", new { playerNumber = player.PlayerNumber });
     }
     
     public IActionResult Detail(int playerNumber)
