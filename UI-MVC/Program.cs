@@ -14,12 +14,12 @@ using PadelClubManagement.DAL.EF;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<PadelClubManagementDbContext>(options
-    => options.UseSqlite(@"Data Source=..\..\..\..\PadelClubManagement.db"));
+    => options.UseSqlite(@"Data Source=..\PadelClubManagement.db"));
 
 builder.Services.AddScoped<IRepository, DbContextRepository>();
 builder.Services.AddScoped<IManager, Manager>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 WebApplication app = builder.Build();
 

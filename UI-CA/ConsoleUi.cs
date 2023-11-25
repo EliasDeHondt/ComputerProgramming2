@@ -6,8 +6,10 @@
  ***************************************/
 // Class ConsoleUi
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 using PadelClubManagement.BL.Domain;
 using PadelClubManagement.BL;
+using PadelClubManagement.DAL.EF;
 using PadelClubManagement.UI.CA.Extensions;
 
 namespace PadelClubManagement.UI.CA;
