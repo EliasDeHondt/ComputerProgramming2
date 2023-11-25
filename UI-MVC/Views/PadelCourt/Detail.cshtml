@@ -1,0 +1,13 @@
+<!-- Van Elias De Hondt -->
+@model PadelClubManagement.BL.Domain.PadelCourt
+@{
+    ViewData["Title"] = "PadelCourt";
+}
+<h1>PadelCourt (ID: @Model.CourtNumber)</h1>
+<br/>
+<dl>
+    <dt>Court Number</dt><dd>@Model.CourtNumber</dd>
+    <dt>Indoor?</dt><dd>@(Model != null ? Model.IsIndoor ? "Yes" : "No" : "N/A")</dd>
+    <dt>Capacity</dt><dd>@Model.Capacity</dd>
+    <dt>Price</dt><dd>@Model.Price</dd>
+</dl>

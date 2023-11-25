@@ -7,12 +7,18 @@
 <h1>Player (ID: @Model.PlayerNumber)</h1>
 <br/>
 <dl>
-    <dt>Player Number</dt><dd>@Model.PlayerNumber</dd>
-    <dt>First Name</dt><dd>@Model.FirstName</dd>
-    <dt>Last Name</dt><dd>@Model.LastName</dd>
-    <dt>Birth Date</dt><dd>@Model.BirthDate</dd>
-    <dt>Level</dt><dd>@(Model.Level != 0 ? Model.Level : "unknown")</dd>
-    <dt>Player Position</dt><dd>@Model.Position</dd>
+    <dt>Player Number</dt>
+    <dd>@Model.PlayerNumber</dd>
+    <dt>First Name</dt>
+    <dd>@Model.FirstName</dd>
+    <dt>Last Name</dt>
+    <dd>@Model.LastName</dd>
+    <dt>Birth Date</dt>
+    <dd>@Model.BirthDate</dd>
+    <dt>Level</dt>
+    <dd>@(Model.Level != 0 ? Model.Level : "unknown")</dd>
+    <dt>Player Position</dt>
+    <dd>@Model.Position</dd>
 </dl>
 <br/>
 <table class="item-table">
@@ -21,7 +27,6 @@
         <th>Booking Date</th>
         <th>Start Time</th>
         <th>End Time</th>
-        <th>Details</th>
     </tr>
     @foreach (PadelClubManagement.BL.Domain.Booking booking in Model.Bookings)
     {
@@ -30,7 +35,7 @@
             <td>@(booking.BookingDate?.ToString("yyyy MMMM dd") ?? "N/A")</td>
             <td>@booking.StartTime</td>
             <td>@booking.EndTime</td>
-            <td><a asp-controller="Player" asp-action="Detail" asp-route-playerNumber="">Details</a></td>
+            
         </tr>
     }
 </table>
@@ -41,16 +46,16 @@
         <th>Indoor?</th>
         <th>Capacity</th>
         <th>Price</th>
+        <th>Details</th>
     </tr>
     @foreach (PadelClubManagement.BL.Domain.Booking booking in Model.Bookings)
     {
         <tr>
             <td>@booking.PadelCourt.CourtNumber</td>
-            <td>@(booking.PadelCourt.IsIndoor ? "Yes" : "No")</td>
+            <td>@(booking.PadelCourt != null ? booking.PadelCourt.IsIndoor ? "Yes" : "No" : "N/A")</td>
             <td>@booking.PadelCourt.Capacity</td>
             <td>@booking.PadelCourt.Price</td>
+            <td><a asp-controller="PadelCourt" asp-action="Detail" asp-route-CourtNumber="@booking.PadelCourt.CourtNumber">Details</a></td>
         </tr>
     }
 </table>
-<br/>
-<a class="item-table" asp-controller="Player" asp-action="Index">Go Back</a>
