@@ -18,6 +18,7 @@ Manager manager = new Manager(repository);
 
 // Composition Root
 DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
+optionsBuilder.UseSqlite(@"Data Source=..\..\..\..\PadelClubManagement.db");
 PadelClubManagementDbContext padelClubManagementDbContext = new PadelClubManagementDbContext(optionsBuilder.Options);
 DbContextRepository dbContextRepository = new DbContextRepository(padelClubManagementDbContext);
 

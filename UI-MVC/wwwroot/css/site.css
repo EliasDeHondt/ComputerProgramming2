@@ -1,3 +1,11 @@
+/***************************************
+ *                                     *
+ *   Created by Elias De Hondt         *
+ *   Visit https://eliasdh.com         *
+ *                                     *
+ ***************************************/
+/* CSS Code */
+
 html {
   font-size: 14px;
 }
@@ -20,3 +28,28 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Table */
+.item-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.item-table th,
+.item-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.item-table td:nth-child(7) {
+  text-transform: capitalize;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.item-table a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+/* Table */

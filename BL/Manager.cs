@@ -25,6 +25,11 @@ public class Manager : IManager
         return _repository.ReadPlayer(playerNumber);
     }
     
+    public Player GetPlayerWithBookingsAndPadelCourts(int playerNumber)
+    {
+        return _repository.ReadPlayerWithBookingsAndPadelCourts(playerNumber);
+    }
+    
     public IEnumerable<Player> GetAllPlayers()
     {
         return _repository.ReadAllPlayers();

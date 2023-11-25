@@ -26,6 +26,14 @@ public class DbContextRepository : IRepository
         return player; // player or null
     }
     
+    public Player ReadPlayerWithBookingsAndPadelCourts(int playerNumber)
+    {
+        return DbContext.Players
+            .Include(player => player.Bookings)
+            .ThenInclude(booking => booking.PadelCourt)
+            .FirstOrDefault(player => player.PlayerNumber == playerNumber);
+    }
+    
     public IEnumerable<Player> ReadAllPlayers()
     {
         return DbContext.Players;

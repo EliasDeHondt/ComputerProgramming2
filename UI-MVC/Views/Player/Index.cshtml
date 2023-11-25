@@ -1,0 +1,31 @@
+<!-- Van Elias De Hondt -->
+@model System.Collections.Generic.IEnumerable<PadelClubManagement.BL.Domain.Player>
+@{
+    ViewData["Title"] = "Players";
+}
+
+<h1>All Players</h1>
+<br/>
+<table class="item-table">
+    <tr>
+        <th>Player Number</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Birth Date</th>
+        <th>Level</th>
+        <th>Player Position</th>
+        <th>Details</th>
+    </tr>
+    @foreach (PadelClubManagement.BL.Domain.Player player in Model)
+    {
+        <tr>
+            <td>@player.PlayerNumber</td>
+            <td>@player.FirstName</td>
+            <td>@player.LastName</td>
+            <td>@player.BirthDate</td>
+            <td>@(player.Level != 0 ? player.Level : "unknown")</td>
+            <td>@player.Position</td>
+            <td><a asp-controller="Player" asp-action="Detail" asp-route-playerNumber="@player.PlayerNumber">Details</a></td>
+        </tr>
+    }
+</table>

@@ -127,6 +127,11 @@ public class InMemoryRepository : IRepository
           }
           return null;
       }
+      
+      public Player ReadPlayerWithBookingsAndPadelCourts(int playerNumber)
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
 
       public IEnumerable<Player> ReadAllPlayers()
       {

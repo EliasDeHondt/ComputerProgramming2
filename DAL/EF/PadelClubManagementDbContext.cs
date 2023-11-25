@@ -31,7 +31,6 @@ public class PadelClubManagementDbContext : DbContext
         
         if (!optionsBuilder.IsConfigured) // If not configured, configure it
         {
-            optionsBuilder.UseSqlite(@"Data Source=..\..\..\..\PadelClubManagement.db"); // Use SQLite
             optionsBuilder.UseLazyLoadingProxies(false); // Disable lazy loading
             optionsBuilder.LogTo(message => Debug.WriteLine(message), LogLevel.Information); // Log to Debug
         }

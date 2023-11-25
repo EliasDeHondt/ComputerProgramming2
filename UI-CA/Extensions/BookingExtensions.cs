@@ -5,7 +5,6 @@
  *                                     *
  ***************************************/
 // Class BookingExtensions
-
 using PadelClubManagement.BL.Domain;
 
 namespace PadelClubManagement.UI.CA.Extensions;

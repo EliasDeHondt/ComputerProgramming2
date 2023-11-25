@@ -12,6 +12,7 @@ namespace PadelClubManagement.DAL;
 public interface IRepository
 {
     public Player ReadPlayer(int playerNumber);
+    public Player ReadPlayerWithBookingsAndPadelCourts(int playerNumber);
     public IEnumerable<Player> ReadAllPlayers();
     public IEnumerable<Player> ReadPlayersByPosition(PlayerPosition position);
     public void CreatePlayer(Player player);
