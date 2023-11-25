@@ -16,6 +16,7 @@ public interface IManager
     public IEnumerable<Player> GetAllPlayers();
     public IEnumerable<Player> GetPlayersByPosition(PlayerPosition position);
     public void AddPlayer(string firstName, string lastName, DateOnly? birthDate, double level, PlayerPosition position);
+    public void AddPlayerAsObject(Player player);
     public PadelCourt GetPadelCourt(int courtNumber);
     public IEnumerable<PadelCourt> GetAllPadelCourts();
     public IEnumerable<PadelCourt> GetPadelCourtsByFilter(double? price, bool? indoor);

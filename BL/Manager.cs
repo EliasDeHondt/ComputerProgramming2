@@ -48,6 +48,12 @@ public class Manager : IManager
         _repository.CreatePlayer(player);
     }
     
+    public void AddPlayerAsObject(Player player)
+    {
+        Validate(player);
+        _repository.CreatePlayer(player);
+    }
+    
     public PadelCourt GetPadelCourt(int courtNumber)
     {
         return _repository.ReadPadelCourt(courtNumber);

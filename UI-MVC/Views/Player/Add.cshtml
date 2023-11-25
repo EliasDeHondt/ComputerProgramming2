@@ -1,17 +1,32 @@
 <!-- Van Elias De Hondt -->
+@using PadelClubManagement.BL.Domain
+@model PadelClubManagement.BL.Domain.Player
+
 @{
-    Layout = null;
+    ViewData["Title"] = "Add Player";
 }
 
-<!DOCTYPE html>
+<h1>@ViewData["Title"]</h1>
+<br/>
+<form asp-action="Add" method="post">
+    <label asp-for="FirstName">First Name:</label>
+    <input asp-for="FirstName"/>
+    <span asp-validation-for="FirstName" class="text-danger"></span>
 
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
+    <label asp-for="LastName">Last Name:</label>
+    <input asp-for="LastName"/>
+    <span asp-validation-for="LastName" class="text-danger"></span>
+
+    <label asp-for="BirthDate">Birth Date (dd/MM/yyyy):</label>
+    <input asp-for="BirthDate"/>
+    <span asp-validation-for="BirthDate" class="text-danger"></span>
+
+    <label asp-for="Level">Level (0-10):</label>
+    <input asp-for="Level" />
+    <span asp-validation-for="Level" class="text-danger"></span>
+    
+    <label asp-for="Position">Position:</label>
+    <select asp-for="Position" asp-items="Html.GetEnumSelectList<PlayerPosition>()"></select>
+    
+    <input type="submit" value="Add Player" />
+</form>

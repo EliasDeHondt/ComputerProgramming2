@@ -34,6 +34,17 @@ public class PlayerController : Controller
         return View();
     }
     
+    [HttpPost] // This method is only accessible via POST
+    public IActionResult Add(Player player)
+    {
+        if (ModelState.IsValid)
+        {
+            _manager.AddPlayerAsObject(player);
+            return RedirectToAction("Detail", new { playerNumber = player.PlayerNumber });
+        }
+        return View(player);
+    }
+    
     public IActionResult Detail(int playerNumber)
     {
         Player player = _manager.GetPlayerWithBookingsAndPadelCourts(playerNumber);
