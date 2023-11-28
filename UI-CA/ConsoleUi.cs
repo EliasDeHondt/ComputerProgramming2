@@ -73,7 +73,7 @@ public class ConsoleUi
                     RemovePlayerFromBooking();
                     break;
                 default:
-                    ValidationException validationException = new ValidationException("An error occurred, please try again:\n * Invalid input. Please enter a number from 0 to 6.\n * end");
+                    ValidationException validationException = new ValidationException("An error occurred, please try again:\n * Invalid input. Please enter a number from 0 to 8.\n * end");
                     CatchValidationException(validationException);
                     break;
             }
