@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI-MVC", "UI-MVC\UI-MVC.csproj", "{A48CDA65-26E5-4A9A-9CBB-824E15A71EBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI-WPF", "UI-WPF\UI-WPF.csproj", "{38944969-579C-49ED-AB3A-4726C66B19BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{A48CDA65-26E5-4A9A-9CBB-824E15A71EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A48CDA65-26E5-4A9A-9CBB-824E15A71EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A48CDA65-26E5-4A9A-9CBB-824E15A71EBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38944969-579C-49ED-AB3A-4726C66B19BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38944969-579C-49ED-AB3A-4726C66B19BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38944969-579C-49ED-AB3A-4726C66B19BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38944969-579C-49ED-AB3A-4726C66B19BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
