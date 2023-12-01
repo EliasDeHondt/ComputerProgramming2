@@ -1,11 +1,32 @@
 ﻿<Window x:Class="PadelClubManagement.UI.WIN.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Padel Club Management" Height="800" Width="335">
     <Grid>
+        <ListBox x:Name="playersListBox" HorizontalAlignment="Left" VerticalAlignment="Top" Height="800" Width="300" Margin="10"/>
+        <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#5AD6FF"/> <!-- Achtergrondkleur -->
+                    <Setter Property="Foreground" Value="White"/> <!-- Tekstkleur -->
+                    <Setter Property="FontFamily" Value="Arial"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="#A4E7FF"/> <!-- Randkleur -->
+                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
 
     </Grid>
 </Window>

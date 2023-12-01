@@ -1,12 +1,4 @@
-﻿/***************************************
- *                                     *
- *   Created by Elias De Hondt         *
- *   Visit https://eliasdh.com         *
- *                                     *
- ***************************************/
-// Main window of the application
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
@@ -16,35 +8,56 @@ using PadelClubManagement.BL;
 using PadelClubManagement.BL.Domain;
 using PadelClubManagement.DAL.EF;
 
-namespace PadelClubManagement.UI.WIN;
-
-public partial class MainWindow : Window
+namespace PadelClubManagement.UI.WIN
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent(); // Initialize the components of the window
-        Title = "Padel Club Management";
-        Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/icon.ico"));
-        Background = new SolidColorBrush(Color.FromRgb(90, 214, 255));
+        private IManager _manager;
+        private PadelClubManagementDbContext _context;
 
-        SetupDatabase();
-    }
-    
-    private void SetupDatabase()
-    {
-        DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
-        optionsBuilder.UseSqlite(@"Data Source=..\..\..\..\PadelClubManagement.db");
-        PadelClubManagementDbContext padelClubManagementDbContext = new PadelClubManagementDbContext(optionsBuilder.Options);
-        DbContextRepository dbContextRepository = new DbContextRepository(padelClubManagementDbContext);
-        
-        using (padelClubManagementDbContext)
+        public MainWindow()
         {
-            bool databaseCreated = padelClubManagementDbContext.CreateDatabase(true); // Create the database (Code first flow)
-            if (databaseCreated) DataSeeder.Seed(padelClubManagementDbContext); // Seed the database with some data
+            InitializeComponent();
+            Title = "Padel Club Management";
+            Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/icon.ico"));
+            Background = new SolidColorBrush(Color.FromRgb(90, 214, 255));
+
+            SetupDatabase();
+            LoadPlayers();
         }
-        
-        Manager manager = new Manager(dbContextRepository);
-        
-        IEnumerable<Player> players = manager.GetAllPlayers();
+
+        private void SetupDatabase()
+        {
+            DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
+            optionsBuilder.UseSqlite(@"Data Source=..\..\..\..\PadelClubManagement.db");
+            _context = new PadelClubManagementDbContext(optionsBuilder.Options);
+            DbContextRepository dbContextRepository = new DbContextRepository(_context);
+            bool databaseCreated = _context.Database.EnsureCreated();
+            if (databaseCreated) DataSeeder.Seed(_context);
+            _manager = new Manager(dbContextRepository);
+        }
+
+        private void LoadPlayers()
+        {
+            playersListBox.Items.Clear(); // Clear the list before adding new items
+            
+            IEnumerable<Player> players = _manager.GetAllPlayers();
+
+            foreach (Player player in players)
+            {
+                playersListBox.Items.Add($"Player Number: {player.PlayerNumber}");
+                playersListBox.Items.Add($"First Name: {player.FirstName}");
+                playersListBox.Items.Add($"Last Name: {player.LastName}");
+                playersListBox.Items.Add($"Birth Date: {player.BirthDate}");
+                playersListBox.Items.Add($"Level: {player.Level}");
+                playersListBox.Items.Add($"Position: {player.Position}");
+                playersListBox.Items.Add("");
+            }
+        }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPlayers();
+        }
     }
 }
