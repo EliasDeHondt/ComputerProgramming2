@@ -4,7 +4,7 @@
  *   Visit https://eliasdh.com         *
  *                                     *
  ***************************************/
-// 
+// Assembly info for the project
 using System.Windows;
 
 [assembly: ThemeInfo(

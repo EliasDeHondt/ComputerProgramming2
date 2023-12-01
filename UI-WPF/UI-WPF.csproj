@@ -14,10 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="icon.ico" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <None Remove="Resources\icon.ico" />
       <Resource Include="Resources\icon.ico" />
     </ItemGroup>
 

@@ -30,7 +30,7 @@ using (IServiceScope scope = app.Services.CreateScope())
     if (databaseCreated) DataSeeder.Seed(padelClubManagementDbContext); // Seed the database with some data
 }
 
-if (!app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment()) // If the application is not in development mode
 {
     app.UseExceptionHandler("/Player/Error");
     app.UseHsts();
