@@ -1,4 +1,10 @@
-﻿using System;
+﻿/***************************************
+ *                                     *
+ *   Created by Elias De Hondt         *
+ *   Visit https://eliasdh.com         *
+ *                                     *
+ ***************************************/
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
