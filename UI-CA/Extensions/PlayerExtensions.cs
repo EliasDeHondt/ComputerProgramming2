@@ -30,11 +30,9 @@ public static class PlayerExtensions
                 {
                     bookingInfo += $"\n\t\tPadel Court Info: {booking.PadelCourt.GetInfoBrief()}";
                 }
-            
                 playerInfo += $"\n\t{bookingInfo}";
             }
         }
-    
         return playerInfo;
     }
 }

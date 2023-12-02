@@ -24,6 +24,5 @@ public static class PadelCourtExtensions
         padelCourtInfo += $"\n\t\tClub Info: {padelCourt.Club.GetInfoBrief()}";
 
         return padelCourtInfo;
-
     }
 }

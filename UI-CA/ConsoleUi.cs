@@ -6,10 +6,8 @@
  ***************************************/
 // Class ConsoleUi
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
 using PadelClubManagement.BL.Domain;
 using PadelClubManagement.BL;
-using PadelClubManagement.DAL.EF;
 using PadelClubManagement.UI.CA.Extensions;
 
 namespace PadelClubManagement.UI.CA;
@@ -24,9 +22,10 @@ public class ConsoleUi
 
     public void Start() // Start the application
     {
-        Console.WriteLine("Welcome to the Padel Club application!");
+        String line = new String('=', 29); // Create a new string with 26 "="
+        WelcomeScreen(line);
+        
         bool programLoop = true;
-        String line = new String('=', 26); // Create a new string with 26 "="
         while (programLoop) // While programLoop is true, run the code below
         {
             Console.Write("\n");
@@ -79,6 +78,17 @@ public class ConsoleUi
             }
         }
     }
+    
+    public void WelcomeScreen(string line)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine($"""
+                           {line}
+                           = Padel Club Management app =
+                           {line}
+                           """);
+        Console.ResetColor();
+    }
 
     private void PrintMenu() // Prints the menu
     {
@@ -102,12 +112,6 @@ public class ConsoleUi
     {
         IEnumerable<Club> clubs = _manager.GetAllClubs();
         foreach (Club club in clubs) Console.WriteLine(club.GetInfoBrief());
-    }
-    
-    private void ShowAllPadelCourtsBrief() // Shows all the PadelCourts (brief)
-    {
-        IEnumerable<PadelCourt> padelCourts = _manager.GetAllPadelCourts();
-        foreach (PadelCourt padelCourt in padelCourts) Console.WriteLine(padelCourt.GetInfoBrief());
     }
     
     private void ShowAllBookingsBrief() // Shows all the bookings (brief)
