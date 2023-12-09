@@ -31,8 +31,24 @@
     </thead>
     <tbody id="responseTableBody"></tbody>
 </table>
+<br/>
+<h2>Add PadelCourts to Player</h2>
+<br/>
+<form id="addPadelCourtsToPlayerForm">
+    <label for="playerSelect">Player:</label>
+    <select id="playerSelect"></select><br>
+
+    <label for="startTimeInput">StartTime:</label>
+    <input type="time" id="startTimeInput"><br>
+
+    <label for="endTimeInput">EndTime:</label>
+    <input type="time" id="endTimeInput"><br>
+    <br/>
+    <button type="submit" id="addPlayerButton">Add</button>
+</form>
 
 <span id="courtNumber" data-court-number="@Model.CourtNumber"></span>
 @section Scripts {
     <script src="~/js/player/detail.js" defer></script>
+    <script src="~/js/player/add.js" defer></script>
 }

@@ -6,8 +6,8 @@
  ***************************************/
 // JS code
 
-function fetchPlayer(courtNumber) {
-    fetch('/api/players?courtNumber='+courtNumber)
+function fetchPlayersFromPadelCourt(courtNumber) {
+    fetch('/api/players/fromPadelCourt/'+courtNumber)
         .then(response => response.json())
         .then(data => {
             const responseTableBody = document.getElementById('responseTableBody');
@@ -18,11 +18,11 @@ function fetchPlayer(courtNumber) {
                 const row = document.createElement('tr');
                 
                 row.innerHTML = `
-                    <td>${player.playerNumber}</td>
-                    <td>${player.firstName}</td>
-                    <td>${player.lastName}</td>
+                    <td>${player.playerNumber != null ? player.playerNumber : 'N/A'}</td>
+                    <td>${player.firstName != null ? player.firstName : 'N/A'}</td>
+                    <td>${player.lastName != null ? player.lastName : 'N/A'}</td>
                     <td>${formatDate(player.birthDate)}</td>
-                    <td>${player.level}</td>
+                    <td>${player.level != null ? player.level : 'N/A'}</td>
                     <td>${getEnumText(player.position)}</td>
                 `;
 
@@ -64,5 +64,5 @@ document.addEventListener("DOMContentLoaded", function() {
     const courtNumberElement = document.getElementById('courtNumber');
     const courtNumber = courtNumberElement.dataset.courtNumber
 
-    fetchPlayer(courtNumber);
+    fetchPlayersFromPadelCourt(courtNumber);
 });

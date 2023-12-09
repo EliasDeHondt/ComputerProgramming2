@@ -57,11 +57,6 @@ public class DbContextRepository : IRepository
         PadelCourt padelCourt = DbContext.PadelCourts.Find(courtNumber);
         return padelCourt;
     }
-
-    public IEnumerable<PadelCourt> ReadAllPadelCourts()
-    {
-        return DbContext.PadelCourts;
-    }
     
     public IEnumerable<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor)
     {
@@ -130,6 +125,13 @@ public class DbContextRepository : IRepository
         player.Bookings.Add(booking);
         DbContext.SaveChanges(); // Save changes to the database
     }
+    
+    public void CreatePadelCourtToBooking(PadelCourt padelCourt, Booking booking)
+    {
+        booking.PadelCourt = padelCourt;
+        padelCourt.Bookings.Add(booking);
+        DbContext.SaveChanges(); // Save changes to the database
+    }
 
     public void DeletePlayerFromBooking(Player player, Booking booking)
     {
@@ -148,5 +150,15 @@ public class DbContextRepository : IRepository
     {
         IEnumerable<Player> players = DbContext.Players.Where(player => player.Bookings.Any(booking => booking.PadelCourt.CourtNumber == courtNumber));
         return players;
+    }
+    
+    public int CreateBooking(Booking booking, bool returnBookingNumber)
+    {
+        int bookingNumber = DbContext.Bookings.Count() + 1;
+        booking.BookingNumber = bookingNumber;
+        DbContext.Bookings.Add(booking);
+        DbContext.SaveChanges(); // Save changes to the database
+        if (returnBookingNumber) return bookingNumber;
+        return 0;
     }
 }

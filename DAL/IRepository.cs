@@ -17,7 +17,6 @@ public interface IRepository
     public IEnumerable<Player> ReadPlayersByPosition(PlayerPosition position);
     public void CreatePlayer(Player player);
     public PadelCourt ReadPadelCourt(int courtNumber);
-    public IEnumerable<PadelCourt> ReadAllPadelCourts();
     public IEnumerable<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor);
     public void CreatePadelCourt(PadelCourt padelCourt);
     public IEnumerable<Player> ReadAllPlayersWithBookingsAndPadelCourts();
@@ -27,7 +26,9 @@ public interface IRepository
     public Booking ReadBooking(int bookingNumber);
     public IEnumerable<Booking> ReadAllBookings();
     public void CreatePlayerToBooking(Player player, Booking booking);
+    public void CreatePadelCourtToBooking(PadelCourt padelCourt, Booking booking);
     public void DeletePlayerFromBooking(Player player, Booking booking);
     public IEnumerable<Booking> ReadBookingsOfPlayer(Player player);
     public IEnumerable<Player> ReadPlayersOfPadelCourt(int courtNumber);
+    public int CreateBooking(Booking booking, bool returnBookingNumber);
 }

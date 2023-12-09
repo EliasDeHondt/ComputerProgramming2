@@ -59,11 +59,6 @@ public class Manager : IManager
         return _repository.ReadPadelCourt(courtNumber);
     }
     
-    public IEnumerable<PadelCourt> GetAllPadelCourts()
-    {
-        return _repository.ReadAllPadelCourts();
-    }
-    
     public IEnumerable<PadelCourt> GetPadelCourtsByFilter(double? price, bool? indoor)
     {
         return _repository.ReadPadelCourtsByFilter(price, indoor);
@@ -115,6 +110,17 @@ public class Manager : IManager
         
         _repository.CreatePlayerToBooking(player, booking);
     }
+    
+    public void AddPadelCourtToBooking(int courtNumber, int bookingNumber)
+    {
+        PadelCourt padelCourt = _repository.ReadPadelCourt(courtNumber);
+        Booking booking = _repository.ReadBooking(bookingNumber);
+        
+        Validate(padelCourt);
+        Validate(booking);
+        
+        _repository.CreatePadelCourtToBooking(padelCourt, booking);
+    }
 
     public void RemovePlayerFromBooking(int playerNumber, int bookingNumber)
     {
@@ -141,6 +147,21 @@ public class Manager : IManager
         IEnumerable<Player> players = _repository.ReadPlayersOfPadelCourt(courtNumber);
         
         return players;
+    }
+    
+    public int AddBooking(int playerNumber, int courtNumber, DateOnly bookingDate, TimeSpan startTime, TimeSpan endTime, bool returnBookingNumber)
+    {
+        Player player = _repository.ReadPlayer(playerNumber);
+        PadelCourt padelCourt = _repository.ReadPadelCourt(courtNumber);
+        
+        Validate(player);
+        Validate(padelCourt);
+        
+        Booking booking = new Booking { Player = player, PadelCourt = padelCourt, StartTime = startTime, EndTime = endTime, BookingDate = bookingDate };
+        Validate(booking);
+        
+        int bookingNumber = _repository.CreateBooking(booking, returnBookingNumber);
+        return bookingNumber;
     }
     
     private void Validate(Player player) // Validate the Player object (overload)

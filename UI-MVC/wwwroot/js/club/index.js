@@ -7,7 +7,7 @@
 // JS code
 
 function fetchClubs() {
-    fetch('/api/club')
+    fetch('/api/clubs')
         .then(response => response.json())
         .then(data => {
             const responseTableBody = document.getElementById('responseTableBody');
@@ -16,14 +16,14 @@ function fetchClubs() {
             
             data.forEach(club => {
                 const row = document.createElement('tr');
-                
+
                 row.innerHTML = `
-                    <td>${club.clubNumber}</td>
-                    <td>${club.name}</td>
-                    <td>${club.numberOfCourts}</td>
-                    <td>${club.streetName}</td>
-                    <td>${club.houseNumber}</td>
-                    <td>${club.zipCode}</td>
+                    <td>${club.clubNumber != null ? club.clubNumber : 'N/A'}</td>
+                    <td>${club.name != null ? club.name : 'N/A'}</td>
+                    <td>${club.numberOfCourts != null ? club.numberOfCourts : 'N/A'}</td>
+                    <td>${club.streetName != null ? club.streetName : 'N/A'}</td>
+                    <td>${club.houseNumber != null ? club.houseNumber : 'N/A'}</td>
+                    <td>${club.zipCode != null ? club.zipCode : 'N/A'}</td>
                 `;
 
                 responseTableBody.appendChild(row);

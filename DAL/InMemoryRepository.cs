@@ -163,11 +163,6 @@ public class InMemoryRepository : IRepository
           return null;
       }
 
-      public IEnumerable<PadelCourt> ReadAllPadelCourts()
-      {
-          return _padelCourts;
-      }
-
       public IEnumerable<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor)
       {
           List<PadelCourt> padelCourts = new List<PadelCourt>();
@@ -222,6 +217,11 @@ public class InMemoryRepository : IRepository
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }
+      
+      public void CreatePadelCourtToBooking(PadelCourt padelCourt, Booking booking)
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
 
       public void DeletePlayerFromBooking(Player player, Booking booking)
       {
@@ -234,6 +234,11 @@ public class InMemoryRepository : IRepository
       }
       
       public IEnumerable<Player> ReadPlayersOfPadelCourt(int courtNumber)
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
+      
+      public int CreateBooking(Booking booking, bool returnBookingNumber)
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }
