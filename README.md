@@ -14,7 +14,7 @@
 ### Request
 ```http request
 // Request to add a new Club
-POST https://localhost:7074/api/Club?name=Padelclub&numberOfCourts=2&streetName=Kerkstraat&houseNumber=1&zipCode=9000
+POST https://localhost:7074/api/Clubs?name=Padelclub&numberOfCourts=2&streetName=Kerkstraat&houseNumber=1&zipCode=9000
 
 // Comments:
 // - Name of the club: Padel club
