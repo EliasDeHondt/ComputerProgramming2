@@ -7,19 +7,16 @@
 // JS code
 
 function fetchClubs() {
-    fetch('/api/club') // Fetch data from the API endpoint
-        .then(response => response.json()) // Parse the JSON response
+    fetch('/api/club')
+        .then(response => response.json())
         .then(data => {
             const responseTableBody = document.getElementById('responseTableBody');
-
-            // Clear existing table data
+            
             responseTableBody.innerHTML = '';
-
-            // Loop through the data and populate the table
+            
             data.forEach(club => {
                 const row = document.createElement('tr');
-
-                // Add club data to the table row
+                
                 row.innerHTML = `
                     <td>${club.clubNumber}</td>
                     <td>${club.name}</td>
@@ -29,7 +26,7 @@ function fetchClubs() {
                     <td>${club.zipCode}</td>
                 `;
 
-                responseTableBody.appendChild(row); // Append row to the table body
+                responseTableBody.appendChild(row);
             });
         })
         .catch(error => {

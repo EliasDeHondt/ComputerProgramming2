@@ -3,11 +3,36 @@
 @{
     ViewData["Title"] = "PadelCourt";
 }
-<h1>@ViewData["Title"]  (ID: @Model.CourtNumber)</h1>
+<h1>@ViewData["Title"]  (ID: @Model.CourtNumber) Details</h1>
 <br/>
 <dl>
-    <dt>Court Number</dt><dd>@Model.CourtNumber</dd>
-    <dt>Indoor?</dt><dd>@(Model != null ? Model.IsIndoor ? "Yes" : "No" : "N/A")</dd>
-    <dt>Capacity</dt><dd>@Model.Capacity</dd>
-    <dt>Price</dt><dd>@Model.Price</dd>
+    <dt>Court Number</dt>
+    <dd>@Model.CourtNumber</dd>
+    <dt>Indoor?</dt>
+    <dd>@(Model != null ? Model.IsIndoor ? "Yes" : "No" : "N/A")</dd>
+    <dt>Capacity</dt>
+    <dd>@Model.Capacity</dd>
+    <dt>Price</dt>
+    <dd>@Model.Price</dd>
 </dl>
+<br/>
+<h2>Related Players</h2>
+<br/>
+<table class="item-table">
+    <thead>
+    <tr>
+        <th>Player Number</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Birth Date</th>
+        <th>Level</th>
+        <th>Player Position</th>
+    </tr>
+    </thead>
+    <tbody id="responseTableBody"></tbody>
+</table>
+
+<span id="courtNumber" data-court-number="@Model.CourtNumber"></span>
+@section Scripts {
+    <script src="~/js/player/detail.js" defer></script>
+}

@@ -29,4 +29,5 @@ public interface IRepository
     public void CreatePlayerToBooking(Player player, Booking booking);
     public void DeletePlayerFromBooking(Player player, Booking booking);
     public IEnumerable<Booking> ReadBookingsOfPlayer(Player player);
+    public IEnumerable<Player> ReadPlayersOfPadelCourt(int courtNumber);
 }

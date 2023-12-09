@@ -4,7 +4,7 @@
     ViewData["Title"] = "Player";
 }
 
-<h1>@ViewData["Title"] (ID: @Model.PlayerNumber)</h1>
+<h1>@ViewData["Title"] (ID: @Model.PlayerNumber) Details</h1>
 <br/>
 <dl>
     <dt>Player Number</dt>
@@ -20,6 +20,8 @@
     <dt>Player Position</dt>
     <dd>@Model.Position</dd>
 </dl>
+<br/>
+<h2>Related Bookings</h2>
 <br/>
 <table class="item-table">
     <tr>
@@ -39,6 +41,8 @@
         </tr>
     }
 </table>
+<br/>
+<h2>Related PadelCourt</h2>
 <br/>
 <table class="item-table">
     <tr>

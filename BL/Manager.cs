@@ -136,6 +136,13 @@ public class Manager : IManager
         return _repository.ReadBookingsOfPlayer(player);
     }
     
+    public IEnumerable<Player> GetPlayersOfPadelCourt(int courtNumber)
+    {
+        IEnumerable<Player> players = _repository.ReadPlayersOfPadelCourt(courtNumber);
+        
+        return players;
+    }
+    
     private void Validate(Player player) // Validate the Player object (overload)
     {
         if (player == null) throw new ValidationException("\nAn error occurred, please try again:\n * Player does not exist\nend");

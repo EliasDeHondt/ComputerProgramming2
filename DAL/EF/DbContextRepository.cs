@@ -143,4 +143,10 @@ public class DbContextRepository : IRepository
         IEnumerable<Booking> bookings = DbContext.Bookings.Where(booking => booking.Player == player);
         return bookings;
     }
+    
+    public IEnumerable<Player> ReadPlayersOfPadelCourt(int courtNumber)
+    {
+        IEnumerable<Player> players = DbContext.Players.Where(player => player.Bookings.Any(booking => booking.PadelCourt.CourtNumber == courtNumber));
+        return players;
+    }
 }
