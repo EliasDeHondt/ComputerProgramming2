@@ -106,6 +106,13 @@ public class DbContextRepository : IRepository
         return DbContext.Clubs;
     }
     
+    public void CreateClub(Club club)
+    {
+        club.ClubNumber = DbContext.Clubs.Count() + 1;
+        DbContext.Clubs.Add(club);
+        DbContext.SaveChanges(); // Save changes to the database
+    }
+    
     public Booking ReadBooking(int bookingNumber)
     {
         Booking booking = DbContext.Bookings.Find(bookingNumber);

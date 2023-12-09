@@ -9,6 +9,32 @@
 
 #### Rider Projects [.NET Fundamentals-Extended] Second year exercises of training applied computer science at the KdG.
 
+## Sprint 6
+
+### Nieuwe publisher
+
+#### Request
+```http request
+// Request to add a new Club
+POST https://localhost:7074/api/Club?name=Padelclub&numberOfCourts=2&streetName=Kerkstraat&houseNumber=1&zipCode=9000
+
+// Comments:
+// - Name of the club: Padel club
+// - Number of lanes: 2
+// - StreetName: Kerkstraat
+// - House number: 1
+// - Zip code: 9000
+// - This request adds a new club to the database.
+```
+
+#### Response
+```text
+HTTP/1.1 200 OK
+Content-Length: 0
+Date: Sat, 09 Dec 2023 15:57:01 GMT
+Server: Kestrel
+```
+
 ## Sprint 4
 
 ```mermaid

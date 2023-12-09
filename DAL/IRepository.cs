@@ -23,6 +23,7 @@ public interface IRepository
     public IEnumerable<Player> ReadAllPlayersWithBookingsAndPadelCourts();
     public IEnumerable<PadelCourt> ReadAllPadelCourtsWithClub();
     public IEnumerable<Club> ReadAllClubs();
+    public void CreateClub(Club club);
     public Booking ReadBooking(int bookingNumber);
     public IEnumerable<Booking> ReadAllBookings();
     public void CreatePlayerToBooking(Player player, Booking booking);

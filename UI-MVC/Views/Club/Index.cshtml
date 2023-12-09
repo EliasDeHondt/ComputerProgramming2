@@ -1,0 +1,27 @@
+<!-- Van Elias De Hondt -->
+@{
+    ViewData["Title"] = "Clubs";
+}
+
+<h1>All @ViewData["Title"] </h1>
+<br/>
+<button id="reloadButton">Refresh Clubs List</button>
+<br/>
+<br/>
+<table class="item-table">
+    <thead>
+        <tr>
+            <th>Club Number</th>
+            <th>Name</th>
+            <th>Number Of Courts</th>
+            <th>Street Name</th>
+            <th>House Number</th>
+            <th>Zip Code</th>
+        </tr>
+    </thead>
+    <tbody id="responseTableBody"></tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/club/index.js" defer></script>
+}

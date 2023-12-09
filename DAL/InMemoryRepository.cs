@@ -20,11 +20,11 @@ public class InMemoryRepository : IRepository
       public static void Seed() // Seed data for the application
       {
         // Seed data for Club
-        Club club1 = new Club { ClubNumber = 1, Name = "Ter Eiken", NumberOfCours = 2, StreetName = "Kattenbroek", HouseNumber = 3, ZipCode = 2650 };
-        Club club2 = new Club { ClubNumber = 2, Name = "Antwerp Padelclub", NumberOfCours = 3, StreetName = "Filip Williotstraat", HouseNumber = 1, ZipCode = 2600 };
-        Club club3 = new Club { ClubNumber = 3, Name = "Open Padel", NumberOfCours = 2, StreetName = "Ranstsesteenweg", HouseNumber = 86, ZipCode = 2520  };
-        Club club4 = new Club { ClubNumber = 4, Name = "The Box Padel", NumberOfCours = 4, StreetName = "Zonnestroomstraat", HouseNumber = 9, ZipCode = 2020 };
-        Club club5 = new Club { ClubNumber = 5, Name = "Padel Metropool Antwerpen", NumberOfCours = 6, StreetName = "Maccabilaan", HouseNumber = 32, ZipCode = 2660 };
+        Club club1 = new Club { ClubNumber = 1, Name = "Ter Eiken", NumberOfCourts = 2, StreetName = "Kattenbroek", HouseNumber = 3, ZipCode = 2650 };
+        Club club2 = new Club { ClubNumber = 2, Name = "Antwerp Padelclub", NumberOfCourts = 3, StreetName = "Filip Williotstraat", HouseNumber = 1, ZipCode = 2600 };
+        Club club3 = new Club { ClubNumber = 3, Name = "Open Padel", NumberOfCourts = 2, StreetName = "Ranstsesteenweg", HouseNumber = 86, ZipCode = 2520  };
+        Club club4 = new Club { ClubNumber = 4, Name = "The Box Padel", NumberOfCourts = 4, StreetName = "Zonnestroomstraat", HouseNumber = 9, ZipCode = 2020 };
+        Club club5 = new Club { ClubNumber = 5, Name = "Padel Metropool Antwerpen", NumberOfCourts = 6, StreetName = "Maccabilaan", HouseNumber = 32, ZipCode = 2660 };
         
         // Seed data for PadelCourts
         PadelCourt padelCourt1 = new PadelCourt { CourtNumber = 1, IsIndoor = true, Capacity = 4, Price = 20.50};
@@ -199,6 +199,11 @@ public class InMemoryRepository : IRepository
       }
       
       public IEnumerable<Club> ReadAllClubs()
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
+      
+      public void CreateClub(Club club)
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }

@@ -14,11 +14,11 @@ public static class DataSeeder
     public static void Seed(PadelClubManagementDbContext dbContext)
     {
         // Seed data for Club
-        Club terEikenClub = new Club { Name = "Ter Eiken", NumberOfCours = 2, StreetName = "Kattenbroek", HouseNumber = 3, ZipCode = 2650 };
-        Club antwerpPadelClub = new Club { Name = "Antwerp Padelclub", NumberOfCours = 3, StreetName = "Filip Williotstraat", HouseNumber = 1, ZipCode = 2600 };
-        Club openPadel = new Club { Name = "Open Padel", NumberOfCours = 2, StreetName = "Ranstsesteenweg", HouseNumber = 86, ZipCode = 2520  };
-        Club theBoxPadel = new Club { Name = "The Box Padel", NumberOfCours = 4, StreetName = "Zonnestroomstraat", HouseNumber = 9, ZipCode = 2020 };
-        Club padelMetropoolAntwerpen = new Club { Name = "Padel Metropool Antwerpen", NumberOfCours = 6, StreetName = "Maccabilaan", HouseNumber = 32, ZipCode = 2660 };
+        Club terEikenClub = new Club { Name = "Ter Eiken", NumberOfCourts = 2, StreetName = "Kattenbroek", HouseNumber = 3, ZipCode = 2650 };
+        Club antwerpPadelClub = new Club { Name = "Antwerp Padelclub", NumberOfCourts = 3, StreetName = "Filip Williotstraat", HouseNumber = 1, ZipCode = 2600 };
+        Club openPadel = new Club { Name = "Open Padel", NumberOfCourts = 2, StreetName = "Ranstsesteenweg", HouseNumber = 86, ZipCode = 2520  };
+        Club theBoxPadel = new Club { Name = "The Box Padel", NumberOfCourts = 4, StreetName = "Zonnestroomstraat", HouseNumber = 9, ZipCode = 2020 };
+        Club padelMetropoolAntwerpen = new Club { Name = "Padel Metropool Antwerpen", NumberOfCourts = 6, StreetName = "Maccabilaan", HouseNumber = 32, ZipCode = 2660 };
         
         // Seed data for PadelCourts
         PadelCourt indoorCourt1 = new PadelCourt { IsIndoor = true, Capacity = 4, Price = 20.50};

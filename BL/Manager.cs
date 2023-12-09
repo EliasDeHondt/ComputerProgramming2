@@ -91,6 +91,14 @@ public class Manager : IManager
     {
         return _repository.ReadAllClubs();
     }
+    
+    public void AddClub(string name, int numberOfCourts, string streetName, int houseNumber, int zipCode)
+    {
+        Club club = new Club { Name = name, NumberOfCourts = numberOfCourts, StreetName = streetName, HouseNumber = houseNumber, ZipCode = zipCode };
+        Validate(club);
+        
+        _repository.CreateClub(club);
+    }
 
     public IEnumerable<Booking> GetAllBookings()
     {
@@ -144,6 +152,23 @@ public class Manager : IManager
             throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
         }
     }
+
+    private void Validate(Booking booking) // Validate the Booking object (overload)
+    {
+        if (booking == null) throw new ValidationException("\nAn error occurred, please try again:\n * Booking does not exist\nend");
+        
+        List<ValidationResult> errors = new List<ValidationResult>();
+        bool valid = Validator.TryValidateObject(booking, new ValidationContext(booking), errors, true);
+        
+        if (!valid) // If the object is not valid
+        {
+            string errorString = "\nAn error occurred, please try again:\n * ";
+            
+            foreach (ValidationResult error in errors) errorString += error.ErrorMessage + "\n * "; // Add each error to the errorString
+            
+            throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
+        }
+    }
     
     private void Validate(PadelCourt padelCourt) // Validate the PadelCourt object (overload)
     {
@@ -161,13 +186,13 @@ public class Manager : IManager
             throw new ValidationException(errorString + "end"); // Throw a ValidationException with the errorString to the caller
         }
     }
-
-    private void Validate(Booking booking) // Validate the Booking object (overload)
+    
+    private void Validate(Club club) // Validate the Club object (overload)
     {
-        if (booking == null) throw new ValidationException("\nAn error occurred, please try again:\n * Booking does not exist\nend");
+        if (club == null) throw new ValidationException("\nAn error occurred, please try again:\n * Club does not exist\nend");
         
         List<ValidationResult> errors = new List<ValidationResult>();
-        bool valid = Validator.TryValidateObject(booking, new ValidationContext(booking), errors, true);
+        bool valid = Validator.TryValidateObject(club, new ValidationContext(club), errors, true);
         
         if (!valid) // If the object is not valid
         {

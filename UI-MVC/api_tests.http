@@ -1,0 +1,18 @@
+// ***************************************
+// *                                     *
+// *   Created by Elias De Hondt         *
+// *   Visit https://eliasdh.com         *
+// *                                     *
+// ***************************************/
+// API Test
+
+// Request to add a new Club
+POST https://localhost:7074/api/Club?name=Padelclub&numberOfCourts=2&streetName=Kerkstraat&houseNumber=1&zipCode=9000
+
+// Comments:
+// - Name of the club: Padel club
+// - Number of lanes: 2
+// - StreetName: Kerkstraat
+// - House number: 1
+// - Zip code: 9000
+// - This request adds a new club to the database.
