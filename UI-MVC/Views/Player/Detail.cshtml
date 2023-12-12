@@ -35,9 +35,8 @@
         <tr>
             <td>@booking.BookingNumber</td>
             <td>@(booking.BookingDate?.ToString("yyyy MMMM dd") ?? "N/A")</td>
-            <td>@booking.StartTime</td>
-            <td>@booking.EndTime</td>
-            
+            <td>@(booking.StartTime?.ToString() ?? "N/A")</td>
+            <td>@(booking.EndTime?.ToString() ?? "N/A")</td>
         </tr>
     }
 </table>

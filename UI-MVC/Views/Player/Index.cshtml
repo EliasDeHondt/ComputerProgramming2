@@ -22,8 +22,8 @@
             <td>@player.PlayerNumber</td>
             <td>@player.FirstName</td>
             <td>@player.LastName</td>
-            <td>@player.BirthDate</td>
-            <td>@(player.Level != 0 ? player.Level : "unknown")</td>
+            <td>@(player.BirthDate?.ToString() ?? "Unknown")</td>
+            <td>@player.Level</td>
             <td>@player.Position</td>
             <td><a asp-controller="Player" asp-action="Detail" asp-route-playerNumber="@player.PlayerNumber">Details</a></td>
         </tr>
