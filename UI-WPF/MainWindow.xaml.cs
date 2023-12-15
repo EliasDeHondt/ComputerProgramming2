@@ -32,17 +32,6 @@ public partial class MainWindow : Window
         LoadPlayers();
     }
 
-    private void SetupDatabase()
-    {
-        DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
-        optionsBuilder.UseSqlite(@"Data Source=..\..\..\..\PadelClubManagement.db");
-        _context = new PadelClubManagementDbContext(optionsBuilder.Options);
-        DbContextRepository dbContextRepository = new DbContextRepository(_context);
-        bool databaseCreated = _context.Database.EnsureCreated();
-        if (databaseCreated) DataSeeder.Seed(_context);
-        _manager = new Manager(dbContextRepository);
-    }
-
     private void LoadPlayers()
     {
         playersListBox.Items.Clear(); // Clear the list before adding new items
@@ -59,6 +48,17 @@ public partial class MainWindow : Window
             playersListBox.Items.Add($"Position: {player.Position}");
             playersListBox.Items.Add("");
         }
+    }
+    
+    private void SetupDatabase()
+    {
+        DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
+        optionsBuilder.UseSqlite(@"Data Source=..\..\..\..\PadelClubManagement.db");
+        _context = new PadelClubManagementDbContext(optionsBuilder.Options);
+        DbContextRepository dbContextRepository = new DbContextRepository(_context);
+        bool databaseCreated = _context.Database.EnsureCreated();
+        if (databaseCreated) DataSeeder.Seed(_context);
+        _manager = new Manager(dbContextRepository);
     }
 
     private void RefreshButton_Click(object sender, RoutedEventArgs e)
