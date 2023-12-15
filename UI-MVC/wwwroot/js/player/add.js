@@ -25,8 +25,8 @@ function fetchPlayersfromPadelCourtSelect() {
         });
 }
 
-function addPadelCourtsToPlayer(playerNumber, courtNumber, bookingDate, startTime, endTime) {
-    fetch('/api/addPadelCourtsToPlayer/'+courtNumber+'/'+playerNumber+'/'+bookingDate+'/'+startTime+'/'+endTime, {
+function addPadelCourtToPlayer(playerNumber, courtNumber, bookingDate, startTime, endTime) {
+    fetch('/api/addPadelCourtToPlayer/'+courtNumber+'/'+playerNumber+'/'+bookingDate+'/'+startTime+'/'+endTime, {
         method: 'POST'
     })
         .then(response => {
@@ -59,6 +59,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const courtNumberElement = document.getElementById('courtNumber');
         const courtNumber = courtNumberElement.dataset.courtNumber;
         
-        addPadelCourtsToPlayer(playerNumber, courtNumber, bookingDate, startTime, endTime);
+        addPadelCourtToPlayer(playerNumber, courtNumber, bookingDate, startTime, endTime);
     });
 });

@@ -37,14 +37,14 @@ public class PlayersController : ControllerBase
         return Ok(players);
     }
     
-    [HttpPost("/api/addPadelCourtsToPlayer/{courtNumber}/{playerNumber}/{bookingDate}/{startTime}/{endTime}")]
-    public IActionResult AddPadelCourtsToPlayer(int playerNumber, int courtNumber, DateOnly bookingDate, TimeSpan startTime, TimeSpan endTime)
+    [HttpPost("/api/addPadelCourtToPlayer/{courtNumber}/{playerNumber}/{bookingDate}/{startTime}/{endTime}")]
+    public IActionResult AddPadelCourtToPlayer(int playerNumber, int courtNumber, DateOnly bookingDate, TimeSpan startTime, TimeSpan endTime)
     {
         int bookingNumber = _manager.AddBooking(playerNumber, courtNumber, bookingDate, startTime, endTime, true);
 
         _manager.AddPlayerToBooking(playerNumber, bookingNumber);
         _manager.AddPadelCourtToBooking(courtNumber, bookingNumber);
-        
-        return Ok();
+
+        return CreatedAtAction(nameof(GetAllPlayersFromPadelCourt), new { courtNumber = courtNumber }, null);
     }
 }

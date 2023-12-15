@@ -30,9 +30,9 @@ public class ClubsController : ControllerBase
     }
     
     [HttpPost("/api/clubs")]
-    public IActionResult AddClub([FromBody]Club newClub)
+    public IActionResult AddClub(Club newClub)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (newClub == null) return BadRequest(ModelState);
         _manager.AddClub(newClub.Name, newClub.NumberOfCourts, newClub.StreetName, newClub.ZipCode, newClub.ZipCode);
         return Ok();
     }

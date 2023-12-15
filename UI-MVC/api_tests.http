@@ -6,17 +6,12 @@
 // ***************************************/
 // API Test
 
+###
+// Request to get all Clubs
+GET https://localhost:7074/api/Clubs HTTP/1.1
+###
+###
 // Request to add a new Club
-
-// Comments:
-// - Name of the club: Padel club
-// - Number of lanes: 2
-// - StreetName: Kerkstraat
-// - House number: 1
-// - Zip code: 9000
-// - This request adds a new club to the database.
-
-// POST https://localhost:7074/api/Clubs?name=Padelclub&numberOfCourts=2&streetName=Kerkstraat&houseNumber=1&zipCode=9000
 POST https://localhost:7074/api/Clubs HTTP/1.1
 Content-Type: application/json
 
@@ -27,3 +22,16 @@ Content-Type: application/json
     "houseNumber": 1,
     "zipCode": "9000"
 }
+###
+###
+// Request to get a player by id
+GET https://localhost:7074/api/player/1 HTTP/1.1
+###
+###
+// Request to get all Players
+GET https://localhost:7074/api/players HTTP/1.1
+###
+###
+// Request to add a PadelCourt to a Player
+POST https://localhost:7074/api/addPadelCourtToPlayer/1/1/2023-12-15/10:00:00/12:00:00
+###
