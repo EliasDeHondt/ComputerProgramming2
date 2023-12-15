@@ -12,7 +12,6 @@ using PadelClubManagement.BL.Domain;
 namespace PadelClubManagement.UI.Web.Controllers.Api;
 
 [ApiController]
-[Route("api/[controller]")]
 public class PlayersController : ControllerBase
 {
     private readonly IManager _manager;
@@ -22,7 +21,7 @@ public class PlayersController : ControllerBase
         _manager = manager;
     }
     
-    [HttpGet("fromPadelCourt/{courtNumber}")]
+    [HttpGet("/api/player/{courtNumber}")]
     public IActionResult GetAllPlayersFromPadelCourt(int courtNumber)
     {
         IEnumerable<Player> players = _manager.GetPlayersOfPadelCourt(courtNumber);
@@ -30,15 +29,15 @@ public class PlayersController : ControllerBase
         return Ok(players);
     }
     
-    [HttpGet("all")]
+    [HttpGet("/api/players")]
     public IActionResult GetAllPlayers()
     {
         IEnumerable<Player> players = _manager.GetAllPlayers();
         if (players == null || !players.Any()) return NoContent();
         return Ok(players);
     }
-
-    [HttpPost("addPadelCourtsToPlayer/{courtNumber}/{playerNumber}/{bookingDate}/{startTime}/{endTime}")]
+    
+    [HttpPost("/api/addPadelCourtsToPlayer/{courtNumber}/{playerNumber}/{bookingDate}/{startTime}/{endTime}")]
     public IActionResult AddPadelCourtsToPlayer(int playerNumber, int courtNumber, DateOnly bookingDate, TimeSpan startTime, TimeSpan endTime)
     {
         int bookingNumber = _manager.AddBooking(playerNumber, courtNumber, bookingDate, startTime, endTime, true);

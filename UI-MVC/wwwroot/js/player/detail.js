@@ -7,7 +7,7 @@
 // JS code
 
 function fetchPlayersFromPadelCourt(courtNumber) {
-    fetch('/api/players/fromPadelCourt/'+courtNumber)
+    fetch('/api/player/'+courtNumber)
         .then(response => response.json())
         .then(data => {
             const responseTableBody = document.getElementById('responseTableBody');

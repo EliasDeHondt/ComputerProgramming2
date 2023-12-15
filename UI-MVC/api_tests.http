@@ -8,8 +8,6 @@
 
 // Request to add a new Club
 
-POST https://localhost:7074/api/Clubs?name=Padelclub&numberOfCourts=2&streetName=Kerkstraat&houseNumber=1&zipCode=9000
-
 // Comments:
 // - Name of the club: Padel club
 // - Number of lanes: 2
@@ -17,3 +15,15 @@ POST https://localhost:7074/api/Clubs?name=Padelclub&numberOfCourts=2&streetName
 // - House number: 1
 // - Zip code: 9000
 // - This request adds a new club to the database.
+
+// POST https://localhost:7074/api/Clubs?name=Padelclub&numberOfCourts=2&streetName=Kerkstraat&houseNumber=1&zipCode=9000
+POST https://localhost:7074/api/Clubs HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Padel club",
+    "numberOfCourts": 2,
+    "streetName": "Kerkstraat",
+    "houseNumber": 1,
+    "zipCode": "9000"
+}

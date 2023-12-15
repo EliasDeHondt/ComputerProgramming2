@@ -12,7 +12,6 @@ using PadelClubManagement.BL.Domain;
 namespace PadelClubManagement.UI.Web.Controllers.Api;
 
 [ApiController]
-[Route("api/[controller]")]
 public class ClubsController : ControllerBase
 {
     private readonly IManager _manager;
@@ -22,7 +21,7 @@ public class ClubsController : ControllerBase
         _manager = manager;
     }
     
-    [HttpGet]
+    [HttpGet("/api/clubs")]
     public IActionResult GetAllClubs()
     {
         IEnumerable<Club> clubs = _manager.GetAllClubs();
@@ -30,11 +29,11 @@ public class ClubsController : ControllerBase
         return Ok(clubs);
     }
     
-    [HttpPost]
-    public IActionResult AddClub([FromQuery] string name, [FromQuery] int numberOfCourts, [FromQuery] string streetName, [FromQuery] int houseNumber, [FromQuery] int zipCode)
+    [HttpPost("/api/clubs")]
+    public IActionResult AddClub([FromBody]Club newClub)
     {
         if (!ModelState.IsValid) return BadRequest();
-        _manager.AddClub(name, numberOfCourts, streetName, houseNumber, zipCode);
+        _manager.AddClub(newClub.Name, newClub.NumberOfCourts, newClub.StreetName, newClub.ZipCode, newClub.ZipCode);
         return Ok();
     }
 }

@@ -10,7 +10,7 @@ function fetchPlayersfromPadelCourtSelect() {
     const playerSelect = document.getElementById('playerSelect');
     playerSelect.innerHTML = "";
     
-    fetch('/api/players/all')
+    fetch('/api/players')
         .then(response => response.json())
         .then(data => {
             data.forEach(player => {
@@ -26,7 +26,7 @@ function fetchPlayersfromPadelCourtSelect() {
 }
 
 function addPadelCourtsToPlayer(playerNumber, courtNumber, bookingDate, startTime, endTime) {
-    fetch('/api/players/addPadelCourtsToPlayer/'+courtNumber+'/'+playerNumber+'/'+bookingDate+'/'+startTime+'/'+endTime, {
+    fetch('/api/addPadelCourtsToPlayer/'+courtNumber+'/'+playerNumber+'/'+bookingDate+'/'+startTime+'/'+endTime, {
         method: 'POST'
     })
         .then(response => {
