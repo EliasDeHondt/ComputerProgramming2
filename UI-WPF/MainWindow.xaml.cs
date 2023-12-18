@@ -23,31 +23,73 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
-        InitializeComponent();
         Title = "Padel Club Management";
         Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/icon.ico"));
-        Background = new SolidColorBrush(Color.FromRgb(90, 214, 255));
-
         SetupDatabase();
-        LoadPlayers();
     }
-
-    private void LoadPlayers()
+    
+    private void Club_Click(object sender, RoutedEventArgs e)
     {
-        playersListBox.Items.Clear(); // Clear the list before adding new items
-            
+        IEnumerable<Club> clubs = _manager.GetAllClubs();
+        string message = "Lijst van clubs:\n\n";
+        foreach (Club club in clubs)
+        {
+            message += $"Club Number: {club.ClubNumber}\n";
+            message += $"Name: {club.Name}\n";
+            message += $"Number Of Courts: {club.NumberOfCourts}\n";
+            message += $"Street Name: {club.StreetName}\n";
+            message += $"House Number: {club.HouseNumber}\n";
+            message += $"Zip Code: {club.ZipCode}\n";
+            message += "\n";
+        }
+        MessageBox.Show(message);
+    }
+    
+    private void PadelCourt_Click(object sender, RoutedEventArgs e)
+    {
+        IEnumerable<PadelCourt> padelCourts = _manager.GetAllPadelCourts();
+        string message = "Lijst van padelCourts:\n\n";
+        foreach (PadelCourt padelCourt in padelCourts)
+        {
+            message += $"Court Number: {padelCourt.CourtNumber}\n";
+            message += $"Is Indoor: {padelCourt.IsIndoor}\n";
+            message += $"Capacity: {padelCourt.Capacity}\n";
+            message += $"Price: {padelCourt.Price}\n";
+            message += "\n";
+        }
+        MessageBox.Show(message);
+    }
+    
+    private void Booking_Click(object sender, RoutedEventArgs e)
+    {
+        IEnumerable<Booking> bookings = _manager.GetAllBookings();
+        string message = "Lijst van booking:\n\n";
+        foreach (Booking booking in bookings)
+        {
+            message += $"Booking Number: {booking.BookingNumber}\n";
+            message += $"Booking Date: {booking.BookingDate}\n";
+            message += $"Start Time: {booking.StartTime}\n";
+            message += $"End Time: {booking.EndTime}\n";
+            message += "\n";
+        }
+        MessageBox.Show(message);
+    }
+    
+    private void Player_Click(object sender, RoutedEventArgs e)
+    {
         IEnumerable<Player> players = _manager.GetAllPlayers();
-
+        string message = "Lijst van booking:\n\n";
         foreach (Player player in players)
         {
-            playersListBox.Items.Add($"Player Number: {player.PlayerNumber}");
-            playersListBox.Items.Add($"First Name: {player.FirstName}");
-            playersListBox.Items.Add($"Last Name: {player.LastName}");
-            playersListBox.Items.Add($"Birth Date: {player.BirthDate}");
-            playersListBox.Items.Add($"Level: {player.Level}");
-            playersListBox.Items.Add($"Position: {player.Position}");
-            playersListBox.Items.Add("");
+            message += $"Player Number: {player.PlayerNumber}\n";
+            message += $"First Name: {player.FirstName}\n";
+            message += $"Last Name: {player.LastName}\n";
+            message += $"Birth Date: {player.BirthDate}\n";
+            message += $"Level: {player.Level}\n";
+            message += $"Position: {player.Position}\n";
+            message += "\n";
         }
+        MessageBox.Show(message);
     }
     
     private void SetupDatabase()
@@ -59,10 +101,5 @@ public partial class MainWindow : Window
         bool databaseCreated = _context.Database.EnsureCreated();
         if (databaseCreated) DataSeeder.Seed(_context);
         _manager = new Manager(dbContextRepository);
-    }
-
-    private void RefreshButton_Click(object sender, RoutedEventArgs e)
-    {
-        LoadPlayers();
     }
 }

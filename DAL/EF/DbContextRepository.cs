@@ -161,4 +161,9 @@ public class DbContextRepository : IRepository
         if (returnBookingNumber) return bookingNumber;
         return 0;
     }
+    
+    public IEnumerable<PadelCourt> ReadAllPadelCourts()
+    {
+        return DbContext.PadelCourts;
+    }
 }
