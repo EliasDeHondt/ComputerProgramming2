@@ -7,7 +7,7 @@
 * Onderwerp: Padel Club Management -> Club 1-* PadelCourt \*-\* Player
 
 
-#### Rider Projects [.NET Fundamentals-Extended] Second year exercises of training applied computer science at the KdG.
+#### Rider Projects [Computer programming 2] Second year exercises of training applied computer science at the KdG.
 
 ## Sprint 6
 
