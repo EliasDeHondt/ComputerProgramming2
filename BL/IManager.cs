@@ -30,5 +30,5 @@ public interface IManager
     public void RemovePlayerFromBooking(int playerNumber, int bookingNumber);
     public IEnumerable<Booking> GetBookingsOfPlayer(int playerNumber);
     public IEnumerable<Player> GetPlayersOfPadelCourt(int courtNumber);
-    public int AddBooking(int playerNumber, int courtNumber, DateOnly bookingDate, TimeSpan startTime, TimeSpan endTime, bool returnBookingNumber);
+    public int AddBooking(int playerNumber, int courtNumber, Booking booking, bool returnBookingNumber);
 }

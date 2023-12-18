@@ -149,7 +149,7 @@ public class Manager : IManager
         return players;
     }
     
-    public int AddBooking(int playerNumber, int courtNumber, DateOnly bookingDate, TimeSpan startTime, TimeSpan endTime, bool returnBookingNumber)
+    public int AddBooking(int playerNumber, int courtNumber, Booking booking, bool returnBookingNumber)
     {
         Player player = _repository.ReadPlayer(playerNumber);
         PadelCourt padelCourt = _repository.ReadPadelCourt(courtNumber);
@@ -157,7 +157,8 @@ public class Manager : IManager
         Validate(player);
         Validate(padelCourt);
         
-        Booking booking = new Booking { Player = player, PadelCourt = padelCourt, StartTime = startTime, EndTime = endTime, BookingDate = bookingDate };
+        booking.Player = player;
+        booking.PadelCourt = padelCourt;
         Validate(booking);
         
         int bookingNumber = _repository.CreateBooking(booking, returnBookingNumber);

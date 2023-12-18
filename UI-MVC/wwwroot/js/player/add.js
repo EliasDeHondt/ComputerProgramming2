@@ -25,11 +25,18 @@ function fetchPlayersfromPadelCourtSelect() {
         });
 }
 
-function addPadelCourtToPlayer(playerNumber, courtNumber, bookingDate, startTime, endTime) {
-    fetch('/api/addPadelCourtToPlayer/'+courtNumber+'/'+playerNumber+'/'+bookingDate+'/'+startTime+'/'+endTime, {
-        method: 'POST'
+function addPadelCourtToPlayer(playerNumber, courtNumber, booking) {
+    fetch('/api/addPadelCourtToPlayer/'+courtNumber+'/'+playerNumber+'/bookings', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Specify JSON content type
+        },
+        body: JSON.stringify(booking) // Convert the booking object to JSON string
     })
         .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             fetchPlayersfromPadelCourtSelect();
             fetchPlayersFromPadelCourt(courtNumber);
         })
@@ -48,17 +55,20 @@ document.addEventListener("DOMContentLoaded", function() {
         const playerSelect = document.getElementById('playerSelect');
         const playerNumber = playerSelect.value;
 
-        const startTimeInput = document.getElementById('startTimeInput');
-        const endTimeInput = document.getElementById('endTimeInput');
-
-        const startTime = startTimeInput.value;
-        const endTime = endTimeInput.value;
-
+        const startTimeInput = document.getElementById('startTimeInput').value;
+        const endTimeInput = document.getElementById('endTimeInput').value;
+        
         const bookingDate = new Date().toISOString().slice(0, 10);
 
         const courtNumberElement = document.getElementById('courtNumber');
         const courtNumber = courtNumberElement.dataset.courtNumber;
         
-        addPadelCourtToPlayer(playerNumber, courtNumber, bookingDate, startTime, endTime);
+        const booking = {
+            bookingDate: bookingDate,
+            startTime: startTimeInput+':00',
+            endTime: endTimeInput+':00'
+        };
+        
+        addPadelCourtToPlayer(playerNumber, courtNumber, booking);
     });
 });
