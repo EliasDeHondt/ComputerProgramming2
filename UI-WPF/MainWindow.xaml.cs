@@ -6,9 +6,8 @@
  ***************************************/
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Microsoft.EntityFrameworkCore;
 using PadelClubManagement.BL;
 using PadelClubManagement.BL.Domain;
@@ -16,90 +15,91 @@ using PadelClubManagement.DAL.EF;
 
 namespace PadelClubManagement.UI.WIN;
 
-public partial class MainWindow : Window
+public partial class MainWindow
 { 
     private IManager _manager;
     private PadelClubManagementDbContext _context;
 
     public MainWindow()
     {
-        Title = "Padel Club Management";
-        Icon = new BitmapImage(new Uri("pack://application:,,,/Resources/icon.ico"));
+        InitializeComponent();
         SetupDatabase();
     }
     
-    private void Club_Click(object sender, RoutedEventArgs e)
+    private static void BoxMessage(string message, string title = "") => MessageBox.Show(message, title);
+
+    private void ClubClick(object sender, RoutedEventArgs e)
     {
-        IEnumerable<Club> clubs = _manager.GetAllClubs();
-        string message = "Lijst van clubs:\n\n";
-        foreach (Club club in clubs)
+        try
         {
-            message += $"Club Number: {club.ClubNumber}\n";
-            message += $"Name: {club.Name}\n";
-            message += $"Number Of Courts: {club.NumberOfCourts}\n";
-            message += $"Street Name: {club.StreetName}\n";
-            message += $"House Number: {club.HouseNumber}\n";
-            message += $"Zip Code: {club.ZipCode}\n";
-            message += "\n";
+            List<Club> clubs = _manager.GetAllClubs().ToList();
+            if (clubs.Any())
+            {
+                ClubWindow clubWindow = new ClubWindow(clubs);
+                clubWindow.ShowDialog();
+            }
+            else BoxMessage("No clubs were found.");
         }
-        MessageBox.Show(message);
+        catch (Exception exception) {BoxMessage(exception.Message, "Error retrieving clubs");}
     }
     
-    private void PadelCourt_Click(object sender, RoutedEventArgs e)
+    private void PadelCourtClick(object sender, RoutedEventArgs e)
     {
-        IEnumerable<PadelCourt> padelCourts = _manager.GetAllPadelCourts();
-        string message = "Lijst van padelCourts:\n\n";
-        foreach (PadelCourt padelCourt in padelCourts)
+        try
         {
-            message += $"Court Number: {padelCourt.CourtNumber}\n";
-            message += $"Is Indoor: {padelCourt.IsIndoor}\n";
-            message += $"Capacity: {padelCourt.Capacity}\n";
-            message += $"Price: {padelCourt.Price}\n";
-            message += "\n";
+            List<PadelCourt> padelCourts = _manager.GetAllPadelCourts().ToList();
+            if (padelCourts.Any())
+            {
+                PadelCourtWindow padelCourtWindow = new PadelCourtWindow(padelCourts);
+                padelCourtWindow.ShowDialog();
+            }
+            else BoxMessage("No PadelCourts were found.");
         }
-        MessageBox.Show(message);
+        catch (Exception exception) {BoxMessage(exception.Message, "Error retrieving PadelCourts");}
     }
     
-    private void Booking_Click(object sender, RoutedEventArgs e)
+    private void BookingClick(object sender, RoutedEventArgs e)
     {
-        IEnumerable<Booking> bookings = _manager.GetAllBookings();
-        string message = "Lijst van booking:\n\n";
-        foreach (Booking booking in bookings)
+        try
         {
-            message += $"Booking Number: {booking.BookingNumber}\n";
-            message += $"Booking Date: {booking.BookingDate}\n";
-            message += $"Start Time: {booking.StartTime}\n";
-            message += $"End Time: {booking.EndTime}\n";
-            message += "\n";
+            List<Booking> bookings = _manager.GetAllBookings().ToList();
+            if (bookings.Any())
+            {
+                BookingWindow bookingWindow = new BookingWindow(bookings);
+                bookingWindow.ShowDialog();
+            }
+            else BoxMessage("No Bookings were found.");
         }
-        MessageBox.Show(message);
+        catch (Exception exception) {BoxMessage(exception.Message, "Error retrieving Bookings");}
     }
     
-    private void Player_Click(object sender, RoutedEventArgs e)
+    private void PlayerClick(object sender, RoutedEventArgs e)
     {
-        IEnumerable<Player> players = _manager.GetAllPlayers();
-        string message = "Lijst van booking:\n\n";
-        foreach (Player player in players)
+        try
         {
-            message += $"Player Number: {player.PlayerNumber}\n";
-            message += $"First Name: {player.FirstName}\n";
-            message += $"Last Name: {player.LastName}\n";
-            message += $"Birth Date: {player.BirthDate}\n";
-            message += $"Level: {player.Level}\n";
-            message += $"Position: {player.Position}\n";
-            message += "\n";
+            List<Player> players = _manager.GetAllPlayers().ToList();
+            if (players.Any())
+            {
+                PlayerWindow playerWindow = new PlayerWindow(players);
+                playerWindow.ShowDialog();
+            }
+            else BoxMessage("No Players were found.");
         }
-        MessageBox.Show(message);
+        catch (Exception exception) {BoxMessage(exception.Message, "Error retrieving Players");}
     }
     
     private void SetupDatabase()
     {
-        DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
-        optionsBuilder.UseSqlite(@"Data Source=..\..\..\..\PadelClubManagement.db");
-        _context = new PadelClubManagementDbContext(optionsBuilder.Options);
-        DbContextRepository dbContextRepository = new DbContextRepository(_context);
-        bool databaseCreated = _context.Database.EnsureCreated();
-        if (databaseCreated) DataSeeder.Seed(_context);
-        _manager = new Manager(dbContextRepository);
+        try
+        {
+            DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
+            optionsBuilder.UseSqlite(@"Data Source=..\..\..\..\PadelClubManagement.db");
+            _context = new PadelClubManagementDbContext(optionsBuilder.Options);
+            DbContextRepository dbContextRepository = new DbContextRepository(_context);
+            bool databaseCreated = _context.Database.EnsureCreated();
+            if (databaseCreated) DataSeeder.Seed(_context);
+            _manager = new Manager(dbContextRepository);
+        }
+        catch (Exception exception) {BoxMessage(exception.Message, "Error setting up the database");}
     }
 }

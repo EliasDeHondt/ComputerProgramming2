@@ -1,11 +1,11 @@
-﻿<Window x:Class="PadelClubManagement.UI.WIN.MainWindow"
+<Window x:Class="PadelClubManagement.UI.WIN.BookingWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Padel Club Management"
-        Height="450"
-        Width="890"
-        MinHeight="450"
-        MinWidth="890"
+        Title="BookingWindow" 
+        Height="950" 
+        Width="350"
+        MinHeight="950"
+        MinWidth="350"
         WindowStartupLocation="CenterScreen"
         Icon="{StaticResource AppIcon}">
     <Window.Resources>
@@ -41,32 +41,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="CustomLabelStyle" TargetType="Label">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <!-- Labels -->
-        <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Welcome to Padel Club Management app" Style="{StaticResource CustomLabelStyle}"/>
-            <Label Content="Press one of the four buttons to showcase the entities inside the database" Style="{StaticResource CustomLabelStyle}"/>
-        </StackPanel>
-        <!-- Labels -->
-        <!-- Buttons -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Width="100" Height="50" Content="Club" Click="ClubClick" Style="{StaticResource CustomButtonStyle}"/>
-            <Button Width="100" Height="50" Content="PadelCourt" Click="PadelCourtClick" Style="{StaticResource CustomButtonStyle}"/>
-            <Button Width="100" Height="50" Content="Booking" Click="BookingClick" Style="{StaticResource CustomButtonStyle}"/>
-            <Button Width="100" Height="50" Content="Player" Click="PlayerClick" Style="{StaticResource CustomButtonStyle}"/>
-        </StackPanel>
-        <!-- Buttons -->
+        <TextBlock x:Name="BookingTextBox" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="16"/>
+        <Button Width="100" Height="50" Content="OK" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="ButtonClick" Style="{StaticResource CustomButtonStyle}"/>
     </Grid>
 </Window>

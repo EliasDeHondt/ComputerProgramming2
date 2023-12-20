@@ -1,8 +1,8 @@
-﻿<Application x:Class="PadelClubManagement.UI.WIN.App"
+﻿<Application x:Class="PadelClubManagement.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <BitmapImage x:Key="AppIcon" UriSource="/Resources/icon.ico"/>
     </Application.Resources>
 </Application>
