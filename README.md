@@ -4,10 +4,11 @@
 * Studentennummer: 0160712-80
 * Academiejaar: 2023-2024
 * Klasgroep: ISB204B
-* Onderwerp: Padel Club Management -> Club 1-* PadelCourt \*-\* Player
+* Onderwerp: Padel Club Management 
+* Club 1-* PadelCourt 1-* Booking *-1 Player
 
 
-#### Rider Projects [Computer programming 2] Second year exercises of training applied computer science at the KdG.
+#### Projects [Computer Programming 2] Second year exercises of training applied computer science at KdG.
 
 ## Sprint 6
 
