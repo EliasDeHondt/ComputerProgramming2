@@ -1,4 +1,4 @@
-# Project .NET Fundamentals & Extended
+# Computer Programming 2
 
 * Naam: Elias De Hondt
 * Studentennummer: 0160712-80
