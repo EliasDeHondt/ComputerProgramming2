@@ -7,12 +7,9 @@
         MinHeight="450"
         MinWidth="890"
         WindowStartupLocation="CenterScreen"
+        Background="{StaticResource SecondaryBrush}"
         Icon="{StaticResource AppIcon}">
     <Window.Resources>
-        <Color x:Key="PrimaryColor">#5AD6FF</Color>
-        <Color x:Key="SecondaryColor">#A4E7FF</Color>
-        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
-        <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
         <Style x:Key="CustomButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
             <Setter Property="Foreground" Value="#FFFFFF"/>

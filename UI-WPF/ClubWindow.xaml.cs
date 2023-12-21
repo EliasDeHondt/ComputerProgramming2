@@ -6,33 +6,31 @@
  ***************************************/
 using System.Collections.Generic;
 using System.Windows;
+using PadelClubManagement.BL;
 using PadelClubManagement.BL.Domain;
 
 namespace PadelClubManagement.UI.WIN;
 
 public partial class ClubWindow
 {
-    public ClubWindow(List<Club> clubs)
+    private IManager _manager;
+    public ClubWindow(List<Club> clubs, IManager manager)
     {
         InitializeComponent();
-        ShowClubs(clubs);
+        DataContext = this;
+        Clubs = clubs;
+        _manager = manager;
     }
-
-    private void ShowClubs(List<Club> clubs)
+    
+    private void AddClub_Click(object sender, RoutedEventArgs e)
     {
-        string message = "";
-        foreach (Club club in clubs)
-        {
-            message += $"Club Number: {club.ClubNumber}\n";
-            message += $"Name: {club.Name}\n";
-            message += $"Number Of Courts: {club.NumberOfCourts}\n";
-            message += $"Street Name: {club.StreetName}\n";
-            message += $"House Number: {club.HouseNumber}\n";
-            message += $"Zip Code: {club.ZipCode}\n";
-            message += "\n";
-        }
-        ClubTextBox.Text = message;
+        string name = TxtName.Text;
+        int numberOfCourts = int.Parse(TxtNumberOfCourts.Text);
+        string streetName = TxtStreetName.Text;
+        int houseNumber = int.Parse(TxtHouseNumber.Text);
+        int zipCode = int.Parse(TxtZipCode.Text);
+        _manager.AddClub(name, numberOfCourts, streetName, houseNumber, zipCode);
     }
-
-    private void ButtonClick(object sender, RoutedEventArgs e) => Close();
+    
+    public List<Club> Clubs { get; set; }
 }

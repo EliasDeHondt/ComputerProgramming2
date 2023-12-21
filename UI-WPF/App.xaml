@@ -2,7 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
+    <!-- Window Style -->
     <Application.Resources>
         <BitmapImage x:Key="AppIcon" UriSource="/Resources/icon.ico"/>
+        
+        <Color x:Key="PrimaryColor">#5AD6FF</Color>
+        <Color x:Key="SecondaryColor">#A4E7FF</Color>
+        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
+        <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
     </Application.Resources>
+    <!-- Window Style -->
 </Application>

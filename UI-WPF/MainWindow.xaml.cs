@@ -26,7 +26,7 @@ public partial class MainWindow
         SetupDatabase();
     }
     
-    private static void BoxMessage(string message, string title = "") => MessageBox.Show(message, title);
+    private static void BoxMessage(string message, string title = "") => MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Error);
 
     private void ClubClick(object sender, RoutedEventArgs e)
     {
@@ -35,7 +35,7 @@ public partial class MainWindow
             List<Club> clubs = _manager.GetAllClubs().ToList();
             if (clubs.Any())
             {
-                ClubWindow clubWindow = new ClubWindow(clubs);
+                ClubWindow clubWindow = new ClubWindow(clubs, _manager);
                 clubWindow.ShowDialog();
             }
             else BoxMessage("No clubs were found.");
