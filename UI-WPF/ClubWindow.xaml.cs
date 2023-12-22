@@ -30,6 +30,7 @@ public partial class ClubWindow
         int houseNumber = int.Parse(TxtHouseNumber.Text);
         int zipCode = int.Parse(TxtZipCode.Text);
         _manager.AddClub(name, numberOfCourts, streetName, houseNumber, zipCode);
+        MessageBox.Show("Club added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
     }
     
     public List<Club> Clubs { get; set; }
