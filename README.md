@@ -14,24 +14,79 @@
 
 ### Request
 ```http request
-// Request to add a new Club
-POST https://localhost:7074/api/Clubs?name=Padelclub&numberOfCourts=2&streetName=Kerkstraat&houseNumber=1&zipCode=9000
+###
+// Request to get all Clubs (1)
+GET https://localhost:7074/api/Clubs HTTP/1.1
+###
+###
+// Request to add a new Club (2)
+POST https://localhost:7074/api/Clubs HTTP/1.1
+Content-Type: application/json
 
-// Comments:
-// - Name of the club: Padel club
-// - Number of lanes: 2
-// - StreetName: Kerkstraat
-// - House number: 1
-// - Zip code: 9000
-// - This request adds a new club to the database.
+{
+    "name": "Padel club",
+    "numberOfCourts": 2,
+    "streetName": "Kerkstraat",
+    "houseNumber": 1,
+    "zipCode": "9000"
+}
+###
+###
+// Request to get a player by id (3)
+GET https://localhost:7074/api/player/1 HTTP/1.1
+###
+###
+// Request to get all Players (4)
+GET https://localhost:7074/api/players HTTP/1.1
+###
+###
+// Request to add a PadelCourt to a Player (5)
+POST https://localhost:7074/api/addPadelCourtToPlayer/1/3/bookings HTTP/1.1
+Content-Type: application/json
+
+{
+  "BookingDate": "2023-12-15",
+  "StartTime": "10:00:00",
+  "EndTime": "12:00:00"
+}
+###
 ```
 
 ### Response
 ```text
+// Request to get all Clubs (1)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Fri, 22 Dec 2023 14:19:07 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+// Request to add a new Club (2)
 HTTP/1.1 200 OK
 Content-Length: 0
-Date: Sat, 09 Dec 2023 15:57:01 GMT
+Date: Fri, 22 Dec 2023 14:21:28 GMT
 Server: Kestrel
+
+// Request to get a player by id (3)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Fri, 22 Dec 2023 14:21:42 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+// Request to get all Players (4)
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Fri, 22 Dec 2023 14:22:37 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+// Request to add a PadelCourt to a Player (5)
+HTTP/1.1 201 Created
+Content-Length: 0
+Date: Fri, 22 Dec 2023 14:22:10 GMT
+Server: Kestrel
+Location: https://localhost:7074/api/player/1
 ```
 
 ## Sprint 4
