@@ -8,7 +8,7 @@
 * Club 1-* PadelCourt 1-* Booking *-1 Player
 
 
-#### Projects [Computer Programming 2] Second year exercises of training applied computer science at KdG.
+#### Project [Computer Programming 2] Second year exercises of training applied computer science at KdG.
 
 ## Sprint 6
 
