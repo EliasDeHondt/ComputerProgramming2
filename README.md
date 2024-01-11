@@ -1,10 +1,10 @@
 # Computer Programming 2
 
-* Naam: Elias De Hondt
-* Studentennummer: 0160712-80
-* Academiejaar: 2023-2024
-* Klasgroep: ISB204B
-* Onderwerp: Padel Club Management 
+* Name: Elias De Hondt
+* Student number: 0160712-80
+* Academic year: 2023-2024
+* Class group: ISB204B
+* Subject: Padel Club Management
 * Club 1-* PadelCourt 1-* Booking *-1 Player
 
 
@@ -140,28 +140,28 @@ classDiagram
 
 ## Sprint 3
 
-### Beide zoekcriteria ingevuld
+### Both search criteria completed
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
 WHERE (@__price_0 IS NULL OR "p"."Price" = @__price_0) AND (@__indoor_1 IS NULL OR "p"."IsIndoor" = @__indoor_1)
 ```
 
-### Enkel zoeken op price
+### Search only by price
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
 WHERE @__price_0 IS NULL OR "p"."Price" = @__price_0
 ```
 
-### Enkel zoeken op indoor
+### Only search by indoor
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
 WHERE @__indoor_0 IS NULL OR "p"."IsIndoor" = @__indoor_0
 ```
 
-### Beide zoekcriteria leeg
+### Both search criteria empty
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
