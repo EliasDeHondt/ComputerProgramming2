@@ -41,7 +41,7 @@ function addPadelCourtToPlayer(playerNumber, courtNumber, booking) {
             fetchPlayersFromPadelCourt(courtNumber);
         })
         .catch(error => {
-            console.error('Er is een fout opgetreden:', error);
+            console.error('An error has occurred:', error);
         });
 }
 
