@@ -44,11 +44,7 @@ public class PlayerController : Controller
     
     public IActionResult Detail(int playerNumber)
     {
-        bool isValid = ModelState.IsValid;
-        if (!isValid) return BadRequest();
-        
         Player player = _manager.GetPlayerWithBookingsAndPadelCourts(playerNumber);
-        if (player == null) return NotFound();
         return View(player);
     }
     

@@ -62,16 +62,8 @@ public class DbContextRepository : IRepository
     {
         IQueryable<PadelCourt> filteredPadelCourts = DbContext.PadelCourts.AsQueryable(); // Get all PadelCourts as a queryable source
 
-        if (price.HasValue)
-        {
-            filteredPadelCourts = filteredPadelCourts.Where(padelCourt => padelCourt.Price.Equals(price.Value));
-        }
-
-        if (indoor.HasValue)
-        {
-            filteredPadelCourts = filteredPadelCourts.Where(padelCourt => padelCourt.IsIndoor == indoor.Value);
-        }
-
+        if (price.HasValue) filteredPadelCourts = filteredPadelCourts.Where(padelCourt => padelCourt.Price.Equals(price.Value));
+        if (indoor.HasValue) filteredPadelCourts = filteredPadelCourts.Where(padelCourt => padelCourt.IsIndoor == indoor.Value);
         return filteredPadelCourts;
     }
 

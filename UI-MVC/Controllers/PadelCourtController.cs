@@ -23,11 +23,7 @@ public class PadelCourtController : Controller
 
     public IActionResult Detail(int courtNumber)
     {
-        bool isValid = ModelState.IsValid;
-        if (!isValid) return BadRequest();
-        
         PadelCourt padelCourt = _manager.GetPadelCourt(courtNumber);
-        if (padelCourt == null) return NotFound();
         return View(padelCourt);
     }
 }
