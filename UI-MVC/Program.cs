@@ -24,7 +24,13 @@ builder.Services.AddScoped<IManager, Manager>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation(); // Add MVC
 
 //builder.Services.AddAuthentication("AppAuthCookie").AddCookie("AppAuthCookie"); // Add authentication (Cookie)
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<PadelClubManagementDbContext>(); // Add identity
+//builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<PadelClubManagementDbContext>(); // Add identity
+
+// Configure Identity services
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+    {
+        options.User.RequireUniqueEmail = false;
+    }).AddEntityFrameworkStores<PadelClubManagementDbContext>().AddDefaultTokenProviders().AddDefaultUI();
 
 WebApplication app = builder.Build();
 

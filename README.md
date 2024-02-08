@@ -10,6 +10,46 @@
 
 #### Project [Computer Programming 2] Second year exercises of training applied computer science at KdG.
 
+## Sprint 7
+
+### Users data for testing
+```json
+{
+  "users": [
+    {
+      "username": "User1",
+      "password": "User1$",
+      "email": "user1@eliasdh.com",
+      "role": "Admin"
+    },
+    {
+      "username": "User2",
+      "password": "User2$",
+      "email": "user2@eliasdh.com",
+      "role": "Admin"
+    },
+    {
+      "username": "User3",
+      "password": "User3$",
+      "email": "user3@eliasdh.com",
+      "role": "User"
+    },
+    {
+      "username": "User4",
+      "password": "User4$",
+      "email": "user4@eliasdh.com",
+      "role": "User"
+    },
+    {
+      "username": "User5",
+      "password": "User5$",
+      "email": "user5@eliasdh.com",
+      "role": "User"
+    }
+  ]
+}
+```
+
 ## Sprint 6
 
 ### Request
