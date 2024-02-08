@@ -38,7 +38,12 @@ using (IServiceScope scope = app.Services.CreateScope())
 {
     PadelClubManagementDbContext padelClubManagementDbContext = scope.ServiceProvider.GetRequiredService<PadelClubManagementDbContext>();
     bool databaseCreated = padelClubManagementDbContext.CreateDatabase(true); // Create the database (Code first flow)
-    if (databaseCreated) DataSeeder.Seed(padelClubManagementDbContext); // Seed the database with some data
+    if (databaseCreated)
+    {
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+        SeedUsers(userManager); // Seed the database with some users
+        DataSeeder.Seed(padelClubManagementDbContext); // Seed the database with some data
+    }
 }
 
 // HTTP pipeline
@@ -61,3 +66,18 @@ app.MapControllerRoute(
     name: "default", 
     pattern: "{controller=Player}/{action=Index}/{id?}");
 app.Run();
+
+void SeedUsers(UserManager<IdentityUser> usermanager)
+{
+    var user1 = new IdentityUser { UserName = "User1", Email = "user1@eliasdh.com" };
+    var user2 = new IdentityUser { UserName = "User2", Email = "user2@eliasdh.com" };
+    var user3 = new IdentityUser { UserName = "User3", Email = "user3@eliasdh.com" };
+    var user4 = new IdentityUser { UserName = "User4", Email = "user4@eliasdh.com" };
+    var user5 = new IdentityUser { UserName = "User5", Email = "user5@eliasdh.com" };
+    
+    usermanager.CreateAsync(user1, "User1$");
+    usermanager.CreateAsync(user2, "User2$");
+    usermanager.CreateAsync(user3, "User3$");
+    usermanager.CreateAsync(user4, "User4$");
+    usermanager.CreateAsync(user5, "User5$");
+}
