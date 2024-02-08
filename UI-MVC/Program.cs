@@ -5,6 +5,8 @@
  *                                     *
  ***************************************/
 // Top level statements, i.e. entry point of the application (Start)
+
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PadelClubManagement.BL;
 using PadelClubManagement.DAL;
@@ -19,7 +21,10 @@ builder.Services.AddDbContext<PadelClubManagementDbContext>(options
 builder.Services.AddScoped<IRepository, DbContextRepository>();
 builder.Services.AddScoped<IManager, Manager>();
 
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation(); // Add MVC
+
+//builder.Services.AddAuthentication("AppAuthCookie").AddCookie("AppAuthCookie"); // Add authentication (Cookie)
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<PadelClubManagementDbContext>(); // Add identity
 
 WebApplication app = builder.Build();
 
@@ -30,6 +35,7 @@ using (IServiceScope scope = app.Services.CreateScope())
     if (databaseCreated) DataSeeder.Seed(padelClubManagementDbContext); // Seed the database with some data
 }
 
+// HTTP pipeline
 if (!app.Environment.IsDevelopment()) // If the application is not in development mode
 {
     app.UseExceptionHandler("/Player/Error");
@@ -39,7 +45,12 @@ if (!app.Environment.IsDevelopment()) // If the application is not in developmen
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseAuthentication(); // Use authentication is required e.g. 2FA
 app.UseAuthorization();
+
+app.MapRazorPages(); // Map Razor Pages
+
 app.MapControllerRoute( 
     name: "default", 
     pattern: "{controller=Player}/{action=Index}/{id?}");

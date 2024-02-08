@@ -6,13 +6,15 @@
  ***************************************/
 // Class PadelClubManagementDbContext
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using PadelClubManagement.BL.Domain;
 
 namespace PadelClubManagement.DAL.EF;
 
-public class PadelClubManagementDbContext : DbContext
+public class PadelClubManagementDbContext : IdentityDbContext<IdentityUser>
 {
     
     public DbSet<Club> Clubs { get; set; } // Table Clubs
@@ -20,10 +22,7 @@ public class PadelClubManagementDbContext : DbContext
     public DbSet<Booking> Bookings { get; set; } // Table Bookings
     public DbSet<Player> Players { get; set; } // Table Players
     
-    public PadelClubManagementDbContext(DbContextOptions options) : base(options)
-    {
-        
-    }
+    public PadelClubManagementDbContext(DbContextOptions options) : base(options) { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -38,6 +37,8 @@ public class PadelClubManagementDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder); // Call base method to configure the modelBuilder
+        
         // Club has many PadelCourts (PadelCourt has one Club)
         modelBuilder.Entity<Club>()
             .HasMany(club => club.PadelCourts)

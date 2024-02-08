@@ -7,6 +7,9 @@
 // Controller Player
 
 using System.Diagnostics;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PadelClubManagement.BL;
 using PadelClubManagement.BL.Domain;
@@ -17,10 +20,12 @@ namespace PadelClubManagement.UI.Web.Controllers;
 public class PlayerController : Controller
 {
     private readonly IManager _manager;
+    private readonly SignInManager<IdentityUser> _signInManager;
     
-    public PlayerController(IManager manager)
+    public PlayerController(IManager manager, SignInManager<IdentityUser> signInManager)
     {
         _manager = manager;
+        _signInManager = signInManager;
     }
     
     public IActionResult Index()

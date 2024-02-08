@@ -1,0 +1,11 @@
+<!-- Van Elias De Hondt -->
+
+
+@if (User.Identity.IsAuthenticated)
+{ 
+    <a href="/Identity/Account/Logout">Logout</a>
+}
+else
+{
+    <a href="/Identity/Account/Login">Login</a>
+}
