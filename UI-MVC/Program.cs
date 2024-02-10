@@ -18,19 +18,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PadelClubManagementDbContext>(options
     => options.UseSqlite(@"Data Source=..\PadelClubManagement.db"));
 
+
+builder.Services.AddDbContext<PadelClubManagementDbContext>();
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<PadelClubManagementDbContext>();
 builder.Services.AddScoped<IRepository, DbContextRepository>();
 builder.Services.AddScoped<IManager, Manager>();
-
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation(); // Add MVC
-
-//builder.Services.AddAuthentication("AppAuthCookie").AddCookie("AppAuthCookie"); // Add authentication (Cookie)
-//builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<PadelClubManagementDbContext>(); // Add identity
-
-// Configure Identity services
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
-    {
-        options.User.RequireUniqueEmail = false;
-    }).AddEntityFrameworkStores<PadelClubManagementDbContext>().AddDefaultTokenProviders().AddDefaultUI();
 
 WebApplication app = builder.Build();
 
@@ -55,16 +49,18 @@ if (!app.Environment.IsDevelopment()) // If the application is not in developmen
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseAuthentication(); // Use authentication is required e.g. 2FA
 app.UseAuthorization();
 
-app.MapRazorPages(); // Map Razor Pages
-
 app.MapControllerRoute( 
     name: "default", 
     pattern: "{controller=Player}/{action=Index}/{id?}");
+
+app.MapRazorPages(); // Map Razor Pages
+
 app.Run();
 
 void SeedUsers(UserManager<IdentityUser> usermanager)
