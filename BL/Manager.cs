@@ -20,16 +20,6 @@ public class Manager : IManager
         _repository = repository;
     }
     
-    public Player GetPlayer(int playerNumber)
-    {
-        return _repository.ReadPlayer(playerNumber);
-    }
-    
-    public Player GetPlayerWithBookingsAndPadelCourts(int playerNumber)
-    {
-        return _repository.ReadPlayerWithBookingsAndPadelCourts(playerNumber);
-    }
-    
     public IEnumerable<Player> GetAllPlayers()
     {
         return _repository.ReadAllPlayers();
@@ -48,8 +38,9 @@ public class Manager : IManager
         _repository.CreatePlayer(player);
     }
     
-    public void AddPlayerAsObject(Player player)
+    public void AddPlayerAsObject(Player player, string email)
     {
+        player.PlayerManager = _repository.ReadManagerByEmail(email);
         Validate(player);
         _repository.CreatePlayer(player);
     }
@@ -168,6 +159,16 @@ public class Manager : IManager
     public IEnumerable<PadelCourt> GetAllPadelCourts()
     {
         return _repository.ReadAllPadelCourts();
+    }
+    
+    public IEnumerable<Player> GetAllPlayersWithManager()
+    {
+        return _repository.ReadAllPlayersWithManager();
+    }
+    
+    public Player GetPlayerWithBookingsAndPadelCourtsAndManager(int playerNumber)
+    {
+        return _repository.ReadPlayerWithBookingsAndPadelCourtsAndManager(playerNumber);
     }
     
     private void Validate(Player player) // Validate the Player object (overload)

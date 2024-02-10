@@ -18,19 +18,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PadelClubManagementDbContext>(options
     => options.UseSqlite(@"Data Source=..\PadelClubManagement.db"));
 
+
+builder.Services.AddDbContext<PadelClubManagementDbContext>();
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<PadelClubManagementDbContext>();
 builder.Services.AddScoped<IRepository, DbContextRepository>();
 builder.Services.AddScoped<IManager, Manager>();
-
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation(); // Add MVC
-
-//builder.Services.AddAuthentication("AppAuthCookie").AddCookie("AppAuthCookie"); // Add authentication (Cookie)
-//builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<PadelClubManagementDbContext>(); // Add identity
-
-// Configure Identity services
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
-    {
-        options.User.RequireUniqueEmail = false;
-    }).AddEntityFrameworkStores<PadelClubManagementDbContext>().AddDefaultTokenProviders().AddDefaultUI();
 
 WebApplication app = builder.Build();
 
@@ -55,25 +49,27 @@ if (!app.Environment.IsDevelopment()) // If the application is not in developmen
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseAuthentication(); // Use authentication is required e.g. 2FA
 app.UseAuthorization();
 
-app.MapRazorPages(); // Map Razor Pages
-
 app.MapControllerRoute( 
     name: "default", 
     pattern: "{controller=Player}/{action=Index}/{id?}");
+
+app.MapRazorPages(); // Map Razor Pages
+
 app.Run();
 
 void SeedUsers(UserManager<IdentityUser> usermanager)
 {
-    var user1 = new IdentityUser { UserName = "User1", Email = "user1@eliasdh.com" };
-    var user2 = new IdentityUser { UserName = "User2", Email = "user2@eliasdh.com" };
-    var user3 = new IdentityUser { UserName = "User3", Email = "user3@eliasdh.com" };
-    var user4 = new IdentityUser { UserName = "User4", Email = "user4@eliasdh.com" };
-    var user5 = new IdentityUser { UserName = "User5", Email = "user5@eliasdh.com" };
+    var user1 = new IdentityUser { UserName = "user1@eliasdh.com", Email = "user1@eliasdh.com", EmailConfirmed = true };
+    var user2 = new IdentityUser { UserName = "user2@eliasdh.com", Email = "user2@eliasdh.com", EmailConfirmed = true };
+    var user3 = new IdentityUser { UserName = "user3@eliasdh.com", Email = "user3@eliasdh.com", EmailConfirmed = true };
+    var user4 = new IdentityUser { UserName = "user4@eliasdh.com", Email = "user4@eliasdh.com", EmailConfirmed = true };
+    var user5 = new IdentityUser { UserName = "user5@eliasdh.com", Email = "user5@eliasdh.com", EmailConfirmed = true };
     
     usermanager.CreateAsync(user1, "User1$");
     usermanager.CreateAsync(user2, "User2$");

@@ -8,52 +8,99 @@
 * Club 1-* PadelCourt 1-* Booking *-1 Player
 
 
-#### Project [Computer Programming 2] Second year exercises of training applied computer science at KdG.
+## Project [Computer Programming 2] Second year exercises of training applied computer science at KdG.
 
-## Sprint 7
+## 8️⃣ Sprint
 
-### Users data for testing
+> No data available.
+
+## 7️⃣ Sprint
+
+### 💾Users data for testing
 ```json
 {
   "users": [
     {
-      "username": "User1",
-      "password": "User1$",
+      "username": "user1@eliasdh.com",
       "email": "user1@eliasdh.com",
+      "password": "User1$",
       "role": "Admin"
     },
     {
-      "username": "User2",
-      "password": "User2$",
+      "username": "user2@eliasdh.com",
       "email": "user2@eliasdh.com",
+      "password": "User2$",
       "role": "Admin"
     },
     {
-      "username": "User3",
-      "password": "User3$",
+      "username": "user3@eliasdh.com",
       "email": "user3@eliasdh.com",
+      "password": "User3$",
       "role": "User"
     },
     {
-      "username": "User4",
-      "password": "User4$",
+      "username": "user4@eliasdh.com",
       "email": "user4@eliasdh.com",
+      "password": "User4$",
       "role": "User"
     },
     {
-      "username": "User5",
-      "password": "User5$",
+      "username": "user5@eliasdh.com",
       "email": "user5@eliasdh.com",
+      "password": "User5$",
       "role": "User"
     }
   ]
 }
 ```
 
-## Sprint 6
+### 📤HTTP Request
+> This is the source file: [cookies_testing.http](UI-MVC/cookies_testing.http).
+```text
+###
+// Request to add a new Club without authentication (1)
+POST https://localhost:7074/api/Clubs HTTP/1.1
+Content-Type: application/json
 
-### Request
-```http request
+{
+  "name": "Padel club",
+  "numberOfCourts": 2,
+  "streetName": "Kerkstraat",
+  "houseNumber": 1,
+  "zipCode": "9000"
+}
+###
+// Request to add a new Club as an authenticated user (2)
+POST https://localhost:7074/api/Clubs HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer
+
+{
+  "name": "Another Padel Club",
+  "numberOfCourts": 3,
+  "streetName": "Main Street",
+  "houseNumber": 42,
+  "zipCode": "1000"
+}
+###
+```
+### 📥HTTP Response
+> This is the source file: [cookies_testing.http](UI-MVC/cookies_testing.http).
+```text
+// Request to add a new Club (1)
+HTTP/1.1 200 OK
+Content-Length: 0
+Date: Fri, 22 Dec 2023 14:21:28 GMT
+Server: Kestrel
+
+// Request to add a new Club as an authenticated user (2)
+```
+
+## 6️⃣Sprint
+
+### 📤HTTP Request
+> This is the source file: [api_testing.http](UI-MVC/api_testing.http).
+```text
 ###
 // Request to get all Clubs (1)
 GET https://localhost:7074/api/Clubs HTTP/1.1
@@ -92,7 +139,8 @@ Content-Type: application/json
 ###
 ```
 
-### Response
+### 📥HTTP Response
+> This is the source file: [api_testing.http](UI-MVC/api_testing.http).
 ```text
 // Request to get all Clubs (1)
 HTTP/1.1 200 OK
@@ -129,8 +177,13 @@ Server: Kestrel
 Location: https://localhost:7074/api/player/1
 ```
 
-## Sprint 4
+## 5️⃣Sprint
 
+> No data available.
+
+## 4️⃣Sprint
+
+### 📐Database diagram
 ```mermaid
 classDiagram
     class Club {
@@ -178,31 +231,39 @@ classDiagram
     Booking "*" -- "1" Player
 ```
 
-## Sprint 3
+## 3️⃣ Sprint 
 
-### Both search criteria completed
+### 🔎Both search criteria completed
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
 WHERE (@__price_0 IS NULL OR "p"."Price" = @__price_0) AND (@__indoor_1 IS NULL OR "p"."IsIndoor" = @__indoor_1)
 ```
 
-### Search only by price
+### 🔎Search only by price
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
 WHERE @__price_0 IS NULL OR "p"."Price" = @__price_0
 ```
 
-### Only search by indoor
+### 🔎Only search by indoor
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
 WHERE @__indoor_0 IS NULL OR "p"."IsIndoor" = @__indoor_0
 ```
 
-### Both search criteria empty
+### 🔎Both search criteria empty
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
 ```
+
+## Sprint 2️⃣
+
+> No data available.
+
+## Sprint 1️⃣
+
+> No data available.

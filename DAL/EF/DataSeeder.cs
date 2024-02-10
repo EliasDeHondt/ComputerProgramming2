@@ -39,11 +39,11 @@ public static class DataSeeder
         Booking booking6 = new Booking { BookingDate = new DateOnly(2023, 4, 17), StartTime = new TimeSpan(14, 0, 0), EndTime = new TimeSpan(15, 0, 0) };
         
         // Seed data for Players
-        Player eliasDeHondt = new Player { FirstName = "Elias", LastName = "De Hondt", BirthDate = new DateOnly(2001, 4, 10), Level = 5.5, Position = PlayerPosition.Member };
-        Player aliceJohnson = new Player { FirstName = "Alice", LastName = "Johnson", BirthDate = new DateOnly(1990, 3, 12), Level = 6.2, Position = PlayerPosition.Instructor };
-        Player bobSmith = new Player { FirstName = "Bob", LastName = "Smith", BirthDate = new DateOnly(1988, 12, 15), Level = 5.0, Position = PlayerPosition.TournamentPlayer };
-        Player carolDavis = new Player { FirstName = "Carol", LastName = "Davis", BirthDate = new DateOnly(1995, 8, 15), Level = 4.5, Position = PlayerPosition.Member };
-        Player davidLee = new Player { FirstName = "David", LastName = "Lee", BirthDate = new DateOnly(1992, 6, 10), Level = 4.2, Position = PlayerPosition.Guest };
+        Player eliasDeHondt = new Player { FirstName = "Elias", LastName = "De Hondt", BirthDate = new DateOnly(2001, 4, 10), Level = 5.5, Position = PlayerPosition.Member, PlayerManager = dbContext.Users.Single(user => user.UserName == "user1@eliasdh.com") };
+        Player aliceJohnson = new Player { FirstName = "Alice", LastName = "Johnson", BirthDate = new DateOnly(1990, 3, 12), Level = 6.2, Position = PlayerPosition.Instructor, PlayerManager = dbContext.Users.Single(user => user.UserName == "user2@eliasdh.com") };
+        Player bobSmith = new Player { FirstName = "Bob", LastName = "Smith", BirthDate = new DateOnly(1988, 12, 15), Level = 5.0, Position = PlayerPosition.TournamentPlayer, PlayerManager = dbContext.Users.Single(user => user.UserName == "user3@eliasdh.com") };
+        Player carolDavis = new Player { FirstName = "Carol", LastName = "Davis", BirthDate = new DateOnly(1995, 8, 15), Level = 4.5, Position = PlayerPosition.Member, PlayerManager = dbContext.Users.Single(user => user.UserName == "user4@eliasdh.com") };
+        Player davidLee = new Player { FirstName = "David", LastName = "Lee", BirthDate = new DateOnly(1992, 6, 10), Level = 4.2, Position = PlayerPosition.Guest, PlayerManager = dbContext.Users.Single(user => user.UserName == "user5@eliasdh.com") };
         
         // Relate Club to PadelCourts
         terEikenClub.PadelCourts = new List<PadelCourt> { indoorCourt1, indoorCourt2 };

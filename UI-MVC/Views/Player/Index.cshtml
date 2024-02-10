@@ -14,6 +14,7 @@
         <th>Birth Date</th>
         <th>Level</th>
         <th>Player Position</th>
+        <th>User Name</th>
         <th>Details</th>
     </tr>
     @foreach (PadelClubManagement.BL.Domain.Player player in Model)
@@ -25,6 +26,7 @@
             <td>@(player.BirthDate?.ToString() ?? "Unknown")</td>
             <td>@player.Level</td>
             <td>@player.Position</td>
+            <td>@(player.PlayerManager.UserName ?? "Unknown")</td>
             <td><a asp-controller="Player" asp-action="Detail" asp-route-playerNumber="@player.PlayerNumber">Details</a></td>
         </tr>
     }

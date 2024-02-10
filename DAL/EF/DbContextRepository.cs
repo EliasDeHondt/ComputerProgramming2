@@ -6,6 +6,7 @@
  ***************************************/
 // Class DbContextRepository
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PadelClubManagement.BL.Domain;
 
@@ -24,14 +25,6 @@ public class DbContextRepository : IRepository
     {
         Player player = DbContext.Players.Find(playerNumber);
         return player; // player or null
-    }
-    
-    public Player ReadPlayerWithBookingsAndPadelCourts(int playerNumber)
-    {
-        return DbContext.Players
-            .Include(player => player.Bookings)
-            .ThenInclude(booking => booking.PadelCourt)
-            .FirstOrDefault(player => player.PlayerNumber == playerNumber);
     }
     
     public IEnumerable<Player> ReadAllPlayers()
@@ -157,5 +150,24 @@ public class DbContextRepository : IRepository
     public IEnumerable<PadelCourt> ReadAllPadelCourts()
     {
         return DbContext.PadelCourts;
+    }
+    
+    public IEnumerable<Player> ReadAllPlayersWithManager()
+    {
+        return DbContext.Players.Include(player => player.PlayerManager);
+    }
+    
+    public Player ReadPlayerWithBookingsAndPadelCourtsAndManager(int playerNumber)
+    {
+        return DbContext.Players
+            .Include(player => player.Bookings)
+            .ThenInclude(booking => booking.PadelCourt)
+            .Include(player => player.PlayerManager)
+            .FirstOrDefault(player => player.PlayerNumber == playerNumber);
+    }
+    
+    public IdentityUser ReadManagerByEmail(string email)
+    {
+        return DbContext.Users.FirstOrDefault(user => user.Email == email);
     }
 }

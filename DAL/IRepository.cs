@@ -5,6 +5,8 @@
  *                                     *
  ***************************************/
 // Interface IRepository
+
+using Microsoft.AspNetCore.Identity;
 using PadelClubManagement.BL.Domain;
 
 namespace PadelClubManagement.DAL;
@@ -12,7 +14,6 @@ namespace PadelClubManagement.DAL;
 public interface IRepository
 {
     public Player ReadPlayer(int playerNumber);
-    public Player ReadPlayerWithBookingsAndPadelCourts(int playerNumber);
     public IEnumerable<Player> ReadAllPlayers();
     public IEnumerable<Player> ReadPlayersByPosition(PlayerPosition position);
     public void CreatePlayer(Player player);
@@ -32,4 +33,7 @@ public interface IRepository
     public IEnumerable<Player> ReadPlayersOfPadelCourt(int courtNumber);
     public int CreateBooking(Booking booking, bool returnBookingNumber);
     public IEnumerable<PadelCourt> ReadAllPadelCourts();
+    public IEnumerable<Player> ReadAllPlayersWithManager();
+    public Player ReadPlayerWithBookingsAndPadelCourtsAndManager(int playerNumber);
+    public IdentityUser ReadManagerByEmail(string email);
 }

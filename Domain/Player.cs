@@ -6,6 +6,7 @@
  ***************************************/
 // Class Player
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace PadelClubManagement.BL.Domain;
 
@@ -14,6 +15,8 @@ public class Player
     [Key]
     public int PlayerNumber { get; set; } // Primary key
     public ICollection<Booking> Bookings { get; set; } // Foreign key   (Navigation property)
+    [Required]
+    public IdentityUser PlayerManager { get; set; } // Foreign key   (Navigation property)
     
     [StringLength(50, MinimumLength = 2, ErrorMessage = "(FirstName) At least 2 character, maximum 50 characters")] [Required]
     public string FirstName { get; set; }

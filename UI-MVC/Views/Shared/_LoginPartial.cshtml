@@ -16,7 +16,7 @@
     {
         <li class="nav-item">
             @{
-                var firstName = UserManager.GetUserName(User)?.Split('.')[0];
+                var firstName = UserManager.GetUserName(User)?.Split('@')[0].Split('.')[0];
                 System.Diagnostics.Debug.Assert(firstName != null, nameof(firstName) + " != null");
                 var capitalizedFirstName = char.ToUpper(firstName[0]) + firstName.Substring(1);
             }

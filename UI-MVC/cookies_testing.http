@@ -1,0 +1,35 @@
+// ***************************************
+// *                                     *
+// *   Created by Elias De Hondt         *
+// *   Visit https://eliasdh.com         *
+// *                                     *
+// ***************************************/
+// API Testing
+
+###
+// Request to add a new Club without authentication (1)
+POST https://localhost:7074/api/Clubs HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Padel club",
+  "numberOfCourts": 2,
+  "streetName": "Kerkstraat",
+  "houseNumber": 1,
+  "zipCode": "9000"
+}
+###
+###
+// Request to add a new Club as an authenticated user (2)
+POST https://localhost:7074/api/Clubs HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer <your_valid_access_token_here>
+
+{
+  "name": "Another Padel Club",
+  "numberOfCourts": 3,
+  "streetName": "Main Street",
+  "houseNumber": 42,
+  "zipCode": "1000"
+}
+###

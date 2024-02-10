@@ -7,7 +7,7 @@
 // Controller Player
 
 using System.Diagnostics;
-using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using PadelClubManagement.BL;
 using PadelClubManagement.BL.Domain;
@@ -18,17 +18,15 @@ namespace PadelClubManagement.UI.Web.Controllers;
 public class PlayerController : Controller
 {
     private readonly IManager _manager;
-    private readonly SignInManager<IdentityUser> _signInManager;
     
-    public PlayerController(IManager manager, SignInManager<IdentityUser> signInManager)
+    public PlayerController(IManager manager)
     {
         _manager = manager;
-        _signInManager = signInManager;
     }
     
     public IActionResult Index()
     {
-        IEnumerable<Player> players = _manager.GetAllPlayers();
+        IEnumerable<Player> players = _manager.GetAllPlayersWithManager();
         return View(players);
     }
     
@@ -40,14 +38,14 @@ public class PlayerController : Controller
     [HttpPost] // This method is only accessible via POST
     public IActionResult Add(Player player)
     {
-        if (!ModelState.IsValid) return View(player);
-        _manager.AddPlayerAsObject(player);
+        string email = User.FindFirstValue(ClaimTypes.Email);
+        _manager.AddPlayerAsObject(player, email);
         return RedirectToAction("Detail", new { playerNumber = player.PlayerNumber });
     }
     
     public IActionResult Detail(int playerNumber)
     {
-        Player player = _manager.GetPlayerWithBookingsAndPadelCourts(playerNumber);
+        Player player = _manager.GetPlayerWithBookingsAndPadelCourtsAndManager(playerNumber);
         return View(player);
     }
     

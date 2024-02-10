@@ -19,6 +19,8 @@
     <dd>@(Model.Level != 0 ? Model.Level : "unknown")</dd>
     <dt>Player Position</dt>
     <dd>@Model.Position</dd>
+    <dt>User Name</dt>
+    <dd>Managed by: @(Model.PlayerManager.UserName ?? "Unknown")</dd>
 </dl>
 <br/>
 <h2>Related Bookings</h2>

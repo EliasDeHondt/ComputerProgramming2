@@ -5,6 +5,8 @@
  *                                     *
  ***************************************/
 // Class InMemoryRepository
+
+using Microsoft.AspNetCore.Identity;
 using PadelClubManagement.BL.Domain;
 
 namespace PadelClubManagement.DAL;
@@ -244,6 +246,21 @@ public class InMemoryRepository : IRepository
       }
       
       public IEnumerable<PadelCourt> ReadAllPadelCourts()
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
+      
+      public IEnumerable<Player> ReadAllPlayersWithManager()
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
+      
+      public Player ReadPlayerWithBookingsAndPadelCourtsAndManager(int playerNumber)
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
+      
+      public IdentityUser ReadManagerByEmail(string email)
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }

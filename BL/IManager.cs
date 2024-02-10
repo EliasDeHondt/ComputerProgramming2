@@ -11,12 +11,10 @@ namespace PadelClubManagement.BL;
 
 public interface IManager
 {
-    public Player GetPlayer(int playerNumber);
-    public Player GetPlayerWithBookingsAndPadelCourts(int playerNumber);
     public IEnumerable<Player> GetAllPlayers();
     public IEnumerable<Player> GetPlayersByPosition(PlayerPosition position);
     public void AddPlayer(string firstName, string lastName, DateOnly? birthDate, double level, PlayerPosition position);
-    public void AddPlayerAsObject(Player player);
+    public void AddPlayerAsObject(Player player, string email);
     public PadelCourt GetPadelCourt(int courtNumber);
     public IEnumerable<PadelCourt> GetPadelCourtsByFilter(double? price, bool? indoor);
     public void AddPadelCourt(bool isIndoor, int capacity, double price, Club club);
@@ -32,4 +30,6 @@ public interface IManager
     public IEnumerable<Player> GetPlayersOfPadelCourt(int courtNumber);
     public int AddBooking(int playerNumber, int courtNumber, Booking booking, bool returnBookingNumber);
     public IEnumerable<PadelCourt> GetAllPadelCourts();
+    public IEnumerable<Player> GetAllPlayersWithManager();
+    public Player GetPlayerWithBookingsAndPadelCourtsAndManager(int playerNumber);
 }
