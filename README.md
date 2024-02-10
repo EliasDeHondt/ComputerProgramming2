@@ -190,11 +190,10 @@ classDiagram
         ClubNumber: int
         PadelCourts: PadelCourt[]
         Name: string
-        NumberOfCours: int
+        NumberOfCourts: int
         StreetName: string
         HouseNumber: int
         ZipCode: int
-
     }
 
     class PadelCourt {
@@ -218,17 +217,82 @@ classDiagram
     class Player {
         PlayerNumber: int
         Bookings: Booking[]
+        PlayerManager: IdentityUser
         FirstName: string
         LastName: string
         BirthDate: DateOnly
         Level: double
         Position: PlayerPosition
+    }
 
+    class AspNetRoles {
+        Id: string
+        Name: string
+        NormalizedName: string
+        ConcurrencyStamp: string
+    }
+
+    class AspNetRoleClaims {
+        Id: int
+        RoleId: string
+        ClaimType: string
+        ClaimValue: string
+    }
+
+    class AspNetUsers {
+        Id: string
+        UserName: string
+        NormalizedUserName: string
+        Email: string
+        NormalizedEmail: string
+        EmailConfirmed: int
+        PasswordHash: string
+        SecurityStamp: string
+        ConcurrencyStamp: string
+        PhoneNumber: string
+        PhoneNumberConfirmed: int
+        TwoFactorEnabled: int
+        LockoutEnd: string
+        LockoutEnabled: int
+        AccessFailedCount: int
+    }
+
+    class AspNetUserClaims {
+        Id: int
+        UserId: string
+        ClaimType: string
+        ClaimValue: string
+    }
+
+    class AspNetUserLogins {
+        LoginProvider: string
+        ProviderKey: string
+        ProviderDisplayName: string
+        UserId: string
+    }
+
+    class AspNetUserRoles {
+        UserId: string
+        RoleId: string
+    }
+
+    class AspNetUserTokens {
+        UserId: string
+        LoginProvider: string
+        Name: string
+        Value: string
     }
 
     Club "1" -- "*" PadelCourt
     PadelCourt "1" -- "*" Booking
     Booking "*" -- "1" Player
+    Player "1" -- "1" AspNetUsers
+    AspNetUsers "1" -- "*" AspNetUserTokens
+    AspNetUsers "1" -- "*" AspNetUserLogins
+    AspNetUsers "1" -- "*" AspNetUserClaims
+    AspNetUsers "1" -- "*" AspNetUserRoles
+    AspNetUserRoles "1" -- "*" AspNetRoles
+    AspNetRoles "1" -- "*" AspNetRoleClaims
 ```
 
 ## 3️⃣ Sprint 
