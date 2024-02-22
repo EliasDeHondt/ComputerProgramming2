@@ -15,14 +15,14 @@ using PadelClubManagement.DAL.EF;
 // Composition Root
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<PadelClubManagementDbContext>(options
-    => options.UseSqlite(@"Data Source=..\PadelClubManagement.db"));
-
+builder.Services.AddDbContext<PadelClubManagementDbContext>(options => options.UseSqlite(@"Data Source=..\PadelClubManagement.db"));
 
 builder.Services.AddDbContext<PadelClubManagementDbContext>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<PadelClubManagementDbContext>();
+
 builder.Services.AddScoped<IRepository, DbContextRepository>();
 builder.Services.AddScoped<IManager, Manager>();
 
@@ -34,8 +34,9 @@ using (IServiceScope scope = app.Services.CreateScope())
     bool databaseCreated = padelClubManagementDbContext.CreateDatabase(true); // Create the database (Code first flow)
     if (databaseCreated)
     {
-        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-        SeedUsers(userManager); // Seed the database with some users
+        UserManager<IdentityUser> userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+        RoleManager<IdentityRole> roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        SeedUsers(userManager, roleManager); // Seed the database with some users
         DataSeeder.Seed(padelClubManagementDbContext); // Seed the database with some data
     }
 }
@@ -63,17 +64,32 @@ app.MapRazorPages(); // Map Razor Pages
 
 app.Run();
 
-void SeedUsers(UserManager<IdentityUser> usermanager)
+void SeedUsers(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
 {
+    // Create some users
+    const string adminRole = "Admin";
+    const string userRole = "User";
+    roleManager.CreateAsync(new IdentityRole(adminRole)).Wait();
+    roleManager.CreateAsync(new IdentityRole(userRole)).Wait();
+    
+    // Create some users
     var user1 = new IdentityUser { UserName = "user1@eliasdh.com", Email = "user1@eliasdh.com", EmailConfirmed = true };
     var user2 = new IdentityUser { UserName = "user2@eliasdh.com", Email = "user2@eliasdh.com", EmailConfirmed = true };
     var user3 = new IdentityUser { UserName = "user3@eliasdh.com", Email = "user3@eliasdh.com", EmailConfirmed = true };
     var user4 = new IdentityUser { UserName = "user4@eliasdh.com", Email = "user4@eliasdh.com", EmailConfirmed = true };
     var user5 = new IdentityUser { UserName = "user5@eliasdh.com", Email = "user5@eliasdh.com", EmailConfirmed = true };
     
-    usermanager.CreateAsync(user1, "User1$");
-    usermanager.CreateAsync(user2, "User2$");
-    usermanager.CreateAsync(user3, "User3$");
-    usermanager.CreateAsync(user4, "User4$");
-    usermanager.CreateAsync(user5, "User5$");
+    // Add the password to the users and create them
+    var a = userManager.CreateAsync(user1, "User1$").Result;
+    var b = userManager.CreateAsync(user2, "User2$").Result;
+    var c = userManager.CreateAsync(user3, "User3$").Result;
+    var d = userManager.CreateAsync(user4, "User4$").Result;
+    var e = userManager.CreateAsync(user5, "User5$").Result;
+    
+    // Add the users to the roles
+    userManager.AddToRoleAsync(user1, adminRole).Wait();
+    userManager.AddToRoleAsync(user2, adminRole).Wait();
+    userManager.AddToRoleAsync(user3, userRole).Wait();
+    userManager.AddToRoleAsync(user4, userRole).Wait();
+    userManager.AddToRoleAsync(user5, userRole).Wait();
 }

@@ -96,7 +96,7 @@ Server: Kestrel
 // Request to add a new Club as an authenticated user (2)
 ```
 
-## 6️⃣Sprint
+## 6️⃣ Sprint
 
 ### 📤HTTP Request
 > This is the source file: [api_testing.http](UI-MVC/api_testing.http).
@@ -324,10 +324,10 @@ SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p".
 FROM "PadelCourts" AS "p"
 ```
 
-## Sprint 2️⃣
+## 2️⃣ Sprint
 
 > No data available.
 
-## Sprint 1️⃣
+## 1️⃣ Sprint
 
 > No data available.
