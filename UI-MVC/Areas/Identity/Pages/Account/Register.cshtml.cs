@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 
 namespace PadelClubManagement.UI.Web.Areas.Identity.Pages.Account;
@@ -45,6 +46,7 @@ public class RegisterModel : PageModel
     public InputModel Input { get; set; }
     public string ReturnUrl { get; set; }
     public IList<AuthenticationScheme> ExternalLogins { get; set; }
+    public List<SelectListItem> RolesList { get; set; } // ---------- Custom code
 
     public class InputModel
     {
@@ -52,21 +54,34 @@ public class RegisterModel : PageModel
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        // Add the following property
+        [Required]
+        [Display(Name = "Role")]
+        public string SelectedRole { get; set; }
     }
     
     public async Task OnGetAsync(string returnUrl = null)
     {
         ReturnUrl = returnUrl;
         ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+        
+        RolesList = new List<SelectListItem>  // ---------- Custom code
+        {
+            new SelectListItem { Value = "Admin", Text = "Administrator" },
+            new SelectListItem { Value = "User", Text = "Regular User" }
+        };
     }
 
     public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -93,6 +108,8 @@ public class RegisterModel : PageModel
                 pageHandler: null,
                 values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                 protocol: Request.Scheme);
+                
+                await _userManager.AddToRoleAsync(user, "Admin"); // Add the user to the role "User"
 
                 await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");

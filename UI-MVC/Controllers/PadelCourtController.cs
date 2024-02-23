@@ -24,10 +24,10 @@ public class PadelCourtController : Controller
 
     //[Authorize(Roles = "Admin, User")] // Only authenticated users can access this action
     //[Authorize(Roles = "Admin")]
-    [Authorize] // Only authenticated users can access this action
+    //[Authorize] // You need to be logged in a user to access this
     public IActionResult Detail(int courtNumber)
     {
-        if (!User.IsInRole("Admin")) return Redirect("https://eliasdh.com/assets/pages/403.html"); // If the user is not in the Admin role, redirect to a 403 page
+        if (!User.IsInRole("Admin")) return Redirect("https://eliasdh.com/assets/pages/403.html"); // If you're not an admin, redirect to custom page
         
         PadelCourt padelCourt = _manager.GetPadelCourt(courtNumber);
         return View(padelCourt);

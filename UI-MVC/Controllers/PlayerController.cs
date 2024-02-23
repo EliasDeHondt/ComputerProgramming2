@@ -8,6 +8,7 @@
 
 using System.Diagnostics;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PadelClubManagement.BL;
 using PadelClubManagement.BL.Domain;
@@ -30,15 +31,17 @@ public class PlayerController : Controller
         return View(players);
     }
     
+    [Authorize] // You need to be logged in a user to access this
     public IActionResult Add()
     {
         return View();
     }
     
+    [Authorize] // You need to be logged in a user to access this
     [HttpPost] // This method is only accessible via POST
     public IActionResult Add(Player player)
     {
-        string email = User.FindFirstValue(ClaimTypes.Email);
+        string email = User.FindFirstValue(ClaimTypes.Email); // Get the email of the logged in user
         _manager.AddPlayerAsObject(player, email);
         return RedirectToAction("Detail", new { playerNumber = player.PlayerNumber });
     }
