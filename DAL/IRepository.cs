@@ -36,4 +36,6 @@ public interface IRepository
     public IEnumerable<Player> ReadAllPlayersWithManager();
     public Player ReadPlayerWithBookingsAndPadelCourtsAndManager(int playerNumber);
     public IdentityUser ReadManagerByEmail(string email);
+    public void WritePlayer(Player player);
+    public Player ReadPlayerWithUser(int playerNumber);
 }

@@ -5,6 +5,8 @@
  *                                     *
  ***************************************/
 // Controller Club API
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PadelClubManagement.BL;
 using PadelClubManagement.BL.Domain;
@@ -30,6 +32,7 @@ public class ClubsController : ControllerBase
     }
     
     [HttpPost("/api/clubs")]
+    [Authorize] // You need to be logged in a user to access this
     public IActionResult AddClub(Club newClub)
     {
         if (newClub == null) return BadRequest(ModelState);

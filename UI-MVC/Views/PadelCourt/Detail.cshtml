@@ -31,12 +31,12 @@
     </thead>
     <tbody id="responseTableBody"></tbody>
 </table>
-@if (User.Identity != null && User.Identity.IsAuthenticated)
+@if (User.Identity is { IsAuthenticated: true })
 {
     <br/>
     <h2>Add PadelCourts to Player</h2>
     <br/>
-    <form id="addPadelCourtsToPlayeForm">
+    <form id="addPadelCourtsToPlayerForm">
         <label for="playerSelect">Player:</label>
         <select id="playerSelect"></select><br>
 
@@ -53,7 +53,7 @@
 <span id="courtNumber" data-court-number="@Model.CourtNumber"></span>
 @section Scripts {
     <script src="~/js/player/detail.js" defer></script>
-    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    @if (User.Identity is { IsAuthenticated: true })
     {
         <script src="~/js/player/add.js" defer></script>
     }

@@ -1,66 +1,96 @@
 <!-- Van Elias De Hondt -->
+@using System.Globalization
 @model PadelClubManagement.BL.Domain.Player
 @{
     ViewData["Title"] = "Player";
 }
 
-<h1>@ViewData["Title"] (ID: @Model.PlayerNumber) Details</h1>
-<br/>
-<dl>
-    <dt>Player Number</dt>
-    <dd>@Model.PlayerNumber</dd>
-    <dt>First Name</dt>
-    <dd>@Model.FirstName</dd>
-    <dt>Last Name</dt>
-    <dd>@Model.LastName</dd>
-    <dt>Birth Date</dt>
-    <dd>@Model.BirthDate</dd>
-    <dt>Level</dt>
-    <dd>@(Model.Level != 0 ? Model.Level : "unknown")</dd>
-    <dt>Player Position</dt>
-    <dd>@Model.Position</dd>
-    <dt>User Name</dt>
-    <dd>Managed by: @(Model.PlayerManager.UserName ?? "Unknown")</dd>
-</dl>
-<br/>
-<h2>Related Bookings</h2>
-<br/>
-<table class="item-table">
-    <tr>
-        <th>Booking Number</th>
-        <th>Booking Date</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-    </tr>
-    @foreach (PadelClubManagement.BL.Domain.Booking booking in Model.Bookings)
-    {
+<div class="container">
+    <h1>@ViewData["Title"] (ID: @Model.PlayerNumber) Details</h1>
+    <br/>
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">Player Number</dt>
+                <dd class="col-sm-8">@Model.PlayerNumber</dd>
+                <dt class="col-sm-4">First Name</dt>
+                <dd class="col-sm-8">@Model.FirstName</dd>
+                <dt class="col-sm-4">Last Name</dt>
+                <dd class="col-sm-8">@Model.LastName</dd>
+                <dt class="col-sm-4">Birth Date</dt>
+                <dd class="col-sm-8">@Model.BirthDate</dd>
+                @if (User.Identity is { IsAuthenticated: true } && User.Identity.Name == Model.PlayerManager.UserName)
+                {
+                    <dt class="col-sm-4">Level</dt>
+                    <dd class="col-sm-8">
+                        <form id="updateLevelForm">
+                            <input type="hidden" id="playerNumber" name="playerNumber" value="@Model.PlayerNumber" required/>
+                            
+                            <input type="number" id="newLevel" name="newLevel" value="@((Model.Level != 0) ? Model.Level.ToString(CultureInfo.InvariantCulture) : "unknown")" required/>
+                            <button type="submit">Update Level</button>
+                        </form>
+                    </dd>
+                }
+                else
+                {
+                    <dt class="col-sm-4">Level</dt>
+                    <dd class="col-sm-8">@((Model.Level != 0) ? Model.Level.ToString(CultureInfo.InvariantCulture) : "unknown")</dd>
+                }
+                <dt class="col-sm-4">Player Position</dt>
+                <dd class="col-sm-8">@Model.Position</dd>
+                <dt class="col-sm-4">User Name</dt>
+                <dd class="col-sm-8">Managed by: @(Model.PlayerManager.UserName ?? "Unknown")</dd>
+            </dl>
+        </div>
+    </div>
+
+    <br/>
+    <h2>Related Bookings</h2>
+    <br/>
+    <table class="item-table">
         <tr>
-            <td>@booking.BookingNumber</td>
-            <td>@(booking.BookingDate?.ToString("yyyy MMMM dd") ?? "N/A")</td>
-            <td>@(booking.StartTime?.ToString() ?? "N/A")</td>
-            <td>@(booking.EndTime?.ToString() ?? "N/A")</td>
+            <th>Booking Number</th>
+            <th>Booking Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
         </tr>
-    }
-</table>
-<br/>
-<h2>Related PadelCourt</h2>
-<br/>
-<table class="item-table">
-    <tr>
-        <th>Court Number</th>
-        <th>Indoor?</th>
-        <th>Capacity</th>
-        <th>Price</th>
-        <th>Details</th>
-    </tr>
-    @foreach (PadelClubManagement.BL.Domain.Booking booking in Model.Bookings)
-    {
+        @foreach (var booking in Model.Bookings)
+        {
+            <tr>
+                <td>@booking.BookingNumber</td>
+                <td>@(booking.BookingDate?.ToString("yyyy MMMM dd") ?? "N/A")</td>
+                <td>@(booking.StartTime?.ToString() ?? "N/A")</td>
+                <td>@(booking.EndTime?.ToString() ?? "N/A")</td>
+            </tr>
+        }
+    </table>
+    <br/>
+    <h2>Related PadelCourt</h2>
+    <br/>
+    <table class="item-table">
         <tr>
-            <td>@booking.PadelCourt.CourtNumber</td>
-            <td>@(booking.PadelCourt != null ? booking.PadelCourt.IsIndoor ? "Yes" : "No" : "N/A")</td>
-            <td>@booking.PadelCourt.Capacity</td>
-            <td>@booking.PadelCourt.Price</td>
-            <td><a asp-controller="PadelCourt" asp-action="Detail" asp-route-CourtNumber="@booking.PadelCourt.CourtNumber">Details</a></td>
+            <th>Court Number</th>
+            <th>Indoor?</th>
+            <th>Capacity</th>
+            <th>Price</th>
+            <th>Details</th>
         </tr>
+        @foreach (var booking in Model.Bookings)
+        {
+            <tr>
+                <td>@booking.PadelCourt.CourtNumber</td>
+                <td>@(booking.PadelCourt != null ? booking.PadelCourt.IsIndoor ? "Yes" : "No" : "N/A")</td>
+                <td>@booking.PadelCourt.Capacity</td>
+                <td>@booking.PadelCourt.Price</td>
+                <td><a asp-controller="PadelCourt" asp-action="Detail" asp-route-CourtNumber="@booking.PadelCourt.CourtNumber">Details</a></td>
+            </tr>
+        }
+    </table>
+</div>
+
+@section Scripts {
+    @if (User.Identity is { IsAuthenticated: true })
+    {
+        <script src="~/js/player/update.js" defer></script>
     }
-</table>
+}

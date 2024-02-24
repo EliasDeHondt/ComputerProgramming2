@@ -23,8 +23,7 @@ public class DbContextRepository : IRepository
 
     public Player ReadPlayer(int playerNumber)
     {
-        Player player = DbContext.Players.Find(playerNumber);
-        return player; // player or null
+        return DbContext.Players.Find(playerNumber);
     }
     
     public IEnumerable<Player> ReadAllPlayers()
@@ -47,8 +46,7 @@ public class DbContextRepository : IRepository
 
     public PadelCourt ReadPadelCourt(int courtNumber)
     {
-        PadelCourt padelCourt = DbContext.PadelCourts.Find(courtNumber);
-        return padelCourt;
+        return DbContext.PadelCourts.Find(courtNumber);
     }
     
     public IEnumerable<PadelCourt> ReadPadelCourtsByFilter(double? price, bool? indoor)
@@ -169,5 +167,16 @@ public class DbContextRepository : IRepository
     public IdentityUser ReadManagerByEmail(string email)
     {
         return DbContext.Users.FirstOrDefault(user => user.Email == email);
+    }
+    
+    public void WritePlayer(Player player)
+    {
+        DbContext.Players.Update(player);
+        DbContext.SaveChanges(); // Save changes to the database
+    }
+    
+    public Player ReadPlayerWithUser(int playerNumber)
+    {
+        return DbContext.Players.Include(player => player.PlayerManager).FirstOrDefault(player => player.PlayerNumber == playerNumber);
     }
 }

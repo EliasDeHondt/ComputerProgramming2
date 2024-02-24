@@ -130,11 +130,6 @@ public class InMemoryRepository : IRepository
           return null;
       }
       
-      public Player ReadPlayerWithBookingsAndPadelCourts(int playerNumber)
-      {
-          throw new NotImplementedException("This method is not implemented in in-memory repository.");
-      }
-
       public IEnumerable<Player> ReadAllPlayers()
       {
           return _players;
@@ -261,6 +256,16 @@ public class InMemoryRepository : IRepository
       }
       
       public IdentityUser ReadManagerByEmail(string email)
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
+      
+      public void WritePlayer(Player player)
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
+      
+      public Player ReadPlayerWithUser(int playerNumber)
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }

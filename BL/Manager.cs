@@ -13,11 +13,16 @@ namespace PadelClubManagement.BL;
 
 public class Manager : IManager
 {
-    private IRepository _repository; // Dependency injection
+    private readonly IRepository _repository; // Dependency injection
     
     public Manager(IRepository repository)
     {
         _repository = repository;
+    }
+    
+    public Player GetPlayer(int playerNumber)
+    {
+        return _repository.ReadPlayer(playerNumber);
     }
     
     public IEnumerable<Player> GetAllPlayers()
@@ -169,6 +174,17 @@ public class Manager : IManager
     public Player GetPlayerWithBookingsAndPadelCourtsAndManager(int playerNumber)
     {
         return _repository.ReadPlayerWithBookingsAndPadelCourtsAndManager(playerNumber);
+    }
+    
+    public void UpdatePlayer(Player player)
+    {
+        Validate(player);
+        _repository.WritePlayer(player);
+    }
+    
+    public Player GetPlayerWithUser(int playerNumber)
+    {
+        return _repository.ReadPlayerWithUser(playerNumber);
     }
     
     private void Validate(Player player) // Validate the Player object (overload)

@@ -5,6 +5,8 @@
  *                                     *
  ***************************************/
 // Controller Player API
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PadelClubManagement.BL;
 using PadelClubManagement.BL.Domain;
@@ -38,6 +40,7 @@ public class PlayersController : ControllerBase
     }
     
     [HttpPost("/api/addPadelCourtToPlayer/{courtNumber}/{playerNumber}/bookings")]
+    [Authorize] // You need to be logged in a user to access this
     public IActionResult AddPadelCourtToPlayer(int playerNumber, int courtNumber, Booking booking)
     {
         int bookingNumber = _manager.AddBooking(playerNumber, courtNumber, booking, true);
@@ -45,6 +48,23 @@ public class PlayersController : ControllerBase
         _manager.AddPlayerToBooking(playerNumber, bookingNumber);
         _manager.AddPadelCourtToBooking(courtNumber, bookingNumber);
 
-        return CreatedAtAction(nameof(GetAllPlayersFromPadelCourt), new { courtNumber = courtNumber }, null);
+        return CreatedAtAction(nameof(GetAllPlayersFromPadelCourt), new { courtNumber }, null);
+    }
+    
+    [HttpPut("/api/updatePlayerLevel/{playerNumber}/{newLevel}")]
+    [Authorize] // You need to be logged in a user to access this
+    public IActionResult UpdatePlayerLevel(int playerNumber, double newLevel)
+    {
+        Player existingPlayer = _manager.GetPlayerWithUser(playerNumber);
+
+        if (existingPlayer == null) return NotFound();
+        
+        if (User.Identity != null && User.Identity.Name != existingPlayer.PlayerManager.UserName) return Redirect("https://eliasdh.com/assets/pages/403.html"); // Redirect to custom page
+
+        existingPlayer.Level = newLevel;
+        
+        _manager.UpdatePlayer(existingPlayer);
+
+        return Ok(existingPlayer);
     }
 }

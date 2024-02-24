@@ -32,4 +32,6 @@ public interface IManager
     public IEnumerable<PadelCourt> GetAllPadelCourts();
     public IEnumerable<Player> GetAllPlayersWithManager();
     public Player GetPlayerWithBookingsAndPadelCourtsAndManager(int playerNumber);
+    public void UpdatePlayer(Player player);
+    public Player GetPlayerWithUser(int playerNumber);
 }
