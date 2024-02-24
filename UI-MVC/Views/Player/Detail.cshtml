@@ -19,7 +19,8 @@
                 <dd class="col-sm-8">@Model.LastName</dd>
                 <dt class="col-sm-4">Birth Date</dt>
                 <dd class="col-sm-8">@Model.BirthDate</dd>
-                @if (User.Identity is { IsAuthenticated: true } && User.Identity.Name == Model.PlayerManager.UserName)
+                @if (User.Identity is { IsAuthenticated: true } && (Model.PlayerManager.UserName == User.Identity.Name || User.IsInRole("Admin")))
+                // Only the administrator of the entity itself or an admin can update this entity.
                 {
                     <dt class="col-sm-4">Level</dt>
                     <dd class="col-sm-8">

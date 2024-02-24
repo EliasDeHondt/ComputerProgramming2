@@ -8,7 +8,7 @@
 
 ###
 // Request to add a new Club without authentication (1)
-POST https://localhost:7074/api/Clubs HTTP/1.1
+POST https://localhost:6969/api/Clubs HTTP/1.1
 Content-Type: application/json
 
 {
@@ -21,9 +21,9 @@ Content-Type: application/json
 ###
 ###
 // Request to add a new Club as an authenticated user (2)
-POST https://localhost:7074/api/Clubs HTTP/1.1
+POST https://localhost:6969/api/Clubs HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer <your_valid_access_token_here>
+Authorization: Bearer CfDJ8Kir2sV5b8xEqk/koFst/q1+MTGdIpeWsXfR/9JxJcLm2D8dvm7rvp9F598XUJFas0ioE03YBgg48db7H4N6PINNQ7lgJQygTNhzPBaY7hn4/yMcV8sC6jsPuLjzkScyebFRpV7mh53nvhyAeRv0dp56LCK86RuAYcMPv6znFGEvUgnQwyULeGBzDWDQfU8IETTLK4X8E0dhFHwm++CIMQPmhZdgWDduDDAMuYp7fkkx
 
 {
   "name": "Another Padel Club",

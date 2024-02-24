@@ -27,44 +27,43 @@ public class PlayersController : ControllerBase
     public IActionResult GetAllPlayersFromPadelCourt(int courtNumber)
     {
         IEnumerable<Player> players = _manager.GetPlayersOfPadelCourt(courtNumber);
-        if (players == null || !players.Any()) return NoContent();
-        return Ok(players);
+        if (players == null || !players.Any()) return NoContent(); // 204
+        return Ok(players); // 200
     }
     
     [HttpGet("/api/players")]
     public IActionResult GetAllPlayers()
     {
         IEnumerable<Player> players = _manager.GetAllPlayers();
-        if (players == null || !players.Any()) return NoContent();
-        return Ok(players);
+        if (players == null || !players.Any()) return NoContent(); // 204
+        return Ok(players); // 200
     }
     
     [HttpPost("/api/addPadelCourtToPlayer/{courtNumber}/{playerNumber}/bookings")]
-    [Authorize] // You need to be logged in a user to access this
+    [AllowAnonymous]
     public IActionResult AddPadelCourtToPlayer(int playerNumber, int courtNumber, Booking booking)
     {
+        if (User.Identity is { IsAuthenticated: false }) return Unauthorized(); // 401
+        
         int bookingNumber = _manager.AddBooking(playerNumber, courtNumber, booking, true);
 
         _manager.AddPlayerToBooking(playerNumber, bookingNumber);
         _manager.AddPadelCourtToBooking(courtNumber, bookingNumber);
 
-        return CreatedAtAction(nameof(GetAllPlayersFromPadelCourt), new { courtNumber }, null);
+        return CreatedAtAction(nameof(GetAllPlayersFromPadelCourt), new { courtNumber }, null); // 201
     }
     
     [HttpPut("/api/updatePlayerLevel/{playerNumber}/{newLevel}")]
-    [Authorize] // You need to be logged in a user to access this
     public IActionResult UpdatePlayerLevel(int playerNumber, double newLevel)
     {
         Player existingPlayer = _manager.GetPlayerWithUser(playerNumber);
-
-        if (existingPlayer == null) return NotFound();
+        if (existingPlayer == null) return NotFound(); // 404
         
-        if (User.Identity != null && User.Identity.Name != existingPlayer.PlayerManager.UserName) return Redirect("https://eliasdh.com/assets/pages/403.html"); // Redirect to custom page
+        // The user who manages the entity or It must be an admin otherwise return 401
+        if (User.Identity != null && existingPlayer.PlayerManager.UserName != User.Identity.Name && !User.IsInRole("Admin")) return Unauthorized(); // 401
 
         existingPlayer.Level = newLevel;
-        
         _manager.UpdatePlayer(existingPlayer);
-
-        return Ok(existingPlayer);
+        return Ok(existingPlayer); // 200
     }
 }

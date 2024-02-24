@@ -20,9 +20,6 @@ function fetchPlayersfromPadelCourtSelect() {
                 playerSelect.appendChild(option);
             });
         })
-        .catch(error => {
-            console.error('Error fetching players from Padel Court:', error);
-        });
 }
 
 function addPadelCourtToPlayer(playerNumber, courtNumber, booking) {
@@ -32,17 +29,10 @@ function addPadelCourtToPlayer(playerNumber, courtNumber, booking) {
             'Content-Type': 'application/json' // Specify JSON content type
         },
         body: JSON.stringify(booking) // Convert the booking object to JSON string
+    }).then(response => {
+        fetchPlayersfromPadelCourtSelect();
+        fetchPlayersFromPadelCourt(courtNumber);
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            fetchPlayersfromPadelCourtSelect();
-            fetchPlayersFromPadelCourt(courtNumber);
-        })
-        .catch(error => {
-            console.error('An error has occurred:', error);
-        });
 }
 
 document.addEventListener("DOMContentLoaded", function() {

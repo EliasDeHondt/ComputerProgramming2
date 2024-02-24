@@ -27,16 +27,17 @@ public class ClubsController : ControllerBase
     public IActionResult GetAllClubs()
     {
         IEnumerable<Club> clubs = _manager.GetAllClubs();
-        if (clubs == null || !clubs.Any()) return NoContent();
-        return Ok(clubs);
+        if (clubs == null || !clubs.Any()) return NoContent(); // 204
+        return Ok(clubs); // 200
     }
     
     [HttpPost("/api/clubs")]
-    [Authorize] // You need to be logged in a user to access this
+    [AllowAnonymous]
     public IActionResult AddClub(Club newClub)
     {
-        if (newClub == null) return BadRequest(ModelState);
+        if (User.Identity is { IsAuthenticated: false }) return Unauthorized(); // 401
+        if (newClub == null) return BadRequest(ModelState); // 400
         _manager.AddClub(newClub.Name, newClub.NumberOfCourts, newClub.StreetName, newClub.ZipCode, newClub.ZipCode);
-        return Ok();
+        return Ok(); // 200
     }
 }

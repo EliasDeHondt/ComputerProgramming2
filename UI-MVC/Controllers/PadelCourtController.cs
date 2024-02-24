@@ -27,8 +27,3 @@ public class PadelCourtController : Controller
         return View(padelCourt);
     }
 }
-
-//[Authorize(Roles = "Admin, User")] // Only authenticated users can access this action
-//[Authorize(Roles = "Admin")]
-//[Authorize] // You need to be logged in a user to access this
-//if (!User.IsInRole("Admin")) return Redirect("https://eliasdh.com/assets/pages/403.html"); // If you're not an admin, redirect to custom page

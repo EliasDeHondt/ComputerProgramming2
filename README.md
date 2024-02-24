@@ -59,7 +59,7 @@
 ```text
 ###
 // Request to add a new Club without authentication (1)
-POST https://localhost:7074/api/Clubs HTTP/1.1
+POST https://localhost:6969/api/Clubs HTTP/1.1
 Content-Type: application/json
 
 {
@@ -71,9 +71,9 @@ Content-Type: application/json
 }
 ###
 // Request to add a new Club as an authenticated user (2)
-POST https://localhost:7074/api/Clubs HTTP/1.1
+POST https://localhost:6969/api/Clubs HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer
+Authorization: Bearer CfDJ8Kir2sV5b8xEqk/koFst/q1+MTGdIpeWsXfR/9JxJcLm2D8dvm7rvp9F598XUJFas0ioE03YBgg48db7H4N6PINNQ7lgJQygTNhzPBaY7hn4/yMcV8sC6jsPuLjzkScyebFRpV7mh53nvhyAeRv0dp56LCK86RuAYcMPv6znFGEvUgnQwyULeGBzDWDQfU8IETTLK4X8E0dhFHwm++CIMQPmhZdgWDduDDAMuYp7fkkx
 
 {
   "name": "Another Padel Club",
@@ -87,13 +87,18 @@ Authorization: Bearer
 ### 📥HTTP Response
 > This is the source file: [cookies_testing.http](UI-MVC/cookies_testing.http).
 ```text
-// Request to add a new Club (1)
-HTTP/1.1 200 OK
-Content-Length: 0
-Date: Fri, 22 Dec 2023 14:21:28 GMT
+// Request to add a new Club without authentication (1)
+HTTP/1.1 401 Unauthorized
+Content-Type: application/problem+json; charset=utf-8
+Date: Sat, 24 Feb 2024 17:25:57 GMT
 Server: Kestrel
+Transfer-Encoding: chunked
 
 // Request to add a new Club as an authenticated user (2)
+HTTP/1.1 200 OK
+Content-Length: 0
+Date: Sat, 24 Feb 2024 18:51:23 GMT
+Server: Kestrel
 ```
 
 ## 6️⃣ Sprint
@@ -103,11 +108,11 @@ Server: Kestrel
 ```text
 ###
 // Request to get all Clubs (1)
-GET https://localhost:7074/api/Clubs HTTP/1.1
+GET https://localhost:6969/api/Clubs HTTP/1.1
 ###
 ###
 // Request to add a new Club (2)
-POST https://localhost:7074/api/Clubs HTTP/1.1
+POST https://localhost:6969/api/Clubs HTTP/1.1
 Content-Type: application/json
 
 {
@@ -120,15 +125,15 @@ Content-Type: application/json
 ###
 ###
 // Request to get a player by id (3)
-GET https://localhost:7074/api/player/1 HTTP/1.1
+GET https://localhost:6969/api/player/1 HTTP/1.1
 ###
 ###
 // Request to get all Players (4)
-GET https://localhost:7074/api/players HTTP/1.1
+GET https://localhost:6969/api/players HTTP/1.1
 ###
 ###
 // Request to add a PadelCourt to a Player (5)
-POST https://localhost:7074/api/addPadelCourtToPlayer/1/3/bookings HTTP/1.1
+POST https://localhost:6969/api/addPadelCourtToPlayer/1/3/bookings HTTP/1.1
 Content-Type: application/json
 
 {
@@ -174,7 +179,7 @@ HTTP/1.1 201 Created
 Content-Length: 0
 Date: Fri, 22 Dec 2023 14:22:10 GMT
 Server: Kestrel
-Location: https://localhost:7074/api/player/1
+Location: https://localhost:6969/api/player/1
 ```
 
 ## 5️⃣Sprint

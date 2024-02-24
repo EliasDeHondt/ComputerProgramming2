@@ -29,9 +29,6 @@ function fetchClubs() {
                 responseTableBody.appendChild(row);
             });
         })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
 }
 
 document.getElementById('reloadButton').addEventListener('click', fetchClubs);

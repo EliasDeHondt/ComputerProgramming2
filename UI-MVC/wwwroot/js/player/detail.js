@@ -29,9 +29,6 @@ function fetchPlayersFromPadelCourt(courtNumber) {
                 responseTableBody.appendChild(row);
             });
         })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
 }
 
 function formatDate(dateString) {
