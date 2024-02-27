@@ -26,6 +26,28 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddScoped<IRepository, DbContextRepository>();
 builder.Services.AddScoped<IManager, Manager>();
 
+// Add the controllers and the Razor Pages to the application for routing purposes
+builder.Services.ConfigureApplicationCookie (cfg =>
+{
+    cfg.Events.OnRedirectToLogin += ctx =>
+    {
+        if (ctx.Request.Path.StartsWithSegments ("/api"))
+        {
+            ctx.Response.StatusCode = 401;
+        }
+        return Task.CompletedTask ;
+    };
+    
+    cfg.Events.OnRedirectToAccessDenied += ctx =>
+    {
+        if (ctx.Request.Path.StartsWithSegments ("/api"))
+        {
+            ctx.Response.StatusCode = 403;
+        }
+        return Task.CompletedTask ;
+    };
+});
+
 WebApplication app = builder.Build();
 
 using (IServiceScope scope = app.Services.CreateScope())
@@ -85,20 +107,6 @@ void SeedUsers(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> 
     var c = userManager.CreateAsync(user3, "User3$").Result;
     var d = userManager.CreateAsync(user4, "User4$").Result;
     var e = userManager.CreateAsync(user5, "User5$").Result;
-    
-    // Create tokens
-    var token1 = userManager.GenerateUserTokenAsync(user1, TokenOptions.DefaultProvider, "API").Result;
-    var token2 = userManager.GenerateUserTokenAsync(user2, TokenOptions.DefaultProvider, "API").Result;
-    var token3 = userManager.GenerateUserTokenAsync(user3, TokenOptions.DefaultProvider, "API").Result;
-    var token4 = userManager.GenerateUserTokenAsync(user4, TokenOptions.DefaultProvider, "API").Result;
-    var token5 = userManager.GenerateUserTokenAsync(user5, TokenOptions.DefaultProvider, "API").Result;
-    
-    // Add the tokens to the users
-    userManager.SetAuthenticationTokenAsync(user1, TokenOptions.DefaultProvider, "API", token1).Wait();
-    userManager.SetAuthenticationTokenAsync(user2, TokenOptions.DefaultProvider, "API", token2).Wait();
-    userManager.SetAuthenticationTokenAsync(user3, TokenOptions.DefaultProvider, "API", token3).Wait();
-    userManager.SetAuthenticationTokenAsync(user4, TokenOptions.DefaultProvider, "API", token4).Wait();
-    userManager.SetAuthenticationTokenAsync(user5, TokenOptions.DefaultProvider, "API", token5).Wait();
     
     // Add the users to the roles
     userManager.AddToRoleAsync(user1, adminRole).Wait();

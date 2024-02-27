@@ -97,7 +97,7 @@ Transfer-Encoding: chunked
 // Request to add a new Club as an authenticated user (2)
 HTTP/1.1 200 OK
 Content-Length: 0
-Date: Sat, 24 Feb 2024 18:51:23 GMT
+Date: Tue, 27 Feb 2024 12:39:42 GMT
 Server: Kestrel
 ```
 
