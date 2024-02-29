@@ -31,19 +31,15 @@ builder.Services.ConfigureApplicationCookie (cfg =>
 {
     cfg.Events.OnRedirectToLogin += ctx =>
     {
-        if (ctx.Request.Path.StartsWithSegments ("/api"))
-        {
-            ctx.Response.StatusCode = 401;
-        }
+        if (ctx.Request.Path.StartsWithSegments ("/api")) ctx.Response.StatusCode = 401;
+
         return Task.CompletedTask ;
     };
     
     cfg.Events.OnRedirectToAccessDenied += ctx =>
     {
-        if (ctx.Request.Path.StartsWithSegments ("/api"))
-        {
-            ctx.Response.StatusCode = 403;
-        }
+        if (ctx.Request.Path.StartsWithSegments ("/api")) ctx.Response.StatusCode = 403;
+
         return Task.CompletedTask ;
     };
 });
@@ -86,13 +82,11 @@ app.MapRazorPages(); // Map Razor Pages
 
 app.Run();
 
-void SeedUsers(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+void SeedUsers(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager) // Seed the database with some users & roles
 {
     // Create some users
-    const string adminRole = "Admin";
-    const string userRole = "User";
-    roleManager.CreateAsync(new IdentityRole(adminRole)).Wait();
-    roleManager.CreateAsync(new IdentityRole(userRole)).Wait();
+    string[] roleNames = { "Admin", "User" };
+    foreach (var roleName in roleNames) roleManager.CreateAsync(new IdentityRole(roleName)).Wait();
     
     // Create some users
     var user1 = new IdentityUser { UserName = "user1@eliasdh.com", Email = "user1@eliasdh.com", EmailConfirmed = true };
@@ -107,11 +101,13 @@ void SeedUsers(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> 
     var c = userManager.CreateAsync(user3, "User3$").Result;
     var d = userManager.CreateAsync(user4, "User4$").Result;
     var e = userManager.CreateAsync(user5, "User5$").Result;
+
+    if (!a.Succeeded || !b.Succeeded || !c.Succeeded || !d.Succeeded || !e.Succeeded) throw new Exception("Failed to create the users");
     
     // Add the users to the roles
-    userManager.AddToRoleAsync(user1, adminRole).Wait();
-    userManager.AddToRoleAsync(user2, adminRole).Wait();
-    userManager.AddToRoleAsync(user3, userRole).Wait();
-    userManager.AddToRoleAsync(user4, userRole).Wait();
-    userManager.AddToRoleAsync(user5, userRole).Wait();
+    userManager.AddToRoleAsync(user1, roleNames[0]).Wait();
+    userManager.AddToRoleAsync(user2, roleNames[0]).Wait();
+    userManager.AddToRoleAsync(user3, roleNames[1]).Wait();
+    userManager.AddToRoleAsync(user4, roleNames[1]).Wait();
+    userManager.AddToRoleAsync(user5, roleNames[1]).Wait();
 }
