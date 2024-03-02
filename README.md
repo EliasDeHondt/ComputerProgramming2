@@ -1,22 +1,58 @@
-# Computer Programming 2
+![logo](https://eliasdh.com/assets/media/images/logo-github.png)
+# 💙🤍README🤍💙
+
+## 📘Table of Contents
+
+1. [📘Table of Contents](#📘table-of-contents)
+2. [🖖Introduction](#🖖introduction)
+3. [📦Extra](#📦extra)
+    1. [8️⃣ Sprint](#8️⃣sprint)
+    2. [7️⃣ Sprint](#7️⃣sprint)
+        1. [💾Users data for testing](#💾users-data-for-testing)
+        2. [📤HTTP Request](#📤http-request)
+        3. [📥HTTP Response](#📥http-response)
+    3. [6️⃣ Sprint](#6️⃣-sprint)
+        1. [📤HTTP Request](#📤http-request-1)
+        2. [📥HTTP Response](#📥http-response-1)
+    4. [5️⃣Sprint](#5️⃣sprint)
+    5. [4️⃣Sprint](#4️⃣sprint)
+        1. [📐Database diagram](#📐database-diagram)
+    6. [3️⃣ Sprint](#3️⃣sprint)
+        1. [🔎Both search criteria completed](#🔎both-search-criteria-completed)
+        2. [🔎Search only by price](#🔎search-only-by-price)
+        3. [🔎Only search by indoor](#🔎only-search-by-indoor)
+        4. [🔎Both search criteria empty](#🔎both-search-criteria-empty)
+    7. [2️⃣ Sprint](#2️⃣sprint)
+    8. [1️⃣ Sprint](#1️⃣sprint)
+9. [🔗Links](#🔗links)
+
+
+---
+
+## 🖖Introduction
+
+I kindly request your thorough examination and absorption of the comprehensive documentation incorporated within the confines of this repository. Your diligent review of the diverse materials provided herein will undoubtedly enhance your understanding of the intricacies and nuances associated with the contents therein.
+
+Please also see following documents:
+- [LICENSE](LICENSE.md)
+- [SECURITY](SECURITY.md)
+
+## 📦Extra
 
 * Name: Elias De Hondt
 * Student number: 0160712-80
 * Academic year: 2023-2024
 * Class group: ISB204B
 * Subject: Padel Club Management
-* Club 1-* PadelCourt 1-* Booking *-1 Player
+* Club 1-* PadelCourt 1-* Booking *-1 Player 1-1 AspNetUsers 1-* AspNetUserTokens 1-* AspNetUserLogins 1-* AspNetUserClaims 1-* AspNetUserRoles 1-* AspNetRoles 1-* AspNetRoleClaims
 
-
-## Project [Computer Programming 2] Second year exercises of training applied computer science at KdG.
-
-## 8️⃣ Sprint
+### 8️⃣Sprint
 
 > No data available.
 
-## 7️⃣ Sprint
+### 7️⃣Sprint
 
-### 💾Users data for testing
+#### 💾Users data for testing
 ```json
 {
   "users": [
@@ -54,7 +90,7 @@
 }
 ```
 
-### 📤HTTP Request
+#### 📤HTTP Request
 > This is the source file: [cookies_testing.http](UI-MVC/cookies_testing.http).
 ```text
 ###
@@ -84,7 +120,7 @@ Authorization: Bearer CfDJ8Kir2sV5b8xEqk/koFst/q1+MTGdIpeWsXfR/9JxJcLm2D8dvm7rvp
 }
 ###
 ```
-### 📥HTTP Response
+#### 📥HTTP Response
 > This is the source file: [cookies_testing.http](UI-MVC/cookies_testing.http).
 ```text
 // Request to add a new Club without authentication (1)
@@ -101,9 +137,9 @@ Date: Tue, 27 Feb 2024 12:39:42 GMT
 Server: Kestrel
 ```
 
-## 6️⃣ Sprint
+### 6️⃣Sprint
 
-### 📤HTTP Request
+#### 📤HTTP Request
 > This is the source file: [api_testing.http](UI-MVC/api_testing.http).
 ```text
 ###
@@ -144,7 +180,7 @@ Content-Type: application/json
 ###
 ```
 
-### 📥HTTP Response
+#### 📥HTTP Response
 > This is the source file: [api_testing.http](UI-MVC/api_testing.http).
 ```text
 // Request to get all Clubs (1)
@@ -182,13 +218,13 @@ Server: Kestrel
 Location: https://localhost:6969/api/player/1
 ```
 
-## 5️⃣Sprint
+### 5️⃣Sprint
 
 > No data available.
 
-## 4️⃣Sprint
+### 4️⃣Sprint
 
-### 📐Database diagram
+#### 📐Database diagram
 ```mermaid
 classDiagram
     class Club {
@@ -300,39 +336,43 @@ classDiagram
     AspNetRoles "1" -- "*" AspNetRoleClaims
 ```
 
-## 3️⃣ Sprint 
+### 3️⃣Sprint
 
-### 🔎Both search criteria completed
+#### 🔎Both search criteria completed
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
 WHERE (@__price_0 IS NULL OR "p"."Price" = @__price_0) AND (@__indoor_1 IS NULL OR "p"."IsIndoor" = @__indoor_1)
 ```
 
-### 🔎Search only by price
+#### 🔎Search only by price
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
 WHERE @__price_0 IS NULL OR "p"."Price" = @__price_0
 ```
 
-### 🔎Only search by indoor
+#### 🔎Only search by indoor
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
 WHERE @__indoor_0 IS NULL OR "p"."IsIndoor" = @__indoor_0
 ```
 
-### 🔎Both search criteria empty
+#### 🔎Both search criteria empty
 ```sql
 SELECT "p"."CourtNumber", "p"."Capacity", "p"."ClubNumber", "p"."IsIndoor", "p"."PlayerNumber", "p"."Price"
 FROM "PadelCourts" AS "p"
 ```
 
-## 2️⃣ Sprint
+### 2️⃣Sprint
 
 > No data available.
 
-## 1️⃣ Sprint
+### 1️⃣Sprint
 
 > No data available.
+
+## 🔗Links
+- 👯 Web hosting company [EliasDH.com](https://eliasdh.com).
+- 📫 How to reach us eliasdehondt@outlook.com.
