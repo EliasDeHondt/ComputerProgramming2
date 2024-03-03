@@ -29,7 +29,6 @@ public interface IManager
     public IEnumerable<Booking> GetBookingsOfPlayer(int playerNumber);
     public IEnumerable<Player> GetPlayersOfPadelCourt(int courtNumber);
     public int AddBooking(int playerNumber, int courtNumber, Booking booking, bool returnBookingNumber);
-    public IEnumerable<PadelCourt> GetAllPadelCourts();
     public IEnumerable<Player> GetAllPlayersWithManager();
     public Player GetPlayerWithBookingsAndPadelCourtsAndManager(int playerNumber);
     public void UpdatePlayer(Player player);

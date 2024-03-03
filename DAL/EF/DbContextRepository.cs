@@ -145,11 +145,6 @@ public class DbContextRepository : IRepository
         return 0;
     }
     
-    public IEnumerable<PadelCourt> ReadAllPadelCourts()
-    {
-        return DbContext.PadelCourts;
-    }
-    
     public IEnumerable<Player> ReadAllPlayersWithManager()
     {
         return DbContext.Players.Include(player => player.PlayerManager);

@@ -32,7 +32,6 @@ public interface IRepository
     public IEnumerable<Booking> ReadBookingsOfPlayer(Player player);
     public IEnumerable<Player> ReadPlayersOfPadelCourt(int courtNumber);
     public int CreateBooking(Booking booking, bool returnBookingNumber);
-    public IEnumerable<PadelCourt> ReadAllPadelCourts();
     public IEnumerable<Player> ReadAllPlayersWithManager();
     public Player ReadPlayerWithBookingsAndPadelCourtsAndManager(int playerNumber);
     public IdentityUser ReadManagerByEmail(string email);

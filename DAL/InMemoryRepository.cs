@@ -240,11 +240,6 @@ public class InMemoryRepository : IRepository
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }
       
-      public IEnumerable<PadelCourt> ReadAllPadelCourts()
-      {
-          throw new NotImplementedException("This method is not implemented in in-memory repository.");
-      }
-      
       public IEnumerable<Player> ReadAllPlayersWithManager()
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");

@@ -161,11 +161,6 @@ public class Manager : IManager
         return bookingNumber;
     }
     
-    public IEnumerable<PadelCourt> GetAllPadelCourts()
-    {
-        return _repository.ReadAllPadelCourts();
-    }
-    
     public IEnumerable<Player> GetAllPlayersWithManager()
     {
         return _repository.ReadAllPlayersWithManager();
