@@ -1,6 +1,8 @@
 runtime: aspnetcore
 env: flex
 
+entrypoint: "dotnet UI-MVC/UI-MVC.dll"
+
 runtime_config:
   operating_system: ubuntu22
 
