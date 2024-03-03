@@ -6,7 +6,6 @@
  ***************************************/
 // Class DataSeeder
 
-using Microsoft.AspNetCore.Identity;
 using PadelClubManagement.BL.Domain;
 
 namespace PadelClubManagement.DAL.EF;
