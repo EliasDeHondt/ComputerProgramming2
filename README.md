@@ -48,7 +48,10 @@ Please also see following documents:
 
 ### 8️⃣Sprint
 
-> No data available.
+#### 🔬Test the application
+```shell
+dotnet test
+```
 
 ### 7️⃣Sprint
 
