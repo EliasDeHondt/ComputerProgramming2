@@ -3,6 +3,8 @@
 # @see https://eliasdh.com #
 # @since 01/03/2024        #
 ############################
+
+# App Engine configuration
 env: flex
 runtime: custom
-service: dotnet-core
+service: default
