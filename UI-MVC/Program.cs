@@ -16,7 +16,7 @@ using PadelClubManagement.DAL.EF;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<PadelClubManagementDbContext>(options => options.UseSqlite(@"Data Source=..\PadelClubManagement.db"));
-//builder.Services.AddDbContext<PadelClubManagementDbContext>(options => options.UseNpgsql("Host=35.195.216.224;Port=5432;Database=codeforge;=admin;Password=123"));
+//builder.Services.AddDbContext<PadelClubManagementDbContext>(options => options.UseNpgsql("Host=35.187.177.58;Port=5432;Database=codeforge;Username=admin;Password=123"));
 
 builder.Services.AddDbContext<PadelClubManagementDbContext>();
 
