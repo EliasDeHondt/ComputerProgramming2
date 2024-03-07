@@ -53,6 +53,14 @@ Please also see following documents:
 dotnet test
 ```
 
+#### 🔬Tested method names
+```cs
+// Integration Tests
+
+// Unit Tests
+
+```
+
 ### 7️⃣Sprint
 
 #### 💾Users data for testing
