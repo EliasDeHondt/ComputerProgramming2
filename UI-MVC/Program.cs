@@ -33,15 +33,13 @@ builder.Services.ConfigureApplicationCookie (cfg =>
     cfg.Events.OnRedirectToLogin += ctx =>
     {
         if (ctx.Request.Path.StartsWithSegments ("/api")) ctx.Response.StatusCode = 401;
-
-        return Task.CompletedTask ;
+        return Task.CompletedTask;
     };
     
     cfg.Events.OnRedirectToAccessDenied += ctx =>
     {
         if (ctx.Request.Path.StartsWithSegments ("/api")) ctx.Response.StatusCode = 403;
-
-        return Task.CompletedTask ;
+        return Task.CompletedTask;
     };
 });
 
@@ -112,3 +110,5 @@ void SeedUsers(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> 
     userManager.AddToRoleAsync(user4, roleNames[1]).Wait();
     userManager.AddToRoleAsync(user5, roleNames[1]).Wait();
 }
+
+public partial class Program { } // Partial class to avoid redundant code in Test projects

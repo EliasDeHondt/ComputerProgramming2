@@ -8,7 +8,7 @@
 using System.ComponentModel.DataAnnotations;
 using PadelClubManagement.BL.Domain;
 
-namespace PadelClubManagement.BL.Tests;
+namespace Tests.IntegrationTests;
 
 public class ClubTests
 {
