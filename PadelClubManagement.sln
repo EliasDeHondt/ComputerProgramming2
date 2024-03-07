@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI-MVC", "UI-MVC\UI-MVC.csproj", "{A48CDA65-26E5-4A9A-9CBB-824E15A71EBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI-MVC.Tests", "UI-MVC.Tests\UI-MVC.Tests.csproj", "{15487D19-729E-4217-9ED2-7810680EF07F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL.Tests", "BL.Tests\BL.Tests.csproj", "{21A465C1-6C83-4F3A-A14A-5F3308AEE650}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{A48CDA65-26E5-4A9A-9CBB-824E15A71EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A48CDA65-26E5-4A9A-9CBB-824E15A71EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A48CDA65-26E5-4A9A-9CBB-824E15A71EBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15487D19-729E-4217-9ED2-7810680EF07F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15487D19-729E-4217-9ED2-7810680EF07F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15487D19-729E-4217-9ED2-7810680EF07F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15487D19-729E-4217-9ED2-7810680EF07F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21A465C1-6C83-4F3A-A14A-5F3308AEE650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21A465C1-6C83-4F3A-A14A-5F3308AEE650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21A465C1-6C83-4F3A-A14A-5F3308AEE650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21A465C1-6C83-4F3A-A14A-5F3308AEE650}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
