@@ -5,19 +5,19 @@
  *                                     *
  ***************************************/
 
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using PadelClubManagement.BL;
 using PadelClubManagement.BL.Domain;
+using Tests.Config;
 
 namespace Tests.IntegrationTests;
 
-public class PadelCourtTests : IClassFixture<WebApplicationFactory<Program>>
+public class PadelCourtTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> _factory;
+    private readonly CustomWebApplicationFactory<Program> _factory;
     
     
-    public PadelCourtTests(WebApplicationFactory<Program> factory) // Constructor
+    public PadelCourtTests(CustomWebApplicationFactory<Program> factory) // Constructor
     {
         _factory = factory; // Create a new web application factory
     }
