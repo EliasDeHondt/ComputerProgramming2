@@ -16,7 +16,6 @@ public class PadelCourtTests : IClassFixture<CustomWebApplicationFactory<Program
 {
     private readonly CustomWebApplicationFactory<Program> _factory;
     
-    
     public PadelCourtTests(CustomWebApplicationFactory<Program> factory) // Constructor
     {
         _factory = factory; // Create a new web application factory
