@@ -25,6 +25,11 @@ public class Manager : IManager
         return _repository.ReadPlayer(playerNumber);
     }
     
+    public Booking GetBooking(int bookingNumber)
+    {
+        return _repository.ReadBooking(bookingNumber);
+    }
+    
     public IEnumerable<Player> GetAllPlayers()
     {
         return _repository.ReadAllPlayers();

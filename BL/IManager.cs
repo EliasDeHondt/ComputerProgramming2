@@ -11,6 +11,8 @@ namespace PadelClubManagement.BL;
 
 public interface IManager
 {
+    public Player GetPlayer(int playerNumber);
+    public Booking GetBooking(int bookingNumber);
     public IEnumerable<Player> GetAllPlayers();
     public IEnumerable<Player> GetPlayersByPosition(PlayerPosition position);
     public void AddPlayer(string firstName, string lastName, DateOnly? birthDate, double level, PlayerPosition position);
