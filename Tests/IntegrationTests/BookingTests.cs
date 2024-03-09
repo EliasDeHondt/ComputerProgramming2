@@ -43,8 +43,7 @@ public class BookingTests : IClassFixture<CustomWebApplicationFactory<Program>>
         int bookingNumber = manager.AddBooking(playerNumber, courtNumber, booking, true);
         manager.AddPlayerToBooking(playerNumber, bookingNumber);
         manager.AddPadelCourtToBooking(courtNumber, bookingNumber);
-
-
+        
         // Assert
         Assert.True(bookingNumber > 0); // Expected: true
         Assert.NotNull(manager.GetBooking(bookingNumber)); // Expected: true

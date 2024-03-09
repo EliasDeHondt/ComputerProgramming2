@@ -58,11 +58,14 @@ dotnet test
 // Integration Tests
 public PadelCourt GetPadelCourt(int courtNumber); // BL
 public int AddBooking(int playerNumber, int courtNumber, Booking booking, bool returnBookingNumber); // BL
+public IActionResult Add(Player player); // MVC
 
 // Unit Tests
 
 
 ```
+
+![Code coverage](code-coverage.png)
 
 ### 7️⃣Sprint
 
