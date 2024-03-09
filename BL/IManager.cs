@@ -35,4 +35,5 @@ public interface IManager
     public Player GetPlayerWithBookingsAndPadelCourtsAndManager(int playerNumber);
     public void UpdatePlayer(Player player);
     public Player GetPlayerWithUser(int playerNumber);
+    public void DeleteAllClubs();
 }

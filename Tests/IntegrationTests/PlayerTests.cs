@@ -12,9 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using PadelClubManagement.BL;
 using PadelClubManagement.BL.Domain;
-using PadelClubManagement.DAL.EF;
 using PadelClubManagement.UI.Web.Controllers;
 using Tests.Config;
+using Xunit;
 
 namespace Tests.IntegrationTests;
 
@@ -48,9 +48,9 @@ public class PlayerTests : IClassFixture<CustomWebApplicationFactory<Program>>
         IActionResult result = controller.Add(player);
         
         // Assert
-        var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
-        Assert.Equal("Detail", redirectToActionResult.ActionName);
-        Assert.Equal(player.PlayerNumber, redirectToActionResult.RouteValues?["playerNumber"]);
+        var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result); // Expected: true
+        Assert.Equal("Detail", redirectToActionResult.ActionName); // Expected: "Detail"
+        Assert.Equal(player.PlayerNumber, redirectToActionResult.RouteValues?["playerNumber"]); // Expected: player.PlayerNumber
     }
 
     [Fact]                                                     // [Authorize] + [HttpPost]
@@ -73,10 +73,10 @@ public class PlayerTests : IClassFixture<CustomWebApplicationFactory<Program>>
         // Act and Assert
         Assert.Throws<ValidationException>(() =>
         {
-            IActionResult result = controller.Add(player);
-            Assert.IsType<RedirectToActionResult>(result);
-            Assert.Equal("Detail", ((RedirectToActionResult)result).ActionName);
-            Assert.Equal(player.PlayerNumber, ((RedirectToActionResult)result).RouteValues?["playerNumber"]);
+            IActionResult result = controller.Add(player); 
+            Assert.IsType<RedirectToActionResult>(result);  // Expected: true
+            Assert.Equal("Detail", ((RedirectToActionResult)result).ActionName); // Expected: "Detail"
+            Assert.Equal(player.PlayerNumber, ((RedirectToActionResult)result).RouteValues?["playerNumber"]); // Expected: player.PlayerNumber
         });
     }
 }

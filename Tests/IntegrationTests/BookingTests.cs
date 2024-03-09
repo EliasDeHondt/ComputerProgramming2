@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PadelClubManagement.BL;
 using PadelClubManagement.BL.Domain;
 using Tests.Config;
+using Xunit;
 
 namespace Tests.IntegrationTests;
 

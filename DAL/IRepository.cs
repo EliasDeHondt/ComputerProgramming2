@@ -37,4 +37,5 @@ public interface IRepository
     public IdentityUser ReadManagerByEmail(string email);
     public void WritePlayer(Player player);
     public Player ReadPlayerWithUser(int playerNumber);
+    public void RemoveAllClubs();
 }

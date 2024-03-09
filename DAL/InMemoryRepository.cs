@@ -264,4 +264,9 @@ public class InMemoryRepository : IRepository
       {
           throw new NotImplementedException("This method is not implemented in in-memory repository.");
       }
+
+      public void RemoveAllClubs()
+      {
+          throw new NotImplementedException("This method is not implemented in in-memory repository.");
+      }
 }

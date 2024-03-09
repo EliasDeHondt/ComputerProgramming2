@@ -59,6 +59,7 @@ dotnet test
 public PadelCourt GetPadelCourt(int courtNumber); // BL
 public int AddBooking(int playerNumber, int courtNumber, Booking booking, bool returnBookingNumber); // BL
 public IActionResult Add(Player player); // MVC
+public IActionResult GetAllClubs(); // API
 
 // Unit Tests
 

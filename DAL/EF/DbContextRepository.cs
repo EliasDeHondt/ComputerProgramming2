@@ -174,4 +174,10 @@ public class DbContextRepository : IRepository
     {
         return DbContext.Players.Include(player => player.PlayerManager).FirstOrDefault(player => player.PlayerNumber == playerNumber);
     }
+    
+    public void RemoveAllClubs()
+    {
+        DbContext.Clubs.RemoveRange(DbContext.Clubs);
+        DbContext.SaveChanges(); // Save changes to the database
+    }
 }

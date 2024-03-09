@@ -187,6 +187,11 @@ public class Manager : IManager
         return _repository.ReadPlayerWithUser(playerNumber);
     }
     
+    public void DeleteAllClubs()
+    {
+        _repository.RemoveAllClubs();
+    }
+    
     private void Validate(Player player) // Validate the Player object (overload)
     {
         if (player == null) throw new ValidationException("\nAn error occurred, please try again:\n * Player does not exist\nend");
