@@ -22,7 +22,7 @@ public class PadelCourtTests : IClassFixture<CustomWebApplicationFactory<Program
     }
     
     [Fact]
-    public void GetPadelCourt_ReturnPadelCourt_GivenValidCourtNumber() // Method: public PadelCourt GetPadelCourt(int courtNumber)
+    public void GetPadelCourt_ReturnPadelCourt_GivenValidCourtNumber() // Method: public PadelCourt GetPadelCourt(int courtNumber):
     {
         // Arrange
         using IServiceScope scope = _factory.Services.CreateScope();
@@ -38,7 +38,7 @@ public class PadelCourtTests : IClassFixture<CustomWebApplicationFactory<Program
     }
     
     [Fact]
-    public void GetPadelCourt_ReturnNull_GivenInvalidCourtNumber() // Method: public PadelCourt GetPadelCourt(int courtNumber)
+    public void GetPadelCourt_ReturnNull_GivenInvalidCourtNumber() // Method: public PadelCourt GetPadelCourt(int courtNumber):
     {
         // Arrange
         using IServiceScope scope = _factory.Services.CreateScope();

@@ -23,7 +23,7 @@ public class DbContextRepository : IRepository
 
     public Player ReadPlayer(int playerNumber)
     {
-        return DbContext.Players.Find(playerNumber);
+        return DbContext.Players.Include(player => player.PlayerManager).FirstOrDefault(player => player.PlayerNumber == playerNumber);
     }
     
     public IEnumerable<Player> ReadAllPlayers()

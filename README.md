@@ -56,8 +56,11 @@ dotnet test
 #### 🔬Tested method names
 ```cs
 // Integration Tests
+public PadelCourt GetPadelCourt(int courtNumber); // BL
+public int AddBooking(int playerNumber, int courtNumber, Booking booking, bool returnBookingNumber); // BL
 
 // Unit Tests
+
 
 ```
 
