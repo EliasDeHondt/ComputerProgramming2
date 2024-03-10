@@ -7,17 +7,12 @@
 // Top level statements, i.e. entry point of the application (Start)
 
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using PadelClubManagement.BL;
 using PadelClubManagement.DAL;
 using PadelClubManagement.DAL.EF;
 
 // Composition Root
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddDbContext<PadelClubManagementDbContext>(options => options.UseSqlite(@"Data Source=..\PadelClubManagement.db"));
-
-//builder.Services.AddDbContext<PadelClubManagementDbContext>(options => options.UseNpgsql("Host=34.77.23.244;Port=5432;Database=codeforge;Username=admin;Password=123"));
 
 builder.Services.AddDbContext<PadelClubManagementDbContext>();
 

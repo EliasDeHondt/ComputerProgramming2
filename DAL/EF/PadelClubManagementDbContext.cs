@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PadelClubManagement.BL.Domain;
 
 namespace PadelClubManagement.DAL.EF;
@@ -30,11 +31,29 @@ public class PadelClubManagementDbContext : IdentityDbContext<IdentityUser>
         
         if (!optionsBuilder.IsConfigured) // If not configured, configure it
         {
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var host = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_HOST_PRODUCTION");
+            var port = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_PORT");
+            var database = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_DATABASE_PRODUCTION");
+            var username = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_USER");
+            var password = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_PASSWORD_PRODUCTION");
+            
+            if (env == "Development")
+            {
+                optionsBuilder.UseSqlite(@"Data Source=..\PadelClubManagement.db");
+            }
+            else if (env == "Production")
+            {
+                string connectionString = "Host=" + host + ";Port=" + port + ";Database=" + database + ";Username=" + username + ";Password=" + password +";";
+                optionsBuilder.UseNpgsql(connectionString);
+            }
+            
+            
             optionsBuilder.UseLazyLoadingProxies(false); // Disable lazy loading
             optionsBuilder.LogTo(message => Debug.WriteLine(message), LogLevel.Information); // Log to Debug
         }
     }
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder); // Call base method to configure the modelBuilder
