@@ -38,8 +38,15 @@ public class PadelClubManagementDbContext : IdentityDbContext<IdentityUser>
             var username = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_USER");
             var password = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_PASSWORD");
             
-            string connectionString = "Host=" + host + ";Port=" + port + ";Database=" + database + ";Username=" + username + ";Password=" + password +";";
-            optionsBuilder.UseNpgsql(connectionString);
+            if (environment == "Development")
+            {
+                optionsBuilder.UseSqlite(@"Data Source=..\PadelClubManagement.db");
+            }
+            else if (environment == "Production")
+            {
+                string connectionString = "Host=" + host + ";Port=" + port + ";Database=" + database + ";Username=" + username + ";Password=" + password +";";
+                optionsBuilder.UseNpgsql(connectionString);
+            }
             
             optionsBuilder.UseLazyLoadingProxies(false); // Disable lazy loading
             optionsBuilder.LogTo(message => Debug.WriteLine(message), LogLevel.Information); // Log to Debug
