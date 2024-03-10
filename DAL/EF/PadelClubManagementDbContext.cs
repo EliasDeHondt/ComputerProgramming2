@@ -5,12 +5,12 @@
  *                                     *
  ***************************************/
 // Class PadelClubManagementDbContext
+
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PadelClubManagement.BL.Domain;
 
 namespace PadelClubManagement.DAL.EF;
@@ -31,23 +31,22 @@ public class PadelClubManagementDbContext : IdentityDbContext<IdentityUser>
         
         if (!optionsBuilder.IsConfigured) // If not configured, configure it
         {
-            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var host = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_HOST_PRODUCTION");
             var port = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_PORT");
             var database = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_DATABASE_PRODUCTION");
             var username = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_USER");
             var password = Environment.GetEnvironmentVariable("ASPNETCORE_POSTGRES_PASSWORD_PRODUCTION");
             
-            if (env == "Development")
+            if (environment == "Development")
             {
                 optionsBuilder.UseSqlite(@"Data Source=..\PadelClubManagement.db");
             }
-            else if (env == "Production")
+            else if (environment == "Production")
             {
                 string connectionString = "Host=" + host + ";Port=" + port + ";Database=" + database + ";Username=" + username + ";Password=" + password +";";
                 optionsBuilder.UseNpgsql(connectionString);
             }
-            
             
             optionsBuilder.UseLazyLoadingProxies(false); // Disable lazy loading
             optionsBuilder.LogTo(message => Debug.WriteLine(message), LogLevel.Information); // Log to Debug
