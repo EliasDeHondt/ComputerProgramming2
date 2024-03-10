@@ -44,7 +44,7 @@ public class PadelClubManagementDbContext : IdentityDbContext<IdentityUser>
             }
             else if (environment == "Production")
             {
-                string connectionString = "Host=" + host + ";Port=" + port + ";Database=" + database + ";Username=" + username + ";Password=" + password +";";
+                string connectionString = $"Host={host};Port={port};Database={database};Username={username};Password={password}";
                 optionsBuilder.UseNpgsql(connectionString);
             }
             
