@@ -8,7 +8,9 @@
 env: flex
 runtime: custom
 service: default
-
+manual_scaling:
+  instances: 1
+  
 # Secret configuration
 env_variables:
   ASPNETCORE_ENVIRONMENT: 'Production'
