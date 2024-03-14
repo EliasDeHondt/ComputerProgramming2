@@ -68,6 +68,7 @@ public IActionResult GetAllClubs(); // API
 
 // Unit Tests
 public void AddClub(string name, int numberOfCourts, string streetName, int houseNumber, int zipCode); // BL
+public void AddPadelCourt(int clubNumber, double price, bool indoor); // BL
 
 
 ```

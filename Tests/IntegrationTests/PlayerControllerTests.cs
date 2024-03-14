@@ -36,25 +36,23 @@ public class PlayerControllerTests : IClassFixture<ExtendedWebApplicationFactory
         using IServiceScope scope = _factory.Services.CreateScope();
         IServiceProvider services = scope.ServiceProvider;
         IManager manager = services.GetRequiredService<IManager>();
+        PlayerController controller = new PlayerController(manager);
         
         Player player = manager.GetPlayer(1); // Get a valid player from the database
+        
+        // Simulate an authenticated user
+        var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] { new (ClaimTypes.Email, "user1@eliasdh.com") }, "mock"));
 
-        var client = _factory.SetAuthenticatedUser(
-            new Claim(ClaimTypes.NameIdentifier, "AdminId1"),
-            new Claim(ClaimTypes.Email, "user1@eliasdh.com"),
-            new Claim(ClaimTypes.Name, "user1@eliasdh.com"),
-            new Claim(ClaimTypes.Role, "Admin")
-        ).CreateClient(); // Create an HTTP client
+        // Set the HttpContext user to the simulated user
+        controller.ControllerContext = new ControllerContext { HttpContext = new DefaultHttpContext { User = user } };
         
         // Act
-        var response = client.PostAsJsonAsync("/Player/Add", player).Result; // Send a POST request to the specified URI
-        var responseBody = response.Content.ReadAsStringAsync().Result; // Read the response body
+        IActionResult result = controller.Add(player);
         
         // Assert
-        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode); // Expected: 302
-        
-        // Test Cleaning
-        _factory.SetAuthenticatedUser();
+        var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result); // Expected: true
+        Assert.Equal("Detail", redirectToActionResult.ActionName); // Expected: "Detail"
+        Assert.Equal(player.PlayerNumber, redirectToActionResult.RouteValues?["playerNumber"]); // Expected: player.PlayerNumber
     }
 
     [Fact]                                                     // [Authorize] + [HttpPost]
