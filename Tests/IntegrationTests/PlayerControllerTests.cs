@@ -6,6 +6,7 @@
  ***************************************/
 
 using System.ComponentModel.DataAnnotations;
+using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +19,11 @@ using Xunit;
 
 namespace Tests.IntegrationTests;
 
-public class PlayerTests : IClassFixture<CustomWebApplicationFactory<Program>>
+public class PlayerControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
     private readonly CustomWebApplicationFactory<Program> _factory;
     
-    public PlayerTests(CustomWebApplicationFactory<Program> factory) // Constructor
+    public PlayerControllerTests(CustomWebApplicationFactory<Program> factory) // Constructor
     {
         _factory = factory; // Create a new web application factory
     }
@@ -78,5 +79,37 @@ public class PlayerTests : IClassFixture<CustomWebApplicationFactory<Program>>
             Assert.Equal("Detail", ((RedirectToActionResult)result).ActionName); // Expected: "Detail"
             Assert.Equal(player.PlayerNumber, ((RedirectToActionResult)result).RouteValues?["playerNumber"]); // Expected: player.PlayerNumber
         });
+    }
+    
+    [Fact]
+    public void Index_ReturnView_GivenValidEndpoint() // Method: public IActionResult Index();
+    {
+        // Arrange
+        var client = _factory.CreateClient(); // Create an HTTP client
+        
+        // Act
+        var response = client.GetAsync("/Player/Index").Result; // Send a GET request to the specified URI
+        var responsebody = response.Content.ReadAsStringAsync().Result; // Read the response body
+        
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode); // Expected: 200
+        Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType?.ToString()); // Expected: "text/html; charset=utf-8"
+        Assert.Contains("<title>Players - Padel Club Management</title>", responsebody); // Expected: true
+    }
+    
+    [Fact]
+    public void Detail_ReturnView_GivenValidEndpoint() // Method: public IActionResult Detail(int playerNumber);
+    {
+        // Arrange
+        var client = _factory.CreateClient(); // Create an HTTP client
+        
+        // Act
+        var response = client.GetAsync("/Player/Detail?playerNumber=1").Result; // Send a GET request to the specified URI
+        var responsebody = response.Content.ReadAsStringAsync().Result; // Read the response body
+        
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode); // Expected: 200
+        Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType?.ToString()); // Expected: "text/html; charset=utf-8"
+        Assert.Contains("Player (ID: 1) Details", responsebody); // Expected: true
     }
 }

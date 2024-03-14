@@ -13,16 +13,16 @@ using Xunit;
 
 namespace Tests.IntegrationTests;
 
-public class ClubsTests : IClassFixture<CustomWebApplicationFactory<Program>>
+public class ClubsControllerTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
     private readonly CustomWebApplicationFactory<Program> _factory;
     
-    public ClubsTests(CustomWebApplicationFactory<Program> factory) // Constructor
+    public ClubsControllerTests(CustomWebApplicationFactory<Program> factory) // Constructor
     {
         _factory = factory; // Create a new web application factory
     }
     
-    [Fact]                                                // [HttpGet("/api/clubs")]
+    [Fact]                                                  // [HttpGet("/api/clubs")]
     public void GetAllClubs_Return200_GivenValidEndpoint() // Method: public IActionResult GetAllClubs();
     {
         // Arrange
@@ -35,7 +35,7 @@ public class ClubsTests : IClassFixture<CustomWebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
     
-    [Fact]                                                // [HttpGet("/api/clubs")]
+    [Fact]                                                    // [HttpGet("/api/clubs")]
     public void GetAllClubs_Return204_GivenInValidEndpoint() // Method: public IActionResult GetAllClubs();
     {
         // Arrange

@@ -31,10 +31,8 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
                 connection.Open();
                 return connection;
             });
-            services.AddDbContext<PadelClubManagementDbContext>((container, options) =>
-            {
-                options.UseSqlite(container.GetRequiredService<DbConnection>());
-            });
+            services.AddDbContext<PadelClubManagementDbContext>((container, options) => 
+                options.UseSqlite(container.GetRequiredService<DbConnection>()));
         });
         builder.UseEnvironment("Development");
     }

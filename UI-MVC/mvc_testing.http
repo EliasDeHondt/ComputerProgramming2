@@ -1,0 +1,15 @@
+// ***************************************
+// *                                     *
+// *   Created by Elias De Hondt         *
+// *   Visit https://eliasdh.com         *
+// *                                     *
+// ***************************************/
+// MVC Testing
+
+###
+// Request to add a player to the database
+POST https://localhost:6969/Player/Add
+Content-Type: application/x-www-form-urlencoded
+
+name=TestPlayer
+###

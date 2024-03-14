@@ -7,6 +7,8 @@
 2. [🖖Introduction](#🖖introduction)
 3. [📦Extra](#📦extra)
     1. [8️⃣ Sprint](#8️⃣sprint)
+       1. [🔬Test the application](#🔬test-the-application)
+       2. [🔬Tested method names](#🔬tested-method-names)
     2. [7️⃣ Sprint](#7️⃣sprint)
         1. [💾Users data for testing](#💾users-data-for-testing)
         2. [📤HTTP Request](#📤http-request)
@@ -59,6 +61,8 @@ dotnet test
 public PadelCourt GetPadelCourt(int courtNumber); // BL
 public int AddBooking(int playerNumber, int courtNumber, Booking booking, bool returnBookingNumber); // BL
 public IActionResult Add(Player player); // MVC
+public IActionResult Index(); // MVC
+public IActionResult Detail(int playerNumber); // MVC
 public IActionResult GetAllClubs(); // API
 
 // Unit Tests
@@ -67,6 +71,18 @@ public IActionResult GetAllClubs(); // API
 ```
 
 ![Code coverage](code-coverage.png)
+
+#### 🔬MVC .http test
+> This is the source file: [mvc_testing.http](UI-MVC/mvc_testing.http).
+```text
+###
+// Request to add a player to the database
+POST https://localhost:6969/Player/Add
+Content-Type: application/x-www-form-urlencoded
+
+name=TestPlayer
+###
+```
 
 ### 7️⃣Sprint
 
