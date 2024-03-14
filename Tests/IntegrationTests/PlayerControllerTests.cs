@@ -112,4 +112,20 @@ public class PlayerControllerTests : IClassFixture<CustomWebApplicationFactory<P
         Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType?.ToString()); // Expected: "text/html; charset=utf-8"
         Assert.Contains("Player (ID: 1) Details", responsebody); // Expected: true
     }
+    
+    [Fact]
+    public void Privacy_ReturnView_GivenValidEndpoint() // Method: public IActionResult Privacy();
+    {
+        // Arrange
+        var client = _factory.CreateClient(); // Create an HTTP client
+        
+        // Act
+        var response = client.GetAsync("/Player/Privacy").Result; // Send a GET request to the specified URI
+        var responsebody = response.Content.ReadAsStringAsync().Result; // Read the response body
+        
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode); // Expected: 200
+        Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType?.ToString()); // Expected: "text/html; charset=utf-8"
+        Assert.Contains("<h1>Privacy Policy</h1>", responsebody); // Expected: true
+    }
 }

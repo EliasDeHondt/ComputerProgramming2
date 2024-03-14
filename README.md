@@ -63,6 +63,7 @@ public int AddBooking(int playerNumber, int courtNumber, Booking booking, bool r
 public IActionResult Add(Player player); // MVC
 public IActionResult Index(); // MVC
 public IActionResult Detail(int playerNumber); // MVC
+public IActionResult Privacy(); // MVC
 public IActionResult GetAllClubs(); // API
 
 // Unit Tests
