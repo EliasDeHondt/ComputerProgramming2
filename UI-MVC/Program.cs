@@ -84,11 +84,11 @@ void SeedUsers(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> 
     foreach (var roleName in roleNames) roleManager.CreateAsync(new IdentityRole(roleName)).Wait();
     
     // Create some users
-    var user1 = new IdentityUser { UserName = "user1@eliasdh.com", Email = "user1@eliasdh.com", EmailConfirmed = true };
-    var user2 = new IdentityUser { UserName = "user2@eliasdh.com", Email = "user2@eliasdh.com", EmailConfirmed = true };
-    var user3 = new IdentityUser { UserName = "user3@eliasdh.com", Email = "user3@eliasdh.com", EmailConfirmed = true };
-    var user4 = new IdentityUser { UserName = "user4@eliasdh.com", Email = "user4@eliasdh.com", EmailConfirmed = true };
-    var user5 = new IdentityUser { UserName = "user5@eliasdh.com", Email = "user5@eliasdh.com", EmailConfirmed = true };
+    var user1 = new IdentityUser { Id ="AdminId1", UserName = "user1@eliasdh.com", Email = "user1@eliasdh.com", EmailConfirmed = true };
+    var user2 = new IdentityUser { Id ="AdminId2", UserName = "user2@eliasdh.com", Email = "user2@eliasdh.com", EmailConfirmed = true };
+    var user3 = new IdentityUser { Id ="UserId1", UserName = "user3@eliasdh.com", Email = "user3@eliasdh.com", EmailConfirmed = true };
+    var user4 = new IdentityUser { Id ="UserId2", UserName = "user4@eliasdh.com", Email = "user4@eliasdh.com", EmailConfirmed = true };
+    var user5 = new IdentityUser { Id ="UserId3", UserName = "user5@eliasdh.com", Email = "user5@eliasdh.com", EmailConfirmed = true };
     
     // Add the password to the users and create them
     var a = userManager.CreateAsync(user1, "User1$").Result;

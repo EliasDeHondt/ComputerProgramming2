@@ -14,11 +14,11 @@ using Xunit;
 
 namespace Tests.IntegrationTests;
 
-public class BookingTests : IClassFixture<CustomWebApplicationFactory<Program>>
+public class BookingTests : IClassFixture<ExtendedWebApplicationFactoryWithMockAuth<Program>>
 {
-    private readonly CustomWebApplicationFactory<Program> _factory;
+    private readonly ExtendedWebApplicationFactoryWithMockAuth<Program> _factory;
     
-    public BookingTests(CustomWebApplicationFactory<Program> factory) // Constructor
+    public BookingTests(ExtendedWebApplicationFactoryWithMockAuth<Program> factory) // Constructor
     {
         _factory = factory; // Create a new web application factory
     }
