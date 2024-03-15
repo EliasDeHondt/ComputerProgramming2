@@ -5,13 +5,17 @@
  *                                     *
  ***************************************/
 
+using System.ComponentModel.DataAnnotations;
+using PadelClubManagement.BL;
 using System.Net;
 using Microsoft.Extensions.DependencyInjection;
-using PadelClubManagement.BL;
+using Moq;
+using PadelClubManagement.BL.Domain;
+using PadelClubManagement.DAL;
 using Tests.Config;
 using Xunit;
 
-namespace Tests.IntegrationTests;
+namespace Tests.UnitTests;
 
 public class ClubsControllerTests : IClassFixture<ExtendedWebApplicationFactoryWithMockAuth<Program>>
 {
@@ -58,4 +62,41 @@ public class ClubsControllerTests : IClassFixture<ExtendedWebApplicationFactoryW
         IManager manager = services.GetRequiredService<IManager>();
         manager.DeleteAllClubs(); // Delete all clubs
     }
+    
+    [Fact]                                            // [AllowAnonymous] [HttpPost("/api/clubs")]
+    public void AddClub_GivenValidClub_Return200() // Method: public IActionResult AddClub(Club newClub);
+    {
+        // Arrange
+        var mockRepo = new Mock<IRepository>(); // Create a new mock repository
+        mockRepo.Setup(r => r.CreateClub(It.IsAny<Club>())).Callback((Club club) => {club.ClubNumber=69; }).Verifiable(Times.Once); // Setup the mock repository
+        var manager = new Manager(mockRepo.Object); // Create a new manager
+
+        // Act
+        manager.AddClub("TestClub", 4, "TestStreet", 14, 2650); // Add a new club
+        
+        
+        // Assert
+        mockRepo.Verify(r => r.CreateClub(It.IsAny<Club>()), Times.Once); // Expected: Once (200)
+        
+        mockRepo.VerifyAll(); // Drop mock repository
+    }
+    
+    [Fact]                                                                // [AllowAnonymous] [HttpPost("/api/clubs")]
+    public void AddClub_GivenInValidClub_ShouldThrowValidationException() // Method: public IActionResult AddClub(Club newClub);
+    {
+        // Arrange
+        var mockRepo = new Mock<IRepository>(); // Create a new mock repository
+        var manager = new Manager(mockRepo.Object); // Create a new manager
+        
+        // Act
+        var ex = Assert.Throws<ValidationException>(() => 
+            manager.AddClub("T", 4, "TestStreet", 14, 2650)); // Add a new club
+        
+        // Assert
+        Assert.NotNull(ex); // Expected: Not null
+        Assert.Equal("\nAn error occurred, please try again:\n * (Name) At least 2 character, maximum 50 characters\n * end", ex.Message); // Expected: ValidationException
+        
+        mockRepo.VerifyAll(); // Drop mock repository
+    }
+    
 }
