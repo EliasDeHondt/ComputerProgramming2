@@ -72,7 +72,15 @@ public void AddPadelCourt(int clubNumber, double price, bool indoor); // BL
 public IActionResult GetAllClubs(); // MVC
 ```
 
+#### 🔬Code coverage
+
 ![Code coverage](code-coverage.png)
+
+#### 🔬Tests table
+
+
+#### 🔬Code coverage rapport
+
 
 #### 🔬MVC .http test
 > This is the source file: [mvc_testing.http](UI-MVC/mvc_testing.http).
