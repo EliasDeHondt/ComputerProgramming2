@@ -1,0 +1,54 @@
+############################
+# @author Elias De Hondt   #
+# @see https://eliasdh.com #
+# @since 20/03/2024        #
+############################
+
+image: mcr.microsoft.com/dotnet/sdk:7.0
+
+variables:
+  OBJECTS_DIRECTORY: 'obj'
+  NUGET_PACKAGES_DIRECTORY: '.nuget'
+  SOURCE_CODE_PATH: '*/'
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/project.assets.json'
+    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/*.csproj.nuget.*'
+    - '$NUGET_PACKAGES_DIRECTORY'
+  policy: pull-push
+
+before_script:
+  - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - 'dotnet build --no-restore'
+
+integration_tests:
+  stage: test
+  script:
+    - 'dotnet test --filter Category=Integration --no-restore --collect:"XPlat Code Coverage" --logger junit'
+  artifacts:
+    when: always
+    reports:
+      junit: Tests/TestResults/Integration_TestResults.xml
+
+unit_tests:
+  stage: test
+  script:
+    - 'dotnet test --filter Category=Unit --no-restore --collect:"XPlat Code Coverage" --logger junit'
+    - 'dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools --version 5.2.3'
+    - './tools/reportgenerator -reports:"Tests/TestResults/Unit_TestResults.xml" -targetdir:"unit_coveragereport" -reporttypes:Html'
+  artifacts:
+    when: always
+    reports:
+      junit: Tests/TestResults/Unit_TestResults.xml
+    paths:
+      - unit_coveragereport
