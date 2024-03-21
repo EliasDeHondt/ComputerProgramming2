@@ -4,7 +4,7 @@
 # @since 20/03/2024        #
 ############################
 
-image: mcr.microsoft.com/dotnet/sdk:7.0
+image: mcr.microsoft.com/dotnet/sdk:7.0 # Global image for all jobs
 
 variables:
   OBJECTS_DIRECTORY: 'obj'
@@ -40,9 +40,10 @@ job_test:
     when: always
     reports:
       junit: Tests/TestResults/TestResults.xml
-      coverage_report: 
+      coverage_report:
         coverage_format: cobertura
-        paths: Tests/TestResults/*/coverage.cobertura.xml
+        paths: 
+        - Tests/TestResults/*/coverage.cobertura.xml
 
 .job_deploy:
   stage: deploy
