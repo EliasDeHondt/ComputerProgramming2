@@ -32,7 +32,7 @@ job_build:
   script:
     - 'dotnet build --no-restore'
 
-job_integration_tests:
+job_test:
   stage: test
   script:
     - 'dotnet test Tests/IntegrationTests --no-restore --collect:"XPlat Code Coverage" --logger junit'
@@ -40,17 +40,11 @@ job_integration_tests:
     when: always
     reports:
       junit: Tests/TestResults/TestResults.xml
+      coverage_report: 
+        coverage_format: cobertura
+        paths: Tests/TestResults/*/coverage.cobertura.xml
 
-job_unit_tests:
-  stage: test
-  script:
-    - 'dotnet test Tests/IntegrationTests --no-restore --collect:"XPlat Code Coverage" --logger junit'
-  artifacts:
-    when: always
-    reports:
-      junit: Tests/TestResults/TestResults.xml
-
-job_deploy: # .deploy . is for hidden jobs (This job will not be visible in the pipeline)
+job_deploy:
   stage: deploy
   script: echo "Deployment script!"
   environment: production
