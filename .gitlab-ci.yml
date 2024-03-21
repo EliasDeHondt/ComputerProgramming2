@@ -39,18 +39,16 @@ job_integration_tests:
   artifacts:
     when: always
     reports:
-      junit: Tests/TestResults/Integration_TestResults.xml
+      junit: Tests/TestResults/TestResults.xml
 
 job_unit_tests:
   stage: test
   script:
-    - 'dotnet test Tests/UnitTests --no-restore --collect:"XPlat Code Coverage" --logger junit'
-    - 'dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools --version 5.2.3'
-    - './tools/reportgenerator -reports:"Tests/TestResults/Unit_TestResults.xml" -targetdir:"unit_coveragereport" -reporttypes:Html'
+    - 'dotnet test Tests/IntegrationTests --no-restore --collect:"XPlat Code Coverage" --logger junit'
   artifacts:
     when: always
     reports:
-      junit: Tests/TestResults/Unit_TestResults.xml
+      junit: Tests/TestResults/TestResults.xml
 
 job_deploy: # .deploy . is for hidden jobs (This job will not be visible in the pipeline)
   stage: deploy
