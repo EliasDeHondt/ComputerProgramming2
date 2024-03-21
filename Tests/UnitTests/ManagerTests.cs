@@ -17,13 +17,6 @@ namespace Tests.UnitTests;
 
 public class ManagerTests : IClassFixture<ExtendedWebApplicationFactoryWithMockAuth<Program>>
 {
-    private readonly ExtendedWebApplicationFactoryWithMockAuth<Program> _factory;
-    
-    public ManagerTests(ExtendedWebApplicationFactoryWithMockAuth<Program> factory) // Constructor
-    {
-        _factory = factory; // Create a new web application factory
-    }
-    
     [Fact]
     public void AddClub_GivenInValidData_ShouldThrowValidationException() // Method: public void AddClub(string name, int numberOfCourts, string streetName, int houseNumber, int zipCode);
     {

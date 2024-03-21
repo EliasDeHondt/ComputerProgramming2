@@ -28,4 +28,8 @@
       <ProjectReference Include="..\UI-MVC\UI-MVC.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="TestResults\" />
+    </ItemGroup>
+
 </Project>

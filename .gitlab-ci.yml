@@ -25,6 +25,7 @@ before_script:
 stages:
   - build
   - test
+  - deploy
 
 build:
   stage: build
@@ -52,3 +53,7 @@ unit_tests:
       junit: Tests/TestResults/Unit_TestResults.xml
     paths:
       - unit_coveragereport
+
+deploy:
+  stage: deploy
+  script: echo "Deployment script!"

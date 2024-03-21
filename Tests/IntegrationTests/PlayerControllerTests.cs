@@ -7,7 +7,6 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.Net;
-using System.Net.Http.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

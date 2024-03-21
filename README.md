@@ -74,6 +74,10 @@ public IActionResult GetAllClubs(); // API
 public void AddClub(string name, int numberOfCourts, string streetName, int houseNumber, int zipCode); // BL
 public void AddPadelCourt(int clubNumber, double price, bool indoor); // BL
 public IActionResult GetAllClubs(); // MVC
+
+
+PadelClubManagement.UI.Web.Controllers.Add(Player player); // Authorization
+PadelClubManagement.UI.Web.Controllers.Add(Player player); // Verification
 ```
 
 #### 🔬Code coverage
@@ -82,11 +86,11 @@ public IActionResult GetAllClubs(); // MVC
 
 #### 🔬Tests table
 
-![Tests table]()
+[Tests table]()
 
 #### 🔬Code coverage rapport
 
-![Code coverage rapport]()
+[Code coverage rapport]()
 
 #### 🔬MVC .http test
 > This is the source file: [mvc_testing.http](UI-MVC/mvc_testing.http).
