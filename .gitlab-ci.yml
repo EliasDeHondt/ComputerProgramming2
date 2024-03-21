@@ -40,10 +40,6 @@ job_test:
     when: always
     reports:
       junit: Tests/TestResults/TestResults.xml
-      coverage_report:
-        coverage_format: cobertura
-        paths: 
-        - Tests/TestResults/*/coverage.cobertura.xml
 
 .job_deploy:
   stage: deploy
