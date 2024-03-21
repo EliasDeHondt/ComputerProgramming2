@@ -86,11 +86,11 @@ PadelClubManagement.UI.Web.Controllers.Add(Player player); // Verification
 
 #### 🔬Tests table
 
-[Tests table]()
+[Tests table](https://gitlab.com/kdg-ti/programmeren-2---.net/23-24/isb204/projecten/elias.dehondt/-/pipelines/1222154855/test_report?job_name=job_test)
 
 #### 🔬Code coverage rapport
 
-[Code coverage rapport]()
+[Code coverage rapport](https://kdg-ti.gitlab.io/-/programmeren-2---.net/23-24/isb204/projecten/elias.dehondt/-/jobs/6445955689/artifacts/Tests/TestResults/CodeCoverageReport/index.htm)
 
 #### 🔬MVC .http test
 > This is the source file: [mvc_testing.http](UI-MVC/mvc_testing.http).

@@ -35,7 +35,7 @@ job_build:
 job_test:
   stage: test
   script:
-    - dotnet test Tests --logger junit --collect "Xplat Code Coverage"
+    - 'dotnet test Tests --logger junit --collect "Xplat Code Coverage"'
   after_script:
     - 'dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools --version 5.2.3'
     - './tools/reportgenerator -reports:"Tests/TestResults/*/coverage.cobertura.xml" -reporttypes:Html -targetdir:"Tests/TestResults/CodeCoverageReport"'
@@ -48,7 +48,6 @@ job_test:
       coverage_report:
         coverage_format: cobertura
         path: Tests/TestResults/*/coverage.cobertura.xml
-
 
 job_deploy:
   stage: deploy
