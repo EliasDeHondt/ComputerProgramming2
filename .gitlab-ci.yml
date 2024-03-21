@@ -27,33 +27,32 @@ stages:
   - test
   - deploy
 
-build:
+job_build:
   stage: build
   script:
     - 'dotnet build --no-restore'
 
-integration_tests:
+job_integration_tests:
   stage: test
   script:
-    - 'dotnet test --filter Category=Integration --no-restore --collect:"XPlat Code Coverage" --logger junit'
+    - 'dotnet test Tests/IntegrationTests --no-restore --collect:"XPlat Code Coverage" --logger junit'
   artifacts:
     when: always
     reports:
       junit: Tests/TestResults/Integration_TestResults.xml
 
-unit_tests:
+job_unit_tests:
   stage: test
   script:
-    - 'dotnet test --filter Category=Unit --no-restore --collect:"XPlat Code Coverage" --logger junit'
+    - 'dotnet test Tests/UnitTests --no-restore --collect:"XPlat Code Coverage" --logger junit'
     - 'dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools --version 5.2.3'
     - './tools/reportgenerator -reports:"Tests/TestResults/Unit_TestResults.xml" -targetdir:"unit_coveragereport" -reporttypes:Html'
   artifacts:
     when: always
     reports:
       junit: Tests/TestResults/Unit_TestResults.xml
-    paths:
-      - unit_coveragereport
 
-deploy:
+job_deploy: # .deploy . is for hidden jobs (This job will not be visible in the pipeline)
   stage: deploy
   script: echo "Deployment script!"
+  environment: production
