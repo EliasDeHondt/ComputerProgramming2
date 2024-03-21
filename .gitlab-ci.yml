@@ -35,7 +35,7 @@ job_build:
 job_test:
   stage: test
   script:
-    - 'dotnet test Tests/IntegrationTests --no-restore --collect:"XPlat Code Coverage" --logger junit'
+    - 'dotnet test --no-restore --collect:"XPlat Code Coverage" --logger junit'
   artifacts:
     when: always
     reports:
@@ -44,7 +44,7 @@ job_test:
         coverage_format: cobertura
         paths: Tests/TestResults/*/coverage.cobertura.xml
 
-job_deploy:
+.job_deploy:
   stage: deploy
-  script: echo "Deployment script!"
+  script: echo "Deployment script"
   environment: production
