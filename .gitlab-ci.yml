@@ -10,6 +10,7 @@ variables:
   OBJECTS_DIRECTORY: 'obj'
   NUGET_PACKAGES_DIRECTORY: '.nuget'
   SOURCE_CODE_PATH: '*/'
+  DISCORD_WEBHOOK: 'https://discord.com/api/webhooks/1221150899167301643/8q44fV44W9X-3VasWUwdHmjLlnkXypwW5GGgEuDqYT-ehWSm5gRWGKy0BDH53xDRPBbT'
 
 cache:
   key: "$CI_COMMIT_REF_SLUG"
@@ -26,6 +27,7 @@ stages:
   - build
   - test
   - deploy
+  - notify
 
 job_build:
   stage: build
@@ -53,3 +55,12 @@ job_deploy:
   stage: deploy
   script: echo "Deployment script"
   environment: production
+  
+job_notify_main:
+  stage: notify
+  script:
+    - 'curl -X POST -H "Content-Type: application/json" -d "{\"content\": \":arrow_up: New commit to the main branch!\nTime: $(date +"%Y-%m-%d %H:%M:%S")\"}" $DISCORD_WEBHOOK'
+  when: on_success
+  allow_failure: false
+  only:
+    - main # Only notify on the main branch
